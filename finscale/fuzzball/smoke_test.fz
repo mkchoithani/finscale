@@ -1,0 +1,18 @@
+version: v1
+
+jobs:
+  smoke_test:
+    image:
+      uri: docker://<REGISTRY>/<IMAGE>:<TAG>
+    resource:
+      cpu:
+        cores: 2
+      memory:
+        size: 4GiB
+      devices:
+        nvidia.com/gpu: 1
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      cd /app
+      python scripts/smoke_test_cuda.py

@@ -1,0 +1,101 @@
+version: v1
+
+volumes:
+  shared:
+    use: ephemeral
+
+jobs:
+  train:
+    image:
+      uri: docker://<REGISTRY>/<IMAGE>:<TAG>
+    resource:
+      cpu:
+        cores: 16
+      memory:
+        size: 64GiB
+      devices:
+        nvidia.com/gpu: 1
+    mounts:
+      shared:
+        location: /shared
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      cd /app
+      python gen_data.py
+      torchrun --standalone --nproc_per_node=1 train_gb10.py --out /shared/out/adapter
+      python merge_adapter.py Qwen/Qwen2.5-0.5B-Instruct /shared/out/adapter /shared/merged
+
+  eval:
+    image:
+      uri: docker://<REGISTRY>/<IMAGE>:<TAG>
+    resource:
+      cpu:
+        cores: 2
+      memory:
+        size: 4GiB
+    mounts:
+      shared:
+        location: /shared
+    depends-on:
+      - name: serve
+        status: RUNNING
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      cd /app
+      python gen_data.py
+      # RUNNING is not readiness; wait for the OpenAI-compatible models endpoint.
+      endpoint="http://serve:8000/v1/models"
+      for attempt in $(seq 1 60); do
+        if python - "$endpoint" <<'PY'
+      import sys, urllib.request
+      try:
+          urllib.request.urlopen(sys.argv[1], timeout=3).read()
+      except Exception:
+          sys.exit(1)
+      PY
+        then
+          break
+        fi
+        if [ "$attempt" -eq 60 ]; then
+          echo "Server did not become healthy: $endpoint" >&2
+          exit 1
+        fi
+        sleep 5
+      done
+      python evaluate_endpoint.py http://serve:8000/v1 finscale
+
+services:
+  serve:
+    # TODO: confirm the service hostname used by dependent jobs in the event environment.
+    image:
+      uri: docker://<REGISTRY>/<IMAGE>:<TAG>
+    resource:
+      cpu:
+        cores: 8
+      memory:
+        size: 32GiB
+      devices:
+        nvidia.com/gpu: 1
+    mounts:
+      shared:
+        location: /models
+    depends-on:
+      - name: train
+        status: COMPLETED # TODO: confirm this documented completion-status value in the event environment.
+    network:
+      ports:
+        - name: http
+          port: 8000
+          protocol: tcp
+    readiness-probe:
+      tcp-socket:
+        port: 8000
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      cd /app
+      # UNTESTED on arm64/GB10: default vLLM OpenAI server command.
+      SERVER_CMD="${SERVER_CMD:-python -m vllm.entrypoints.openai.api_server --model /models/merged --host 0.0.0.0 --port 8000}"
+      exec bash -lc "$SERVER_CMD"

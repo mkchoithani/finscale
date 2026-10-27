@@ -1,0 +1,29 @@
+version: v1
+
+volumes:
+  shared:
+    use: ephemeral
+
+jobs:
+  train:
+    image:
+      uri: docker://<REGISTRY>/<IMAGE>:<TAG>
+    resource:
+      cpu:
+        cores: 16
+      memory:
+        size: 64GiB
+      devices:
+        nvidia.com/gpu: 1
+    mounts:
+      shared:
+        location: /shared
+    multinode:
+      nodes: 2
+      implementation: generic
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      cd /app
+      python gen_data.py
+      bash scripts/launch_multinode.sh --out /shared/out/adapter

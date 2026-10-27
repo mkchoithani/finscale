@@ -8,3 +8,9 @@ data/mlx/
 data/*.jsonl
 *.safetensors
 results/*.log
+finscale.zip
+__pycache__/
+*.pyc
+out*/
+adapters/
+.DS_Store
