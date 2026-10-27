@@ -1,0 +1,82 @@
+{
+  "records_read": 327,
+  "valid_records": 327,
+  "unique_records": 321,
+  "exact_duplicates_removed": 6,
+  "invalid_lines": [],
+  "split_counts": {
+    "train": 256,
+    "valid": 33,
+    "test": 32
+  },
+  "split_categories": {
+    "train": {
+      "other": 55,
+      "market": 37,
+      "operational": 39,
+      "supply_chain": 13,
+      "regulatory_legal": 74,
+      "credit": 16,
+      "cybersecurity": 18,
+      "liquidity": 4
+    },
+    "valid": {
+      "market": 5,
+      "other": 7,
+      "regulatory_legal": 9,
+      "credit": 2,
+      "operational": 5,
+      "supply_chain": 2,
+      "cybersecurity": 2,
+      "liquidity": 1
+    },
+    "test": {
+      "market": 5,
+      "regulatory_legal": 9,
+      "operational": 5,
+      "credit": 2,
+      "other": 7,
+      "cybersecurity": 2,
+      "supply_chain": 1,
+      "liquidity": 1
+    }
+  },
+  "backend": "mlx",
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "iterations_requested": 100,
+  "batch_size": 2,
+  "lora_layers": 8,
+  "learning_rate": 1e-05,
+  "wall_time_seconds": 155.71120241697645,
+  "step_time_seconds_observed": [],
+  "mean_step_time_seconds": 1.5571120241697645,
+  "step_time_source": "wall time / requested iterations (approximation)",
+  "tokens_per_second_observed": null,
+  "peak_memory_gb_observed": null,
+  "peak_memory_source": null,
+  "training_log": "out/train.log",
+  "adapter_path": "out/adapters",
+  "command": [
+    "/opt/anaconda3/envs/finscale/bin/python",
+    "-m",
+    "mlx_lm.lora",
+    "--model",
+    "Qwen/Qwen2.5-3B-Instruct",
+    "--train",
+    "--data",
+    "data/mlx",
+    "--adapter-path",
+    "out/adapters",
+    "--iters",
+    "100",
+    "--batch-size",
+    "2",
+    "--num-layers",
+    "8",
+    "--learning-rate",
+    "1e-05",
+    "--grad-checkpoint",
+    "--max-seq-length",
+    "4096"
+  ]
+}

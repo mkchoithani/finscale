@@ -1,0 +1,558 @@
+{
+  "backend": "mlx",
+  "model": "Qwen/Qwen2.5-3B-Instruct",
+  "adapter": "out/adapters",
+  "test_file": "data/mlx/test.jsonl",
+  "base": {
+    "examples": 32,
+    "valid_json_count": 22,
+    "valid_json_rate": 0.6875,
+    "category_accuracy": 0.53125,
+    "category_macro_f1": 0.5194805194805194,
+    "severity_accuracy": 0.71875,
+    "category_labels_scored": [
+      "credit",
+      "cybersecurity",
+      "liquidity",
+      "market",
+      "operational",
+      "other",
+      "regulatory_legal",
+      "supply_chain"
+    ],
+    "per_example": [
+      {
+        "gold_category": "market",
+        "pred_category": "market",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"market\",\n  \"severity\": \"medium\",\n  \"evidence\": \"We periodically review the methodologies, inputs and outputs of third-party pricing services for reasonableness.\",\n  \"explanation\": \"The excerpt discusses the review of third-party pricing services, which is related to market risk as it involves assessing the accuracy and reliability of market data and pricing models used in financial reporting.\"\n}\n```"
+      },
+      {
+        "gold_category": "market",
+        "pred_category": "market",
+        "gold_severity": "medium",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"market\",\n  \"severity\": \"high\",\n  \"evidence\": \"Competition The markets for the Company’s products and services are highly competitive and are characterized by aggressive price competition, downward pressure on gross margins, continual improvement in product performance, and price sensitivity on the part of consumers and businesses.\",\n  \"explanation\": \"The excerpt discusses the highly competitive nature of the markets in which Apple competes, including aggressive pricing, downward pressure on margins, and price sensitivity. This information is critical for understanding the financial risks associated with the company's market position and pricing strategy, warranting a high severity classification.\"\n}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"regulatory_legal\",\n  \"severity\": \"high\",\n  \"evidence\": \"Regulatory initiatives outside the U.S. have required and could in the future require JPMorganChase to significantly modify its operations or legal entity structure\",\n  \"explanation\": \"The excerpt discusses regulatory requirements that could significantly alter JPMorganChase's operations or legal structure, which is a clear indication of regulatory risk. The potential for significant modifications and the possibility of future requirements indicate a high level of risk.\"\n}\n```"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "market",
+        "gold_severity": "low",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"market\",\n\"severity\": \"medium\",\n\"evidence\": \"The Company manages its business primarily on a geographic basis and the reportable segments provide similar hardware and software products and similar services, each one is managed separately to better align with the location of the Company’s customers and distribution partners and the unique market dynamics of each geographic region.\",\n\"explanation\": \"This excerpt discusses the company's business segmentation and geographic management, which is indicative of market analysis and strategy. It involves understanding and adapting to different market dynamics in various regions, which can be critical for financial risk management. The medium severity reflects the importance but not the criticality of the information in terms of immediate risk exposure.\"\n}"
+      },
+      {
+        "gold_category": "credit",
+        "pred_category": "credit",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"credit\",\n  \"severity\": \"medium\",\n  \"evidence\": \"Unbilled receivables related to claims are items that we believe are earned, but are subject to uncertainty concerning their determination or ultimate realization.\",\n  \"explanation\": \"The excerpt mentions unbilled receivables that are considered earned but uncertain, which indicates potential credit risk. This uncertainty could lead to financial losses if the receivables are not realized as expected, thus classifying this as a credit risk issue. The severity is medium because while it involves financial uncertainty, it does not seem to pose an immediate catastrophic risk to the company's financial health.\"\n}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "market",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"market\",\n  \"severity\": \"low\",\n  \"evidence\": \"While consumers may maintain simultaneous relationships with multiple entertainment sources, we strive for consumers to choose us in their moments of free time.\",\n  \"explanation\": \"The excerpt discusses the company's strategy to win consumers' choice in moments of free time, which is a market-oriented approach. There is no mention of credit risk, liquidity issues, operational disruptions, regulatory compliance, cybersecurity threats, supply chain disruptions, or other financial risks. The low severity reflects the general nature of the market strategy described, which does not pose a significant immediate risk to the company's financial health.\"\n}"
+      },
+      {
+        "gold_category": "cybersecurity",
+        "pred_category": "cybersecurity",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"cybersecurity\",\n  \"severity\": \"high\",\n  \"evidence\": \"JPMorganChase could become increasingly vulnerable to cyber attacks if it does not, in a timely manner, identify and address emerging threats, known vulnerabilities or shortcomings in its cybersecurity controls\",\n  \"explanation\": \"The excerpt highlights the potential for significant cyber risks if JPMorganChase fails to promptly identify and address cybersecurity issues. This directly impacts the company's operational security and could lead to severe financial and reputational damage, warranting a high severity classification.\"\n}\n```"
+      },
+      {
+        "gold_category": "supply_chain",
+        "pred_category": "supply_chain",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"supply_chain\",\n\"severity\": \"high\",\n\"evidence\": \"We may experience supply or quality problems. There are limited suppliers for certain device and datacenter components. Capacity available to us may be affected as competitors use some of the same suppliers and materials for hardware components.\",\n\"explanation\": \"The excerpt discusses supply chain issues, including limited suppliers, potential supplier capacity constraints, and disruptions in the supply chain, which could lead to shortages and impact the company's operations, financial condition, and results of operations. This clearly falls under the supply chain category and is classified as high severity due to the potential for significant operational disruptions and financial impact.\"}"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "operational",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"operational\",\n\"severity\": \"high\",\n\"evidence\": \"These risks may affect our ability to manage our data and inventory, procure parts or supplies or manufacture, sell, deliver and service products, adequately protect our intellectual property or achieve and maintain compliance with, or realize available benefits under, tax laws and other applicable regulations.\",\n\"explanation\": \"The excerpt discusses risks associated with maintaining and improving core systems, which can significantly impact operational efficiency and compliance. This directly relates to operational risks as it pertains to the day-to-day business operations and regulatory compliance, warranting a high severity classification.\"\n}"
+      },
+      {
+        "gold_category": "cybersecurity",
+        "pred_category": "cybersecurity",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"cybersecurity\",\n\"severity\": \"low\",\n\"evidence\": \"We use these channels as well as social media and blogs to communicate with our members and the public about our company, our services and other issues. It is possible that the information we post on social media and blogs could be deemed to be material information.\",\n\"explanation\": \"The excerpt discusses the use of social media and blogs as communication channels, which could be a cybersecurity risk if the information posted is sensitive or material. However, the severity is low as the risk is not explicitly severe (e.g., data breaches, unauthorized access) but rather a potential risk associated with the use of these channels.\"\n}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "cybersecurity",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"cybersecurity\",\n  \"severity\": \"low\",\n  \"evidence\": \"Inventing new gaming experiences that bring people together around their shared love for games on any device and pushing the boundaries of innovation with console and PC gaming.\",\n  \"explanation\": \"The excerpt discusses innovations in gaming experiences and pushing the boundaries of innovation, which does not directly relate to cybersecurity. However, the mention of gaming experiences and digital learning could imply some cybersecurity aspects, such as protecting user data or ensuring secure online interactions, which are not explicitly stated and thus classified as low severity.\"\n}"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "credit",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"credit\",\n  \"severity\": \"high\",\n  \"evidence\": \"Due to the significance of judgment in the estimation process described above, it is likely that materially different earnings could be recorded if we used different assumptions or if the underlying circumstances were to change.\",\n  \"explanation\": \"This excerpt discusses the potential for significant changes in earnings based on different assumptions or changing circumstances, which is indicative of credit risk. The high severity is justified by the potential for substantial financial performance changes, which could affect the company's creditworthiness and ability to meet financial obligations.\"\n}"
+      },
+      {
+        "gold_category": "credit",
+        "pred_category": "market",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"market\",\n  \"severity\": \"low\",\n  \"evidence\": \"Industrial Revenue Bonds (IRB) issued by St. Louis County, the city of St. Charles, Missouri, and the city of Wichita, Kansas, were used to finance the purchase and/or construction of real and personal property at our St. Louis, St. Charles and Wichita sites.\",\n  \"explanation\": \"The excerpt discusses the use of Industrial Revenue Bonds (IRBs) to finance real estate properties, which is related to market conditions and the financial market. However, the information provided does not contain any significant market risk indicators or issues that would warrant a higher severity classification.\"\n}\n```"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "credit",
+        "gold_severity": "medium",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"credit\",\n  \"severity\": \"high\",\n  \"evidence\": \"While the Company has generally been able to obtain such licenses on commercially reasonable terms in the past, there is no guarantee that such licenses could be obtained in the future on reasonable terms or at all.\",\n  \"explanation\": \"This excerpt discusses the potential future difficulty in obtaining licenses, which could lead to increased costs or even product discontinuation, impacting the company's financial health and creditworthiness.\"\n}"
+      },
+      {
+        "gold_category": "liquidity",
+        "pred_category": "cybersecurity",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"cybersecurity\",\n  \"severity\": \"high\",\n  \"evidence\": \"In 2023, the rapid dissemination of negative information through social media, in part, is believed to have led to the collapse of Silicon Valley Bank (SVB).\",\n  \"explanation\": \"The excerpt highlights the impact of negative social media posts on a financial institution, indicating a cybersecurity risk as it suggests that the rapid spread of information through social media can lead to significant financial instability. This is classified as high severity due to the potential for rapid and severe financial impact on the institution.\"\n}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "market",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"market\",\n  \"severity\": \"low\",\n  \"evidence\": \"Automobile Manufacturer and Dealer Regulation In the U.S., state laws regulate the manufacture, distribution, sale and service of automobiles, and generally require motor vehicle manufacturers and dealers to be licensed in order to sell vehicles directly to residents.\",\n  \"explanation\": \"The excerpt discusses regulatory requirements for automobile manufacturers and dealers, which impacts the market for these products and the ability of manufacturers to sell directly to consumers. This is classified as market risk due to the potential for legal and compliance issues affecting sales and market access.\"\n}\n```"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"regulatory_legal\",\n\"severity\": \"high\",\n\"evidence\": \"The Company is also subject to new and changing laws and regulations regarding online safety, including enhanced protections for minors and mandatory age verification requirements.\",\n\"explanation\": \"The excerpt discusses the Company's exposure to new laws and regulations related to online safety, which can increase regulatory risks and operational disruptions. This directly impacts the financial and operational stability of the company, warranting a high severity classification.\"\n}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "credit",
+        "gold_severity": "medium",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"credit\",\n  \"severity\": \"high\",\n  \"evidence\": \"During 2024, the Company increased the valuation allowance by $ 3,287, primarily due to tax credits and other carryforwards generated in 2024 that cannot be realized in 2024.\",\n  \"explanation\": \"The excerpt discusses the increase in valuation allowance, which is a credit risk indicator. This indicates that the company may face adverse impacts on earnings and/or OCI, which is a credit risk. The severity is high because the increase in valuation allowance suggests a potential for significant financial losses and a negative impact on the company's creditworthiness.\"\n}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"other\",\n  \"severity\": \"low\",\n  \"evidence\": \"For fiscal 2026, the annual dividend will be paid in four quarterly installments of $ 0.235 per share\",\n  \"explanation\": \"The provided excerpt discusses dividend payments, which is a routine corporate action and does not indicate any significant financial risk. It does not contain any information that would classify it as high severity risk in any of the predefined categories.\"\n}"
+      },
+      {
+        "gold_category": "market",
+        "pred_category": "market",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"market\",\n\"severity\": \"high\",\n\"evidence\": \"Changes in competitive offerings for entertainment video could adversely impact our business. The market for entertainment video is intensely competitive and subject to rapid change.\",\n\"explanation\": \"The excerpt discusses the competitive landscape and rapid changes in the entertainment video market, indicating a high risk to the company's business. This is classified as a market risk because it involves external market dynamics and competition that can significantly affect the company's performance and profitability.\"}"
+      },
+      {
+        "gold_category": "market",
+        "pred_category": "credit",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"credit\",\n  \"severity\": \"high\",\n  \"evidence\": \"primarily reflecting increases in production costs. During the second quarter of 2024, we increased the reach-forward loss on the program by $ 278 primarily driven by higher than anticipated costs to meet certain technical and support requirements. During the third quarter of 2024, we increased the loss on the program by $ 908 primarily to reflect higher estimated supplier costs related to future production lots.\",\n  \"explanation\": \"The excerpt discusses significant increases in production costs and losses related to supplier costs, which are indicative of credit risk. These increases suggest potential financial strain and could impact the company's ability to meet its financial obligations, which is a key concern in credit analysis.\"\n}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "cybersecurity",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"cybersecurity\",\n  \"severity\": \"high\",\n  \"evidence\": \"concerns regarding the effectiveness of JPMorganChase’s measures to safeguard personal information, or the perception that those measures are inadequate, could cause JPMorganChase to lose clients, customers or employees, and thereby reduce JPMorganChase’s revenues.\",\n  \"explanation\": \"The excerpt discusses potential cybersecurity risks, including the failure to comply with applicable law, inadequate protection of personal information, and the potential loss of clients, customers, and employees. These issues directly relate to cybersecurity and could significantly impact the company's operations and reputation, warranting a high severity classification.\"\n}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"other\",\n\"severity\": \"low\",\n\"evidence\": \"We are mindful of cultural differences across and within regions. We work to build diversity, inclusion and equity into all aspects of our operations globally, with the goal of having diversity and inclusion function as a critical lens through which each Netflix employee carries out their role.\",\n\"explanation\": \"The excerpt discusses the company's efforts to foster a diverse and inclusive work environment, which is not directly related to market, credit, liquidity, operational, regulatory_legal, cybersecurity, or supply_chain risks. The information provided is about the company's culture and diversity initiatives, which falls under the 'other' category of risks.\"}"
+      },
+      {
+        "gold_category": "market",
+        "pred_category": "market",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"market\",\n  \"severity\": \"medium\",\n  \"evidence\": \"(ii) dividend income of $ 272 million from our investment in ViiV and (iii) a charge of $ 420 million recorded in the third quarter related to the expected sale of one of our facilities resulting from the discontinuation of our DMD program.\",\n  \"explanation\": \"The excerpt discusses dividend income and a charge related to the sale of a facility, which are market-related financial events that could impact the company's stock price and market perception.\"\n}\n```"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "market",
+        "gold_severity": "medium",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"market\",\n\"severity\": \"high\",\n\"evidence\": \"We are investing in artificial intelligence (“AI”) across the entire company and infusing generative AI capabilities into our consumer and commercial offerings. AI technology and services are a highly competitive and rapidly evolving market, and new competitors continue to enter the market.\",\n\"explanation\": \"The excerpt discusses the company's investment in AI, which is a highly competitive and rapidly evolving market. The mention of new competitors entering the market indicates significant market risk, which is classified as high severity.\"\n}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "market",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"market\",\n  \"severity\": \"low\",\n  \"evidence\": \"(4) Total square feet represents gross square feet, while the minimum, maximum and average square feet amounts represent retail unit selling area.\",\n  \"explanation\": \"The excerpt discusses the square footage of retail units and distribution facilities, which is relevant to market analysis as it provides insight into the company's physical presence and operational capacity. However, it does not contain any information that indicates a high risk or significant financial impact, thus classified as low severity.\"\n}\n```"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "operational",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\n  \"category\": \"operational\",\n  \"severity\": \"medium\",\n  \"evidence\": \"Our operating expenses and efficiency ratio depend, in part, on our overall headcount and the proportion of our employees located in strategic locations.\",\n  \"explanation\": \"The excerpt discusses the uncertainty surrounding the company's human capital resource requirements and the benefits of strategic locations, which impacts its operational expenses and efficiency. This indicates a medium severity operational risk as it affects the company's financial performance and strategic positioning.\"\n}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"other\",\n  \"severity\": \"low\",\n  \"evidence\": \"We publish a variety of reports and resources related to our Corporate Social Responsibility programs and progress on our Reports Hub website, www.microsoft.com/corporate-responsibility/reports-hub, including reports on responsible AI, sustainability, responsible sourcing, accessibility, digital trust, and public policy engagement.\",\n  \"explanation\": \"The excerpt discusses corporate social responsibility initiatives and reports, which are not directly related to market, credit, liquidity, operational, regulatory/legal, cybersecurity, or supply chain risks. The information provided is informational and does not pose a significant risk to the company's financial health or operations.\"\n}\n```"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "tax",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"tax\",\n\"severity\": \"medium\",\n\"evidence\": \"The Company’s deferred income tax assets of $ 17,991 can be used in future years to offset taxable income and reduce income taxes payable. The Company’s deferred income tax liabilities of $ 10,091 will partially offset deferred income tax assets and result in higher taxable income in future years and increase income taxes payable.\",\n\"explanation\": \"The excerpt discusses the deferred income tax assets and liabilities, their impact on future taxable income and taxes payable, and the tax laws that determine the offsetting of temporary differences. This information is crucial for understanding the tax implications and risk associated with the company's deferred tax positions, which is why it falls under the tax category and is classified as medium severity.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"regulatory_legal\",\n  \"severity\": \"low\",\n  \"evidence\": \"Regulations Vehicle Safety and Testing In the U.S., our vehicles are subject to regulation by the National Highway Traffic Safety Administration (“NHTSA”), including all applicable Federal Motor Vehicle Safety Standards (“FMVSS”) and the NHTSA bumper standard.\",\n  \"explanation\": \"The excerpt discusses regulatory requirements for vehicle safety and compliance with Federal Motor Vehicle Safety Standards, which falls under the regulatory legal category. The low severity is justified as the compliance with regulations is routine and does not pose a significant financial risk to the company.\"\n}\n```"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": false,
+        "raw_output": "```json\n{\n  \"category\": \"other\",\n  \"severity\": \"low\",\n  \"evidence\": \"The Company believes that its people play an important role in its success, and strives to attract, develop and retain the best talent.\",\n  \"explanation\": \"The excerpt discusses the company's human capital strategy and efforts to attract and retain talent, which is related to operational aspects but does not present any significant financial risk or immediate operational issues.\"\n}\n```"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "market",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\n\"category\": \"market\",\n\"severity\": \"high\",\n\"evidence\": \"in the European Union (“EU”) as it seeks to comply with the Digital Markets Act (the “DMA”), including new business terms and alternative fee structures for iOS and iPadOS apps, alternative methods of distribution for iOS and iPadOS apps, alternative payment processing for apps across the Company’s operating systems, and additional tools and application programming interfaces (“APIs”) for developers.\",\n\"explanation\": \"The excerpt discusses the company's compliance with the Digital Markets Act in the EU, which could lead to changes in business terms and services. These changes could materially adversely affect the company's business, results of operations, and financial condition, indicating a high market risk. The severity is classified as high because the potential impact on the company's financial performance is significant and direct.\"}"
+      }
+    ]
+  },
+  "fine_tuned": {
+    "examples": 32,
+    "valid_json_count": 31,
+    "valid_json_rate": 0.96875,
+    "category_accuracy": 0.71875,
+    "category_macro_f1": 0.5771241830065359,
+    "severity_accuracy": 0.71875,
+    "category_labels_scored": [
+      "credit",
+      "cybersecurity",
+      "liquidity",
+      "market",
+      "operational",
+      "other",
+      "regulatory_legal",
+      "supply_chain"
+    ],
+    "per_example": [
+      {
+        "gold_category": "market",
+        "pred_category": "other",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"We periodically review the methodologies, inputs and outputs of third-party pricing services for reasonableness.\", \"explanation\": \"This excerpt discusses the periodic review of third-party pricing services, which is a standard risk management practice and not indicative of a high severity risk.\"}"
+      },
+      {
+        "gold_category": "market",
+        "pred_category": "market",
+        "gold_severity": "medium",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"market\", \"severity\": \"high\", \"evidence\": \"Competition The markets for the Company’s products and services are highly competitive and are characterized by aggressive price competition, downward pressure on gross margins, continual improvement in product performance, and price sensitivity on the part of consumers and businesses.\", \"explanation\": \"This excerpt highlights the highly competitive nature of the markets in which the company operates, including aggressive pricing, downward pressure on gross margins, and price sensitivity. These factors indicate a high severity of risk.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"high\", \"evidence\": \"Regulatory initiatives outside the U.S. have required and could in the future require JPMorganChase to significantly modify its operations or legal entity structure\", \"explanation\": \"The excerpt highlights the potential for significant modifications to JPMorganChase's operations or legal entity structure due to regulatory requirements, indicating a high severity risk.\"}"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"Although the reportable segments provide similar hardware and software products and similar services, each one is managed separately to better align with the location of the Company’s customers and distribution partners and the unique market dynamics of each geographic region.\", \"explanation\": \"This excerpt discusses the company's business segmentation and management approach, which is more about operational strategy rather than financial risk.\"}"
+      },
+      {
+        "gold_category": "credit",
+        "pred_category": "operational",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"operational\", \"severity\": \"medium\", \"evidence\": \"Advances and progress billings increased from $ 56,328 at December 31, 2023, to $ 60,333 at December 31, 2024, primarily driven by progress billings at BDS and advances on orders received at BCA.\", \"explanation\": \"The excerpt highlights operational risks related to the increase in advances and progress billings, which could indicate potential issues in the company's operations or project management.\"}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": null,
+        "gold_severity": "low",
+        "pred_severity": null,
+        "valid_json": false,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"We strive for consumers to choose us in their moments of free time.\", \"explanation\": \"The excerpt discusses the company's strategy to win consumers' \"moments of truth\" by improving service and content, which is more about business strategy and consumer behavior rather than financial risks.\"}"
+      },
+      {
+        "gold_category": "cybersecurity",
+        "pred_category": "cybersecurity",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"cybersecurity\", \"severity\": \"high\", \"evidence\": \"JPMorganChase could become increasingly vulnerable to cyber attacks if it does not, in a timely manner, identify and address emerging threats, known vulnerabilities or shortcomings in its cybersecurity controls.\", \"explanation\": \"The excerpt highlights the risk of cyber attacks, indicating a high severity due to the potential for significant financial and operational damage.\"}"
+      },
+      {
+        "gold_category": "supply_chain",
+        "pred_category": "supply_chain",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"supply_chain\", \"severity\": \"high\", \"evidence\": \"Datacenter servers, Xbox consoles, Surface devices, and other hardware are assembled in Asia and other geographies that may be subject to disruptions in the supply chain, resulting in shortages which could adversely affect our business, operations, financial condition, and results of operations.\", \"explanation\": \"The excerpt highlights the risk of supply chain disruptions, which could lead to shortages and impact the company's operations, financial condition, and results of operations. This indicates a high severity supply chain risk.\"}"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "operational",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"operational\", \"severity\": \"high\", \"evidence\": \"These risks may affect our ability to manage our data and inventory, procure parts or supplies or manufacture, sell, deliver and service products, adequately protect our intellectual property or achieve and maintain compliance with, or realize available benefits under, tax laws and other applicable regulations.\", \"explanation\": \"The excerpt highlights significant operational risks, including data management, inventory control, supply chain, intellectual property protection, and compliance with tax laws, which can severely impact business operations.\"}"
+      },
+      {
+        "gold_category": "cybersecurity",
+        "pred_category": "cybersecurity",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"cybersecurity\", \"severity\": \"low\", \"evidence\": \"We use these channels as well as social media and blogs to communicate with our members and the public about our company, our services and other issues.\", \"explanation\": \"The excerpt mentions the use of social media and blogs for communication, which could be a cybersecurity risk if not properly managed, but the severity is low as it does not indicate a high likelihood of a significant cybersecurity incident.\"}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"Leveraging Windows to fuel our cloud business, grow our share of the PC market, and drive increased engagement with our services like Microsoft Edge, Bing, Copilot, Microsoft Teams, Microsoft 356 Consumer, Xbox Game Pass, and more.\", \"explanation\": \"The excerpt discusses various initiatives and innovations, but does not indicate any significant risk or potential for financial harm, thus categorizing it as 'other' with low severity.\"}"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "market",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"market\", \"severity\": \"high\", \"evidence\": \"Due to the significance of judgment in the estimation process described above, it is likely that materially different earnings could be recorded if we used different assumptions or if the underlying circumstances were to change.\", \"explanation\": \"The excerpt highlights the significant impact of judgment and changing circumstances on earnings, indicating market risk. The potential for materially different earnings due to changes in assumptions or circumstances suggests a high severity.\"}"
+      },
+      {
+        "gold_category": "credit",
+        "pred_category": "other",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"Industrial Revenue Bonds (IRB) issued by St. Louis County, the city of St. Charles, Missouri, and the city of Wichita, Kansas, were used to finance the purchase and/or construction of real and personal property at our St. Louis, St. Charles and Wichita sites.\", \"explanation\": \"The excerpt discusses the use of Industrial Revenue Bonds to finance real and personal property, which is a financial transaction. However, it does not indicate any significant risk or potential for financial loss, thus classifying it as low severity.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"medium\", \"evidence\": \"While the Company has generally been able to obtain such licenses on commercially reasonable terms in the past, there is no guarantee that such licenses could be obtained in the future on reasonable terms or at all.\", \"explanation\": \"This excerpt highlights the potential for future licensing issues, which could lead to significant financial and operational risks. The uncertainty about obtaining licenses on reasonable terms or at all indicates a medium severity risk.\"}"
+      },
+      {
+        "gold_category": "liquidity",
+        "pred_category": "cybersecurity",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"cybersecurity\", \"severity\": \"high\", \"evidence\": \"We could also be subject to rapid deposit withdrawals or other outflows as a result of negative social media posts or other negative publicity.\", \"explanation\": \"The mention of negative social media posts and other negative publicity indicates a cybersecurity risk, as it suggests the company could face rapid withdrawals or other outflows due to the spread of negative information, which is a cybersecurity concern.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"low\", \"evidence\": \"state laws regulate the manufacture, distribution, sale and service of automobiles, and generally require motor vehicle manufacturers and dealers to be licensed in order to sell vehicles directly to residents.\", \"explanation\": \"The excerpt discusses state laws and regulations that govern the automobile industry, including licensing requirements for manufacturers and dealers. This indicates a regulatory risk, which is classified as low severity due to the general nature of the regulations and the lack of specific risk indicators.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"high\", \"evidence\": \"These laws and regulations can increase regulatory risks by requiring complex compliance measures and significant modifications to the Company’s products, services and operations, and may lead to operational disruptions, heightened privacy and data security risks, increased costs and potential liability and fines, all of which can have a material adverse impact on the Company’s business, financial condition, results of operations and stock price.\", \"explanation\": \"The excerpt highlights the company's exposure to new and changing laws and regulations, which can lead to significant operational disruptions, increased costs, and potential liability, indicating a high severity risk.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"medium\", \"evidence\": \"In 2024, we determined that earnings from our non-U.S. subsidiaries are no longer considered to be indefinitely reinvested.\", \"explanation\": \"This statement indicates a change in the company's tax strategy, which is a regulatory and legal matter. The company's determination to no longer consider earnings from non-U.S. subsidiaries as indefinitely reinvested could lead to additional tax liabilities, which is a significant risk.\"}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"For fiscal 2026, the annual dividend will be paid in four quarterly installments of $ 0.235 per share\", \"explanation\": \"The provided excerpt is about the dividend payment schedule, which is not directly related to market, credit, liquidity, operational, regulatory_legal, cybersecurity, or supply chain risks. It is categorized as 'other' as it pertains to a company's financial policy.\"}"
+      },
+      {
+        "gold_category": "market",
+        "pred_category": "market",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"market\", \"severity\": \"high\", \"evidence\": \"Changes in competitive offerings for entertainment video could adversely impact our business.\", \"explanation\": \"The excerpt highlights the intense competition in the entertainment video market, which could adversely impact the company's business, indicating a high severity risk.\"}"
+      },
+      {
+        "gold_category": "market",
+        "pred_category": "operational",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"operational\", \"severity\": \"high\", \"evidence\": \"During the fourth quarter of 2024, we further increased the reach-forward loss by $\", \"explanation\": \"The excerpt highlights operational risks, specifically related to increased costs and potential supplier non-performance, which could lead to significant financial losses.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"high\", \"evidence\": \"These actions could require JPMorganChase to modify or cease operations or could result in other penalties.\", \"explanation\": \"The excerpt highlights potential legal and regulatory risks, including the possibility of penalties and operations modifications, which are indicative of regulatory and legal risks.\"}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"We are mindful of cultural differences across and within regions.\", \"explanation\": \"The excerpt focuses on the company's efforts to foster a diverse and inclusive work environment, which is not directly related to market, credit, liquidity, operational, regulatory_legal, cybersecurity, or supply chain risks. The low severity indicates that while the company's approach to diversity and inclusion is important, it does not pose a significant risk.\"}"
+      },
+      {
+        "gold_category": "market",
+        "pred_category": "market",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"market\", \"severity\": \"low\", \"evidence\": \"dividend income of $ 272 million from our investment in ViiV\", \"explanation\": \"The excerpt mentions dividend income, which is a market risk as it is related to the performance of the company's investments and can be affected by market conditions.\"}"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "other",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"medium\", \"evidence\": \"We are investing in artificial intelligence (“AI”) across the entire company and infusing generative AI capabilities into our consumer and commercial offerings.\", \"explanation\": \"The excerpt highlights the company's investment in AI, which could indicate significant financial risks due to the high development and operational costs associated with AI technology. The company also faces competition, regulatory changes, and public scrutiny, which could lead to operational and financial risks.\"}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"Owned Leased (2) Total Retail Units Walmart U.S. retail units\", \"explanation\": \"The excerpt provides details about the company's retail units and distribution facilities, which is not directly related to market, credit, liquidity, operational, regulatory_legal, cybersecurity, or supply_chain risks. The low severity indicates that while the information is important, it does not indicate a significant risk.\"}"
+      },
+      {
+        "gold_category": "operational",
+        "pred_category": "operational",
+        "gold_severity": "medium",
+        "pred_severity": "medium",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"operational\", \"severity\": \"medium\", \"evidence\": \"Our future human capital resource requirements and the benefits provided by strategic locations are uncertain, and we may not realize the benefits we anticipate.\", \"explanation\": \"The excerpt highlights the uncertainty in human capital resource requirements and the benefits of strategic locations, which could lead to operational risks. This uncertainty could impact the company's ability to meet its operational needs, thus classifying it as medium severity.\"}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"We publish a variety of reports and resources related to our Corporate Social Responsibility programs and progress on our Reports Hub website, www.microsoft.com/corporate-responsibility/reports-hub,\", \"explanation\": \"The excerpt discusses the company's corporate social responsibility initiatives and the availability of reports and resources related to these programs, which is categorized as 'other' due to the lack of direct financial risk indicators.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"low\", \"evidence\": \"Tax law determines whether future reversals of temporary differences will result in taxable and deductible amounts that offset each other in future years.\", \"explanation\": \"This excerpt discusses the application of tax laws and the potential for future reversals of temporary differences, which is a regulatory and legal matter related to tax compliance and accounting.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "medium",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"low\", \"evidence\": \"Regulations Vehicle Safety and Testing In the U.S., our vehicles are subject to regulation by the National Highway Traffic Safety Administration (“NHTSA”), including all applicable Federal Motor Vehicle Safety Standards (“FMVSS”) and the NHTSA bumper standard.\", \"explanation\": \"The excerpt discusses the regulatory requirements for vehicle safety and testing, indicating compliance with FMVSS and NHTSA standards. This is a low severity risk as it pertains to regulatory compliance rather than direct financial risk.\"}"
+      },
+      {
+        "gold_category": "other",
+        "pred_category": "other",
+        "gold_severity": "low",
+        "pred_severity": "low",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"other\", \"severity\": \"low\", \"evidence\": \"The Company believes that its people play an important role in its success, and strives to attract, develop and retain the best talent.\", \"explanation\": \"This excerpt focuses on the company's human capital strategy and employee development, which is not directly related to market, credit, liquidity, operational, regulatory, legal, supply chain, or cybersecurity risks. The low severity indicates that while the information is important, it does not indicate a significant risk.\"}"
+      },
+      {
+        "gold_category": "regulatory_legal",
+        "pred_category": "regulatory_legal",
+        "gold_severity": "high",
+        "pred_severity": "high",
+        "valid_json": true,
+        "raw_output": "{\"category\": \"regulatory_legal\", \"severity\": \"high\", \"evidence\": \"in the European Union (“EU”) as it seeks to comply with the Digital Markets Act (the “DMA”),\", \"explanation\": \"The excerpt mentions compliance with the Digital Markets Act, which is a regulatory legal requirement. The potential for significant business changes and adverse financial impacts indicate a high severity.\"}"
+      }
+    ]
+  }
+}

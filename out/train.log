@@ -1,0 +1,32 @@
+COMMAND: /opt/anaconda3/envs/finscale/bin/python -m mlx_lm.lora --model Qwen/Qwen2.5-3B-Instruct --train --data data/mlx --adapter-path out/adapters --iters 100 --batch-size 2 --num-layers 8 --learning-rate 1e-05 --grad-checkpoint --max-seq-length 4096
+Calling `python -m mlx_lm.lora...` directly is deprecated. Use `mlx_lm.lora...` or `python -m mlx_lm lora ...` instead.
+Loading pretrained model
+
+Fetching 9 files:   0%|          | 0/9 [00:00<?, ?it/s]
+Fetching 9 files: 100%|██████████| 9/9 [00:00<00:00, 4042.92it/s]
+Loading datasets
+Training
+[34m╭─[0m[34m [0m[1;35mmlx_lm.lora[0m[34m [0m[34m───────────────────────────────────────────────────────────────────────────────────────────────────────[0m[34m─╮[0m
+[34m│[0m    [39mmodel        [0m   [1mQwen/Qwen2.5-3B-Instruct[0m                                                                          [34m│[0m
+[34m│[0m    [39mtype         [0m   [1mlora · 8 layers · rank 8[0m                                                                          [34m│[0m
+[34m│[0m    [39mdataset      [0m   [1mdata/mlx[0m                                                                                          [34m│[0m
+[34m│[0m    [39moptimizer    [0m   [1madam · lr 1.0e-05[0m                                                                                 [34m│[0m
+[34m│[0m    [39mbatch · iters[0m   [1m2 · 100[0m                                                                                           [34m│[0m
+[34m│[0m    [39mmax seq      [0m   [1m4,096[0m                                                                                             [34m│[0m
+[34m╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+Trainable parameters: 0.108% (3.326M/3085.939M)
+  [1miter   train_loss     tok/s     tokens[0m
+  [38;5;244m   1[0m    [1;35mval[0m [1m3.025[0m    [38;5;244m13.71s[0m
+  [38;5;244m  10[0m    [1;32m2.011 ▼[0m    [1m  421[0m    [38;5;244m  6.7k[0m
+  [38;5;244m  20[0m    [1;32m1.057 ▼[0m    [1m  545[0m    [38;5;244m 13.0k[0m
+  [38;5;244m  30[0m    [1;32m1.048 ▼[0m    [1m  539[0m    [38;5;244m 19.7k[0m
+  [38;5;244m  40[0m    [1;32m1.024 ▼[0m    [1m  542[0m    [38;5;244m 26.2k[0m
+  [38;5;244m  50[0m    [1;32m0.994 ▼[0m    [1m  533[0m    [38;5;244m 32.6k[0m
+  [38;5;244m  60[0m    [1;32m0.956 ▼[0m    [1m  541[0m    [38;5;244m 38.8k[0m
+  [38;5;244m  70[0m    [1;33m0.990 ▲[0m    [1m  541[0m    [38;5;244m 45.1k[0m
+  [38;5;244m  80[0m    [1;32m0.895 ▼[0m    [1m  550[0m    [38;5;244m 51.4k[0m
+  [38;5;244m  90[0m    [1;33m0.973 ▲[0m    [1m  535[0m    [38;5;244m 58.2k[0m
+  [38;5;244m 100[0m    [1;35mval[0m [1m1.007[0m    [38;5;244m13.34s[0m
+  [38;5;244m 100[0m    [1;33m1.001 ▲[0m    [1m  534[0m    [38;5;244m 64.6k[0m
+  [1;32msave[0m  [38;5;244m0000100_adapters.safetensors[0m
+[1;34mtrain[0m [34m██████████████████████████████[0m [1;34m100%[0m [38;5;244m·[0m [1;34m  100[0m[38;5;244m/100[0m
