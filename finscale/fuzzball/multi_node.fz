@@ -1,13 +1,14 @@
 version: v1
-
+# Same as single_node.fz, but the train job spans 2 GB10 nodes.
 volumes:
   shared:
-    use: ephemeral
+    use: ephemeral   # TODO(fuzzball): multi-node jobs may need a shared/persistent volume
 
 jobs:
   train:
+    # TODO(fuzzball): multi-node field unconfirmed (e.g. multinode / nodes / replicas) -> 2 nodes, 1 GPU each
     image:
-      uri: docker://<REGISTRY>/<IMAGE>:<TAG>
+      uri: docker://<REGISTRY>/finscale:<TAG>
     resource:
       cpu:
         cores: 16
@@ -18,12 +19,11 @@ jobs:
     mounts:
       shared:
         location: /shared
-    multinode:
-      nodes: 2
-      implementation: generic
     script: |
       #!/bin/bash
-      set -euo pipefail
+      set -e
       cd /app
       python gen_data.py
+      # NNODES / NODE_RANK / MASTER_ADDR must come from Fuzzball (TODO: confirm names)
       bash scripts/launch_multinode.sh --out /shared/out/adapter
+  # serve + eval: identical to single_node.fz

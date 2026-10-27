@@ -1,8 +1,6 @@
-# Build with an organizer-approved image registry/tag after verifying the base image manifest.
-# Verify arm64 manifest availability (newer NGC tags such as 26.09-py3 list arm64)
-# and compatibility with the event GB10 hardware and host driver.
-ARG BASE_IMAGE=nvcr.io/nvidia/pytorch:<VERIFIED_TAG>
-FROM ${BASE_IMAGE}
+# Build: docker buildx build --platform linux/arm64 -t <REGISTRY>/finscale:<TAG> .
+# TODO: confirm NGC tag with organizers (needs arm64 + Blackwell/GB10 support)
+FROM nvcr.io/nvidia/pytorch:25.09-py3
 WORKDIR /app
 RUN pip install --no-cache-dir transformers peft datasets accelerate scikit-learn pandas
 COPY . /app
