@@ -1,0 +1,10 @@
+# Dataset generation
+requests>=2.31
+numpy>=1.26
+# Optional Hugging Face LoRA fallback; install CUDA-matched torch separately as documented.
+torch>=2.2
+transformers>=4.45
+peft>=0.13
+datasets>=3.0
+accelerate>=1.0
+PyYAML>=6.0

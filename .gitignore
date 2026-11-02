@@ -8,3 +8,14 @@ data/mlx/
 data/*.jsonl
 *.safetensors
 results/*.log
+edgar-nemotron.zip
+__pycache__/
+*.pyc
+.venv/
+data/raw/*
+data/processed/*
+outputs/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!outputs/.gitkeep
+.env

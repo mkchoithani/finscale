@@ -1,0 +1,38 @@
+# REFERENCE TEMPLATE ONLY. Do not pass as-is: local file paths and data/LoRA keys
+# require verification against the selected Megatron-Bridge recipe and artifact pipeline.
+# Base fields below are modeled on Nemotron repo docs/nemotron/nano3/stage1_sft config.
+# LoRA fields are modeled on repo cookbook Nemotron-3-Nano-Omni/Megatron-bridge;
+# that Omni recipe is not the Nano3 text-only recipe. TODO verify before launch.
+run:
+  data: TODO-register-EDGAR-packed-parquet-artifact:latest
+  model: TODO-register-compatible-Nemotron-base-checkpoint:latest
+  env:
+    container: nvcr.io/nvidia/nemo:25.11.nemotron_3_nano
+recipe:
+  _target_: megatron.bridge.recipes.nemotronh.nemotron_3_nano.nemotron_3_nano_finetune_config
+  packed_sequence: true
+  # TODO: validate PEFT API and target module names with your exact model/repo revision.
+  peft:
+    _target_: megatron.bridge.training.mixed_lora_config  # TODO verify/import path
+    dim: 16
+    alpha: 32
+dataset:
+  # Must be produced via repo data-prep into packed Parquet; text JSONL is not direct input.
+  nano3_packed_sft_dir: TODO:path-to-packed-parquet-data
+  seq_length: 4096
+  packed_sequence_specs:
+    packed_sequence_size: 4096
+train:
+  train_iters: 200
+  global_batch_size: 8
+model:
+  seq_length: 4096
+  tensor_model_parallel_size: 1 # TODO set consistent with GPU topology/model
+  pipeline_model_parallel_size: 1
+scheduler:
+  lr_warmup_iters: 10
+checkpoint:
+  save: /workspace/edgar-nemotron/outputs/megatron-lora
+  save_interval: 50
+  pretrained_checkpoint: TODO:path-to-compatible-Megatron-base-checkpoint
+  finetune: true
