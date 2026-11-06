@@ -1,0 +1,98 @@
+1. Create the pod
+
+RunPod console > Pods > Deploy.
+Pick the same GPU type you used before (check your notes or RUNPOD.md for the recommendation).
+Template: a PyTorch + CUDA template (same as before).
+Set container disk large enough for model weights (50-100 GB is typical, so confirm against RUNPOD.md).
+Optional but recommended: attach your network volume at /workspace.
+Add environment variables (secrets) if the template allows: HF_TOKEN, and whichever API key your build script uses for the labeling model calls.
+Deploy, wait until status is Running, then open Connect > Web Terminal (or SSH).
+
+
+2. Clone repos
+cd /workspace
+git clone https://github.com/NVIDIA-NeMo/Nemotron.git
+git clone -b edgar-nemotron-runpod https://github.com/mkchoithani/finscale.git
+cd finscale/edgar-nemotron
+
+3. Python environment
+python -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+Verify the GPU works (you have a script for this):
+python scripts/smoke_test_cuda.py
+nvidia-smi
+
+4. Credentials
+export HF_TOKEN=hf_xxx
+huggingface-cli login --token $HF_TOKEN
+# plus whatever your build script needs (check the top of build_sft_dataset.py):
+grep -n "environ\|getenv\|API_KEY" scripts/build_sft_dataset.py
+Export those variables, or put them in a .env if the script loads one.
+SEC EDGAR requires a User-Agent with your name/email for downloads. Check download_edgar.py for how it's set, and make sure it's configured.
+
+5. Get data
+Option A, restore from backup:
+tar xzf edgar-backup.tar.gz -C /workspace/finscale/edgar-nemotron
+Option B, re-download:
+python scripts/download_edgar.py   # check --help for tickers/years args
+
+6. Build the SFT dataset
+nohup python -u scripts/build_sft_dataset.py --workers 2 > build.log 2>&1 &
+tail -f build.log        # Ctrl+C stops tail only
+Monitor: ps -p <PID>, tail -n 20 build.log.
+Validate when done (rows per ticker, label mix, any heavy drops).
+
+7. Train
+Two paths exist in your repo. Use whichever matches what you ran before (check README.md / RUNPOD.md):
+HF LoRA baseline:
+python scripts/train_hf_lora.py   # confirm args via --help or the config in configs/
+NeMo / Nemotron SFT:
+bash scripts/run_nemotron_sft.sh
+Optional binary conversion step (scripts/to_binary.py) if the NeMo path needs packed/binary data. Run it before run_nemotron_sft.sh.
+Run long jobs with nohup ... > train.log 2>&1 & so a dropped browser session doesn't kill them.
+
+8. Evaluate
+You have /workspace/finscale/evaluate.py (older pipeline). Verify it matches your schema first (see my earlier message), or use a new eval script written for the message-JSONL format. Always evaluate base vs baseline LoRA vs new model on the same held-out set.
+
+9. Save results before stopping the pod
+tar czf ~/results-$(date +%F).tar.gz outputs build.log train.log
+# download or push to HF
+cd /workspace/finscale && git add -A && git commit -m "results" && git push
+Then stop the pod. A stopped pod still bills for disk storage; terminate it once everything is backed up to avoid ongoing charges
+
+
+
+
+Train (new data, new output dir)
+Settings match your earlier successful baseline (defaults: r=8, lr 2e-4, 1 epoch). With more data, 2 epochs is reasonable. A100 80GB has plenty of room.
+cd /workspace/finscale/edgar-nemotron
+source .venv/bin/activate
+
+nohup torchrun --nproc_per_node=1 scripts/train_hf_lora.py \
+  --train data/sft/train.jsonl \
+  --val data/sft/val.jsonl \
+  --model nvidia/Llama-3.1-Nemotron-Nano-8B-v1 \
+  --output outputs/hf-lora-v2 \
+  --epochs 2 \
+  --max-length 4096 \
+  > train_v2.log 2>&1 &
+
+tail -f train_v2.log
+
+
+
+mkdir -p eval
+V=data/sft/val.jsonl   # <- your real val path
+
+python scripts/eval_hf_lora.py --data $V --out eval/base.json
+python scripts/eval_hf_lora.py --data $V --adapter outputs/hf-lora    --out eval/baseline.json
+python scripts/eval_hf_lora.py --data $V --adapter outputs/hf-lora-v2 --out eval/v2.json
+
+python - <<'EOF'
+import json
+for n in ["base","baseline","v2"]:
+    s = json.load(open(f"eval/{n}.json"))["summary"]
+    print(f"{n:9s} n={s['n']:3d} rougeL={s['rougeL']:.3f} grounding={s['grounding']:.3f} avg_words={s['avg_words']:.0f}")
+EOF.
