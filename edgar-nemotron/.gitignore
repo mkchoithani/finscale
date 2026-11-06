@@ -20,3 +20,9 @@ outputs/*
 *.pt
 *.pth
 checkpoints/
+data/
+*.bak*
+*.tar.gz
+*.log
+.venv/
+__pycache__/
