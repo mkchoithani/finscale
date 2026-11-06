@@ -1,0 +1,227 @@
+{
+  "summary": {
+    "adapter": "outputs/hf-lora",
+    "n": 27,
+    "rougeL": 0.22595086888257931,
+    "grounding": 0.4061761030869097,
+    "avg_words": 83.0
+  },
+  "results": [
+    {
+      "i": 0,
+      "pred": "\"Failure to meet the evolving needs of our industry and markets may adversely impact our financial results.\" This is the first substantive disclosed detail in NVDA's section Item 1A of its Annual Report on Form 10-K.",
+      "ref": "\"Failure to meet the evolving needs of our industry and markets may adversely impact our financial results.\" This opening risk factor establishes that NVIDIA's financial performance is directly tied to its ability to adapt to rapidly changing industry and market demands.",
+      "rougeL": 0.5194805194805195,
+      "grounding": 0.5757575757575758,
+      "len_words": 36
+    },
+    {
+      "i": 1,
+      "pred": "\"The first substantive disclosed detail in PFE's section Item 1A is 'MANAGED CARE TRENDS' which describes the impact of managed care organizations and payers on the pricing and formulary placement of our products.\"",
+      "ref": "\"Private payors, such as health plans, and other managed care entities, such as PBMs, continue to take action to manage the utilization and costs of drugs in the U.S., the single largest market for biopharmaceutical products.\" This is the first substantive disclosed detail in Item 1A, describing how managed care entities are actively managing drug utilization and costs in the U.S. market.",
+      "rougeL": 0.21052631578947367,
+      "grounding": 0.20689655172413793,
+      "len_words": 33
+    },
+    {
+      "i": 2,
+      "pred": "\"The first substantive disclosed detail in GOOGL's section Item 1A is 'We generate a significant portion of our revenues from advertising. Reduced spending by advertisers, a loss of partners, shifts in online advertising, new and evolving advertising formats, or new or existing technologies that block ads online or affect our ability to personalize ads could harm our business.'\"",
+      "ref": "\"We generated more than 70% of total revenues from online advertising in 2025.\" This is the first substantive disclosed detail in Item 1A, establishing that advertising constitutes the overwhelming majority of Alphabet's revenue stream.",
+      "rougeL": 0.15217391304347824,
+      "grounding": 0.8888888888888888,
+      "len_words": 58
+    },
+    {
+      "i": 3,
+      "pred": "BA's filing section Item 1A highlights significant risks to its commercial aircraft business, including market conditions, customer financial stability, production challenges, and regulatory hurdles. These risks could impact revenue, profitability, and cash flows. The company faces challenges in meeting delivery schedules and maintaining production rates, with delays in new aircraft programs and supply chain disruptions posing additional risks. The U.S. government's defense spending and procurement priorities also pose a threat to its business. While the company has plans to increase production rates and improve efficiency, these efforts are subject to significant risks, including FAA concurrence and supplier constraints. The source does not cover the company's efforts to address supply chain disruptions or improve operational stability.",
+      "ref": "BA's Item 1A filing identifies a broad spectrum of risks tied to its commercial and defense operations, emphasizing that the company's performance is closely linked to airline market conditions, production stability, and government spending. It highlights specific vulnerabilities such as cost overruns on fixed-price contracts, reliance on a limited customer base, and the inherent delays in aircraft certification and delivery. The document also notes that supply chain disruptions, labor instability, and inflationary pressures have already impacted financial results, particularly following the 737-9 door plug accident and the Spirit Acquisition. Additionally, it warns that changes in U.S. defense budgets or appropriations delays could adversely affect revenue and operations.\n\nThe source does not cover risks specific to BA's financial instruments, such as debt covenants or credit rating changes.",
+      "rougeL": 0.24896265560165973,
+      "grounding": 0.008771929824561403,
+      "len_words": 115
+    },
+    {
+      "i": 4,
+      "pred": "KO primarily uses derivative financial instruments to hedge against adverse fluctuations in foreign currency exchange rates, interest rates, and commodity prices. These derivatives are used to reduce exposure to market risks and are not employed for trading purposes. The company monitors its exposure to these risks through sensitivity analyses and hedging transactions. \n\nKO's foreign currency derivatives include forward exchange contracts and options to hedge forecasted cash flows and net investments in foreign operations. The total notional values of these derivatives were $21,128 million and $18,442 million as of December 31, 2025 and 2024, respectively. \n\nInterest rate risk is managed through interest rate swap agreements to offset fluctuations in existing and future debt issuances. Commodity price risk is managed through supplier pricing agreements and derivative financial instruments to mitigate the impact of price fluctuations on raw materials used in manufacturing and distribution. \n\n(The source does not cover other market risks such as geopolitical risks, supply chain disruptions, or environmental risks.)",
+      "ref": "KO's filing Item 7A details the company's use of derivative financial instruments primarily to mitigate exposure to foreign currency exchange rates, interest rates, and commodity price fluctuations, emphasizing that all positions are used for hedging rather than trading. The company manages foreign currency risk on a consolidated basis using forward contracts, options, and collars, with total notional values of $21.1 billion in 2025, and reports both hedging and non-hedging derivatives with associated fair value impacts and sensitivity estimates. Interest rate risk is addressed through a mix of fixed and variable rate debt and swap agreements, with a 1% rate increase estimated to raise interest expense by $120 million and decrease the fair value of liquid debt securities by $39 million. Commodity price risk is managed via supplier agreements and derivatives, with total notional values of $535 million in 2025, resulting in net unrealized losses for both hedging and non-hedging instruments. The source does not cover the company's specific tax strategies or long-term capital allocation decisions.",
+      "rougeL": 0.3271604938271605,
+      "grounding": 0.15286624203821655,
+      "len_words": 159
+    },
+    {
+      "i": 5,
+      "pred": "\"The first substantive disclosed detail in TSLA's section Item 1 is 'We design, develop, manufacture, sell and lease high-performance fully electric vehicles and energy generation and storage systems, and offer services related to our products.'\" (This sentence highlights TSLA's primary business activities and products.)",
+      "ref": "\"We design, develop, manufacture, sell and lease high-performance fully electric vehicles and energy generation and storage systems, and offer services related to our products.\" This opening statement establishes the company's core business scope and operational focus before any specific product or segment details are introduced.",
+      "rougeL": 0.5393258426966293,
+      "grounding": 0.6190476190476191,
+      "len_words": 44
+    },
+    {
+      "i": 6,
+      "pred": "Here are 3-5 sentences of plain prose summarizing GOOGL's filing section Item 1A (filed 2026-02-05) using only the source:\n\nGOOGL faces significant risks due to its heavy investment in online advertising, which constitutes over 70% of its total revenues. These risks include reduced spending by advertisers, loss of partners, shifts in online advertising trends, and new technologies that block ads online. Additionally, GOOGL's investments in new businesses, products, and services, as well as its increasing focus on AI, present inherent risks and uncertainties that could harm its financial condition and operating results. Furthermore, GOOGL's competitors and new entrants in the AI and cloud computing industries may develop products and services that are similar or superior to GOOGL's offerings, posing additional challenges to its competitiveness.\n\n(The source does not cover the specific risks and uncertainties related to GOOGL's partnerships and collaborations, as well as the potential impact of regulatory changes on its business operations.)",
+      "ref": "Alphabet's Item 1A filing identifies advertising revenue concentration as a primary risk, noting that over 70% of 2025 revenues came from online advertising, with advertisers able to terminate contracts at any time. The document highlights that AI-driven shifts in ad delivery and emerging ad-blocking technologies threaten the company's ability to personalize and serve ads effectively. It also flags macroeconomic sensitivity, as advertiser spending fluctuates with economic conditions, and warns that heavy investment in new businesses, AI infrastructure, and property carries commercial and operational risks, including potential liabilities from long-duration contracts and asset obsolescence. The filing further emphasizes intense competition across Google Services, Cloud, and Other Bets, where failure to innovate could erode market position. It concludes by noting that evolving product and service risks, including ethical and regulatory challenges, could harm demand and brand reputation.\n\nThe source does not address specific legal or regulatory penalties arising from the risks described.",
+      "rougeL": 0.1716171617161716,
+      "grounding": 0.08333333333333333,
+      "len_words": 153
+    },
+    {
+      "i": 7,
+      "pred": "\"The NVIDIA CUDA development platform that runs on all NVIDIA GPUs, as well as hundreds of domain-specific software libraries, frameworks, algorithms, software development kits, or SDKs, and application programming interfaces, or APIs.\" This is the first substantive disclosed detail in NVDA's section Item 1, detailing the foundational CUDA platform that runs on their GPUs.",
+      "ref": "\"NVIDIA pioneered accelerated computing to help solve the most challenging computational problems.\" This opening statement establishes the company's foundational purpose and technological focus.",
+      "rougeL": 0.07792207792207792,
+      "grounding": 0.6666666666666666,
+      "len_words": 54
+    },
+    {
+      "i": 8,
+      "pred": "\"In the first quarter of fiscal 2023, the EPA informed us that it believes we owe certain penalties for violations by third-party installers of documentation requirements under the decree.\" This is the first substantive disclosed detail in HD's section Item 3, as it provides specific information about a proceeding that may result in monetary sanctions above the stated threshold of $1 million.",
+      "ref": "\"The Company is party to various legal proceedings arising in the ordinary course of its business but is not currently a party to any legal proceeding that management believes will have a material adverse effect on our consolidated financial position or our results of operations.\" This opening statement establishes the overall legal posture before detailing specific environmental proceedings.",
+      "rougeL": 0.13333333333333333,
+      "grounding": 0.5423728813559322,
+      "len_words": 62
+    },
+    {
+      "i": 9,
+      "pred": "\"The first substantive disclosed detail in V's section Item 7A is 'Market risk is the potential economic loss arising from adverse changes in market factors. Our exposure to financial market risks results primarily from fluctuations in foreign currency exchange rates, interest rates and equity prices.' \" This detail is the first sentence of the section, providing an overview of the company's market risk exposure.",
+      "ref": "\"As of September 30, 2026 and 2025, the effect of a hypothetical 10% weakening in the value of the functional currencies is estimated to create an additional fair value loss of approximately $486 million and $422 million, respectively, on our outstanding foreign exchange forward contracts.\" This sentence establishes the magnitude of potential financial exposure from currency fluctuations, quantifying the estimated loss on derivative instruments as a concrete risk metric.",
+      "rougeL": 0.18045112781954886,
+      "grounding": 0.5833333333333334,
+      "len_words": 64
+    },
+    {
+      "i": 10,
+      "pred": "\"The first substantive disclosed detail in KO's section Item 1A is 'Unfavorable general economic and geopolitical conditions could negatively impact our financial results.'\" (Unfavorable general economic and geopolitical conditions could negatively impact our financial results.)",
+      "ref": "\"Unfavorable general economic and geopolitical conditions could negatively impact our financial results.\" This is the first substantive disclosed detail in Item 1A, as it immediately follows the introductory paragraph and outlines the primary risk category the company addresses.",
+      "rougeL": 0.3013698630136986,
+      "grounding": 0.6451612903225806,
+      "len_words": 35
+    },
+    {
+      "i": 11,
+      "pred": "Item 1A of HD's filing highlights the risks to its business, results of operations, and financial condition due to factors such as strong competition, evolving customer preferences, technological advancements, and geopolitical changes. The company emphasizes the importance of managing these risks through effective inventory management, customer experience, and delivery options. However, it does not address potential risks related to regulatory scrutiny, litigation, or supply chain disruptions. \n\n(Note: The source does not cover potential risks related to regulatory scrutiny, litigation, or supply chain disruptions.)",
+      "ref": "HD's Item 1A filing identifies numerous strategic risks, primarily centering on intense competition that threatens pricing, market share, and margins, as well as evolving customer expectations around digital shopping, delivery, and data privacy that require continuous adaptation. The company also highlights reputational risks stemming from brand perception, social and environmental initiatives, and third-party actions, noting that damage to its brand could affect customer loyalty, regulatory scrutiny, and stock price. The filing concludes that failure to manage these factors\u2014including supply chain investments, localized merchandising, and customer experience\u2014could materially harm financial performance. The source does not cover specific legal proceedings or litigation outcomes.",
+      "rougeL": 0.25,
+      "grounding": 0.0,
+      "len_words": 83
+    },
+    {
+      "i": 12,
+      "pred": "Here is a 3-5 sentence summary of UNH's filing section Item 1 (filed 2025-02-27) using only the source:\n\nUnitedHealth Group Incorporated, a health care and well-being company, operates two complementary businesses: Optum and UnitedHealthcare. Optum, with segments including Optum Health, Optum Insight, and Optum Rx, delivers patient-centered care, data analytics, and pharmacy services to improve health outcomes and reduce costs. UnitedHealthcare offers health benefits to consumers, employers, Medicare and Retirement beneficiaries, and economically disadvantaged individuals. The company's four reportable segments focus on value-based care, population health, health care operations, and data and analytics. The source does not cover UNH's financial performance or strategic initiatives. \n\n(Note: The summary is limited to 150 words, as requested, and does not include the final sentence about what the source does not cover, as it would exceed the word limit. If you'd like, I can adjust the summary to fit the additional sentence.) \n\n(If you want the summary to include the note about what the source does not cover, here's an adjusted version within the 150-word limit:)\n\nUnitedHealth Group Incorporated, a health care and well-being company,",
+      "ref": "UnitedHealth Group's 2025 Item 1 filing outlines the company's structure as a health care and well-being entity with two primary businesses, Optum and UnitedHealthcare, organized into four reportable segments: Optum Health, Optum Insight, Optum Rx, and UnitedHealthcare. Optum Health serves 100 million consumers and partners with health payers, delivering value-based care and financial services; Optum Insight provides analytics and technology to improve system efficiency and manage $32.8 billion in backlog; Optum Rx manages $178 billion in pharmaceutical spending across a 65,000-pharmacy network; and UnitedHealthcare offers benefits through Employer & Individual, Medicare & Retirement, and Community & State divisions. The filing emphasizes the company's mission to improve access, affordability, and outcomes through data-driven, integrated health services. The source does not cover UnitedHealth Group's financial performance metrics or results for the fiscal year.",
+      "rougeL": 0.24358974358974358,
+      "grounding": 0.10582010582010581,
+      "len_words": 181
+    },
+    {
+      "i": 13,
+      "pred": "Amazon faces intense competition in its rapidly evolving businesses, including e-commerce, cloud services, and retail. The company's expansion into new products, services, and geographic regions subjects it to additional risks, such as limited experience, high costs of establishment, and potential failure to gain or lose business. International operations expose Amazon to risks like local economic and political conditions, government regulation, and restrictive ownership rules. \n\nGlobal economic and geopolitical conditions, such as tariff policy changes and trade disputes, can negatively impact Amazon's operating results. The company's success depends on its ability to adapt to changing market conditions and customer preferences. While Amazon has a strong brand and significant market share, it faces risks from competitors, including those with greater resources, longer histories, and more customers. \n\nThe source does not cover Amazon's specific financial performance, stock price, or market trends, as these are detailed in other sections of the filing.",
+      "ref": "Amazon's 2026 Item 1A filing identifies intense competition across multiple industries and geographies as a primary risk, noting that competitors with greater resources may adopt more aggressive pricing and devote more resources to technology and marketing, potentially reducing Amazon's sales and profits. The company highlights that expansion into new products, services, and geographic regions subjects it to additional risks, including limited customer adoption and the possibility that intended benefits from significant investments in automation and artificial intelligence may not be realized, which could result in investment write-downs. International operations are flagged as exposing the company to diverse risks such as government regulation, trade restrictions, currency controls, and geopolitical events, with specific concern regarding regulatory environments in China and India that may restrict foreign investment and operations. The filing also notes that variability in the retail business due to seasonality, economic conditions, and unforeseeable events places strain on operations, though the source text is cut off before detailing the full impact of overstocking.\n\nThe source does not cover Amazon's specific financial performance metrics or quarterly results for the filing period.",
+      "rougeL": 0.2507645259938838,
+      "grounding": 0.02027027027027027,
+      "len_words": 148
+    },
+    {
+      "i": 14,
+      "pred": "Market risk, primarily from foreign currency and interest rate fluctuations, is managed through derivative contracts and hedging activities. Foreign exchange risk is mitigated by short-term derivatives, net investment hedges, and daily settlement activities. Interest rate risk is managed by high-quality investments and interest rate derivative hedges. (Source does not cover other market risks such as credit risk.)",
+      "ref": "Management monitors risk exposures related to foreign currency exchange rates and interest rates, establishing policies for funding, investments, and derivative instruments to mitigate these risks. The company uses foreign exchange derivative contracts to manage currency exposure from anticipated transactions and to offset changes in the value of assets and liabilities, noting that a hypothetical 10% adverse currency shift could cause a fair value loss of approximately $475 million on outstanding contracts as of December 31, 2024. Additionally, MA manages interest rate risk through derivative contracts on fixed-rate debt, acknowledging that a 100 basis point adverse change would result in a fair value loss of approximately $20 million on those hedges at the same date. The source does not cover the company's specific credit risk or liquidity risk management practices.",
+      "rougeL": 0.17204301075268819,
+      "grounding": 0.0,
+      "len_words": 57
+    },
+    {
+      "i": 15,
+      "pred": "Microsoft's filing section Item 1 (filed July 30, 2025) outlines the company's strategic vision and growth ambitions. Microsoft aims to empower individuals and organizations through digital technology and artificial intelligence (AI), focusing on productivity, collaboration, and personal computing. The company emphasizes security, compliance, and identity management across its cloud, application, and device assets. Microsoft's future growth depends on its ability to transcend current product category definitions, business models, and sales motions. The filing does not cover Microsoft's environmental sustainability goals or its efforts to address climate change. \n\n(Note: This summary is limited to the key points of Item 1 and does not include all the detailed information provided in the source.)",
+      "ref": "Microsoft's Item 1 filing, dated July 30, 2025, presents the company as a technology leader committed to responsible AI integration across its cloud, productivity, and personal computing offerings, with a strategic focus on transforming workplace dynamics and building an intelligent cloud platform. The document outlines Microsoft's three core operating segments\u2014Productivity and Business Processes, Intelligent Cloud, and More Personal Computing\u2014detailing how each leverages AI and cloud infrastructure to drive growth and customer value, while emphasizing the company's long-term ambition to lead in distinct technology areas through sustained investment in innovation and skilling initiatives. The filing also notes structural changes to segment composition effective in fiscal year 2025, aligning reporting with how the chief operating decision maker now manages the business. What the source does not cover is the specific financial performance metrics or quarterly results associated with these segments.",
+      "rougeL": 0.19277108433734938,
+      "grounding": 0.08181818181818182,
+      "len_words": 111
+    },
+    {
+      "i": 16,
+      "pred": "\"The NVIDIA pioneered accelerated computing to help solve the most challenging computational problems. NVIDIA is now a full-stack computing infrastructure company with data-center-scale offerings that are reshaping industry.\"",
+      "ref": "\"NVIDIA pioneered accelerated computing to help solve the most challenging computational problems.\" This opening statement establishes the company's foundational mission and technological focus before detailing specific business segments and markets.",
+      "rougeL": 0.3448275862068965,
+      "grounding": 0.9615384615384616,
+      "len_words": 28
+    },
+    {
+      "i": 17,
+      "pred": "\"The first substantive disclosed detail in PFE's section Item 7 is 'We, like other businesses in our industry, are subject to certain industry-specific challenges. These include, among others, the topics listed below. See also the Item 1. Business\u2013\u2013Government Regulation and Price Constraints and Item 1A. Risk Factors sections.'\" (This detail is followed by a discussion of regulatory environment challenges, including pipeline productivity.)",
+      "ref": "\"In the first quarter of 2024, we reclassified royalty income (substantially all of which is related to our Biopharma segment) from Other (income)/deductions\u2013\u2013net and began presenting Royalty revenues as a separate line item within Total revenues in our consolidated statements of operations. Prior-period amounts have been recast to conform to the current presentation.\" This detail explains that Pfizer reclassified royalty income from a different line item to a separate royalty revenue line in their financial statements, with prior periods adjusted to match the new presentation.",
+      "rougeL": 0.12244897959183675,
+      "grounding": 0.6666666666666666,
+      "len_words": 62
+    },
+    {
+      "i": 18,
+      "pred": "\"The first substantive disclosed detail in NVDA's section Item 7A is 'We are exposed to interest rate risk related to our fixed-rate investment portfolio and outstanding debt. The investment portfolio is managed consistent with our overall liquidity strategy in support of both working capital needs and growth of our businesses.'\"",
+      "ref": "\"According to our sensitivity analysis on our investment portfolio, a decrease in the yield curve of 0.5% as of the end of fiscal year 2026 and 2025 would decrease the fair value for these investments by approximately $0.2 billion.\" This is the first substantive detail disclosed in Item 7A, outlining the potential financial impact of interest rate changes on the investment portfolio's fair value.",
+      "rougeL": 0.15789473684210525,
+      "grounding": 0.8723404255319149,
+      "len_words": 50
+    },
+    {
+      "i": 19,
+      "pred": "\"The Procter & Gamble Company (the Registrant) is a world-leading multinational consumer goods company focused on providing trusted, branded products of superior quality, performance and value to improve the lives of consumers around the world - now and for generations to come.\" (One substantive disclosed detail from PG's section Item 1 is the company's focus on providing high-quality, high-performance products to consumers.)",
+      "ref": "\"Our business model is focused on delivering sustainable value creation by driving balanced top- and bottom-line growth.\" This sentence introduces the company's strategic approach to growth and value creation.",
+      "rougeL": 0.17582417582417584,
+      "grounding": 0.5166666666666667,
+      "len_words": 62
+    },
+    {
+      "i": 20,
+      "pred": "NVIDIA reported fiscal year 2025 revenue growth driven by data center compute and networking platforms, with significant demand for its Hopper architecture. The company began shipping production systems of the Blackwell architecture in the fourth quarter of fiscal year 2025. \n\nNVIDIA faced challenges due to export controls, including the AI Diffusion IFR, which imposed new licensing requirements on its products. The company expanded its Data Center product portfolio to offer new solutions, including those for which the USG does not require a license or advance notice before each shipment. \n\n(The source does not cover the company's financial performance or results of operations in fiscal year 2025.)",
+      "ref": "NVIDIA's fiscal year 2025 revenue growth was driven by data center compute and networking platforms for accelerated computing and AI, with Hopper architecture shipments and the fourth-quarter Blackwell architecture launch contributing to significant year-over-year increases. Demand estimates for new products and applications remain subject to volatility, and the company has expanded supply and capacity purchases with existing and new suppliers, though increased integration creates supply chain complexity and potential inventory provisions if commitments exceed demand. Global trade restrictions, including U.S. export controls on A100, H100, and newer Blackwell systems to China, the Middle East, and other regions, have limited NVIDIA's ability to ship restricted products without a license, harmed its competitive position in affected markets, and may further restrict future sales if regulations expand; the company has introduced license-exempt products for China but acknowledges uncertainty in obtaining licenses for higher-performance systems. The filing does not cover NVIDIA's specific quarterly financial results or detailed balance sheet figures.",
+      "rougeL": 0.23664122137404578,
+      "grounding": 0.3333333333333333,
+      "len_words": 106
+    },
+    {
+      "i": 21,
+      "pred": "\"In our fixed-rate debt obligations, exposure to interest rate risk is not believed to be material for us.\" (This is the first substantive disclosed detail in BA's section Item 7A, which discusses interest rate risk.)",
+      "ref": "\"At December 31, 2025, a 10% increase or decrease in the exchange rate in our portfolio of foreign currency contracts would have increased or decreased our unrealized gains by $425 million.\" This is the first substantive detail disclosed in Item 7A, detailing the magnitude of potential unrealized gains from foreign currency exchange rate risk at the specified measurement date.",
+      "rougeL": 0.21276595744680848,
+      "grounding": 0.4375,
+      "len_words": 35
+    },
+    {
+      "i": 22,
+      "pred": "\"The first substantive disclosed detail in UNH's section Item 7A is 'Our primary market risks are exposures to changes in interest rates impacting our investment income and interest expense and the fair value of certain of our fixed-rate investments, including our loan receivables, and debt.'\" (This detail is significant as it highlights the company's primary market risk and provides a clear understanding of the potential impact of interest rate changes on its financial performance.)",
+      "ref": "\"As of December 31, 2025, we had $34 billion of financial assets on which the interest rates received vary with market interest rates, which may significantly impact our investment income.\" This detail establishes the scale of UNH's exposure to floating-rate financial assets and their direct effect on investment income.",
+      "rougeL": 0.13008130081300814,
+      "grounding": 0.5,
+      "len_words": 74
+    },
+    {
+      "i": 23,
+      "pred": "Pfizer Inc. focuses on breakthroughs that change patients' lives through its research and development of biopharmaceutical products. The company's 2025 priorities include improving R&D productivity, expanding margins, and achieving commercial excellence. Pfizer's commercial operations are structured into three segments: Biopharma, PC1, and Pfizer Ignite. Biopharma is the only reportable segment, encompassing the discovery, development, manufacture, marketing, sale, and distribution of biopharmaceutical products worldwide. The company's commercial divisions market, sell, and distribute its products, with global operating functions responsible for research, development, manufacturing, and supply of its products. \n\nPfizer's R&D efforts are focused on oncology, internal medicine, vaccines, and inflammation and immunology. The company's R&D strategy includes sharpening focus, improving productivity, and advancing a sustainable and value-creating pipeline. Pfizer's commercial strategy includes expanding margins, optimizing capital allocation, and achieving commercial excellence in key categories. \n\n(Note: This summary does not cover Pfizer's financial statements, regulatory compliance, or other non-commercial aspects of the company.)",
+      "ref": "Pfizer's Item 1 filing from its 2024 Form 10-K, dated February 27, 2025, provides a corporate overview emphasizing the company's global biopharmaceutical operations, commercial structure, and R&D priorities. It details the reorganization of the Pfizer Oncology Division at the start of 2025, moving U.S. oncology commercial and global marketing functions into the Pfizer U.S. Commercial Division, and consolidates Oncology R&D and Primary R&D organizations into a single entity effective January 1, 2025, to sharpen focus and improve productivity. The filing outlines Pfizer's five core business principles, its 2025 key priorities including improving R&D productivity and maximizing operational efficiency, and its commitment to strategic capitalization through product pipeline advancement and business development. It also describes the company's commercial segments\u2014Biopharma, PC1, and Pfizer Ignite\u2014and the product portfolios within each, noting that Biopharma is the only reportable segment.\n\nThe source does not cover any details regarding Pfizer's specific financial performance, such as revenue figures, earnings, or balance sheet data.",
+      "rougeL": 0.18241042345276876,
+      "grounding": 0.0759493670886076,
+      "len_words": 151
+    },
+    {
+      "i": 24,
+      "pred": "\"The Boeing Company, together with its subsidiaries (herein referred to as \u201cBoeing,\u201d the \u201cCompany,\u201d \u201cwe,\u201d \u201cus,\u201d \u201cour\u201d), is one of the world\u2019s major aerospace firms.\" (The first substantive disclosed detail in BA's section Item 1 is the introduction to the company, which sets the stage for the detailed information that follows.)",
+      "ref": "\"As of December 31, 2024, Boeing\u2019s total workforce was approximately 172,000 with 15% located outside of the U.S.\" This sentence provides the first substantive detail about Boeing's workforce size and composition.",
+      "rougeL": 0.14634146341463417,
+      "grounding": 0.5625,
+      "len_words": 51
+    },
+    {
+      "i": 25,
+      "pred": "Here is a summary of UNH's filing section Item 7 (filed 2026-03-02) in plain prose, within the 150-word limit:\n\nUNH's filing section Item 7 covers strategic business realignment, net portfolio divestitures, restructuring actions, and direct response costs due to a cyberattack. The company realigned its businesses to respond to market changes and opportunities, with net portfolio divestitures and restructuring actions resulting in a net gain of $568 million. The restructuring actions included real estate rationalization, workforce reductions, and contractual reassessments. The company also provided interest-free loans to support care providers impacted by a cyberattack, increasing reserves for net collection expectations associated with provider loans and other customer balances. The company's business trends include increased care patterns, medical cost trends, and the impact of the Inflation Reduction Act on Medicare Part D benefits. The company is working to mitigate medical cost increases and improve care delivery and payment models. \n\n(The source does not cover the company's financial statements, which are included in Part II, Item 8.)",
+      "ref": "UnitedHealth Group's Item 7 filing opens with an executive overview of its two primary businesses, Optum and UnitedHealthcare, organized into four reportable segments. It then details a January 1, 2026 business realignment that shifted Optum Financial from Optum Health to Optum Insight, with prior period data recast accordingly. The filing further outlines significant 2025 portfolio actions yielding a net $568 million gain, restructuring and other actions totaling $2.5 billion impacting premium revenue, investment income, medical costs, and operating costs across segments, and direct response costs related to the Change Healthcare cyberattack. Business trends highlight persistent healthcare spending growth, pricing pressures from medical cost trends exceeding assumptions, Medicare Advantage membership contraction, Medicaid funding challenges, and ongoing delivery system modernization efforts. The source does not cover year-over-year financial comparisons between 2024 and 2023.",
+      "rougeL": 0.19594594594594594,
+      "grounding": 0.10119047619047619,
+      "len_words": 165
+    },
+    {
+      "i": 26,
+      "pred": "\"The Home Depot, Inc. is the world\u2019s largest home improvement retailer based on net sales for fiscal 2024. We offer our customers a wide assortment of building materials, home improvement products, lawn and garden products, d\u00e9cor products, and facilities MRO products, in stores and online.\" This is the first substantive disclosed detail in HD's section Item 1, detailing the company's business and product offerings.",
+      "ref": "\"In fiscal 2024, we acquired SRS, a leading residential specialty trade distribution company engaged in the distribution of residential and commercial roofing products, complementary building products, landscape supplies and swimming pool supplies serving the professional roofer, landscaper, and pool contractor.\" This sentence first discloses the acquisition of SRS, a key strategic move to expand the company's product offerings and customer base.",
+      "rougeL": 0.22399999999999998,
+      "grounding": 0.7580645161290323,
+      "len_words": 64
+    }
+  ]
+}

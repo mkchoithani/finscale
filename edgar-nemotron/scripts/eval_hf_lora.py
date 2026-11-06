@@ -56,6 +56,8 @@ def main():
         prompt_msgs, ref = msgs[:-1], msgs[-1]["content"]
         source = prompt_msgs[-1]["content"]
         ids = tok.apply_chat_template(prompt_msgs, add_generation_prompt=True, return_tensors="pt")
+        if not torch.is_tensor(ids):
+            ids = ids["input_ids"]
         if ids.shape[1] > a.max_input:
             print(f"[{i}] skipped: prompt {ids.shape[1]} tokens", file=sys.stderr); continue
         with torch.no_grad():
