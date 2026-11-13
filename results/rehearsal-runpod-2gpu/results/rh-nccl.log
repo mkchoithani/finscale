@@ -1,0 +1,13 @@
+
+========== NCCL: 2 'nodes' over sockets ==========
+==> results/two_nodes_rank0.out <==
+        8 MB      3.712 ms  busbw    2.26 GB/s
+       64 MB     27.617 ms  busbw    2.43 GB/s
+      256 MB    110.158 ms  busbw   2.437 GB/s
+     1024 MB    449.066 ms  busbw   2.391 GB/s
+saved results/rehearsal-nccl/nccl_report.json
+
+==> results/two_nodes_rank1.out <==
+PASS_SAME_HOST 3.0
+
+========== DONE (nccl) ==========

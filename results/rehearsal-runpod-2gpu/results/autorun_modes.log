@@ -1,0 +1,405 @@
+##### AUTORUN START 2026-11-13T15:43:08Z commit=52239f3 stages: modes
+NVIDIA H200, 143771 MiB, 595.91.07
+NVIDIA H200, 143771 MiB, 595.91.07
+##### STAGE modes START 15:43:08
+
+========== MODES: fallbacks ddp / shard / ep (each must at least reach step 1) ==========
+Base recipe: /opt/Automodel/examples/llm_finetune/nemotron/nemotron_nano_v3_singlegpu_lora.yaml
+Wrote configs/rh-ddp-2n.yaml  |  mode=ddp nodes=2 world=2 gbs=16 grad_accum/rank=8 seq=3072 steps=2 lr=0.0001
+Distributed: {'strategy': 'ddp', 'dp_size': 2, 'tp_size': 1, 'cp_size': 1, 'ep_size': 1, 'activation_checkpointing': True}
+Launch (every node):  NNODES=2 NODE_RANK=<0..1> HEAD_ADDR=<node0 IP> PORT=<allowed port> bash scripts/launch_train.sh configs/rh-ddp-2n.yaml
+==> results/two_nodes_rank0.out <==
+Training:   0%|          | 0/2 [00:21<?, ?step/s, loss=1.1664, lr=1.00e-04, tps=808]Training:  50%|█████     | 1/2 [00:21<00:21, 21.73s/step, loss=1.1664, lr=1.00e-04, tps=808]2026-11-13 15:45:06 | INFO | root | step 1 | epoch 0 | loss 0.9760 | grad_norm 1.9983 | lr 1.00e-04 | mem 63.74 GiB | tps 4721.25(2360.63/gpu) | num_label_tokens 1672
+Training:  50%|█████     | 1/2 [00:25<00:21, 21.73s/step, loss=0.9760, lr=1.00e-04, tps=4721]Training: 100%|██████████| 2/2 [00:25<00:00, 11.40s/step, loss=0.9760, lr=1.00e-04, tps=4721]Training: 100%|██████████| 2/2 [00:25<00:00, 12.95s/step, loss=0.9760, lr=1.00e-04, tps=4721]
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Deregistering plugin entry for commId: 14773018502193903039
+[finscale] exit=0 wall=104s log=results/runs/rh-ddp-2n/logs/9bd56cf6e51b-n0.log
+rh-ddp-2n: 2 steps | median tps=2764.6699473232948 | median step=4.165s | loss 1.1664440631866455 -> 0.9759565591812134 | peak mem 63.7432804107666 GiB
+
+==> results/two_nodes_rank1.out <==
+/opt/venv/lib/python3.12/site-packages/torchdata/stateful_dataloader/stateful_dataloader.py:379: UserWarning: 'set_vital' is deprecated, please do not call
+  torch.set_vital("Dataloader", "enabled", "True")  # type: ignore[attr-defined]
+9bd56cf6e51b:23467:23467 [0] NCCL INFO Deregistering plugin entry for commId: 14773018502193903039
+[finscale] exit=0 wall=104s log=results/runs/rh-ddp-2n/logs/9bd56cf6e51b-n1.log
+rh-ddp-2n: 2 steps | median tps=2764.6699473232948 | median step=4.165s | loss 1.1664440631866455 -> 0.9759565591812134 | peak mem 63.7432804107666 GiB
+MODE ddp: OK
+Base recipe: /opt/Automodel/examples/llm_finetune/nemotron/nemotron_nano_v3_singlegpu_lora.yaml
+Wrote configs/rh-shard-2n.yaml  |  mode=shard nodes=2 world=2 gbs=16 grad_accum/rank=8 seq=3072 steps=2 lr=0.0001
+Distributed: {'strategy': 'fsdp2', 'dp_size': 2, 'tp_size': 1, 'cp_size': 1, 'ep_size': 1, 'sequence_parallel': False, 'activation_checkpointing': True}
+Launch (every node):  NNODES=2 NODE_RANK=<0..1> HEAD_ADDR=<node0 IP> PORT=<allowed port> bash scripts/launch_train.sh configs/rh-shard-2n.yaml
+==> results/two_nodes_rank0.out <==
+Training:  50%|█████     | 1/2 [07:21<03:49, 229.79s/step, loss=0.9856, lr=1.00e-04, tps=93]Training: 100%|██████████| 2/2 [07:21<00:00, 218.99s/step, loss=0.9856, lr=1.00e-04, tps=93]Training: 100%|██████████| 2/2 [07:21<00:00, 220.61s/step, loss=0.9856, lr=1.00e-04, tps=93]
+9bd56cf6e51b:34677:34677 [0] NCCL INFO Deregistering plugin entry for commId: 3395617994030858460
+9bd56cf6e51b:34677:34677 [0] NCCL INFO Deregistering plugin entry for commId: 9207769654491786568
+[finscale] exit=0 wall=471s log=results/runs/rh-shard-2n/logs/9bd56cf6e51b-n0.log
+rh-shard-2n: 2 steps | median tps=84.74512568803567 | median step=211.429s | loss 1.165931224822998 -> 0.9856070280075073 | peak mem 38.558523654937744 GiB
+
+==> results/two_nodes_rank1.out <==
+  output = self._register_pre_backward_hook(output)
+9bd56cf6e51b:34676:34676 [0] NCCL INFO Deregistering plugin entry for commId: 3395617994030858460
+9bd56cf6e51b:34676:34676 [0] NCCL INFO Deregistering plugin entry for commId: 9207769654491786568
+[finscale] exit=0 wall=471s log=results/runs/rh-shard-2n/logs/9bd56cf6e51b-n1.log
+rh-shard-2n: 2 steps | median tps=84.74512568803567 | median step=211.429s | loss 1.165931224822998 -> 0.9856070280075073 | peak mem 38.558523654937744 GiB
+MODE shard: OK
+Base recipe: /opt/Automodel/examples/llm_finetune/nemotron/nemotron_nano_v3_singlegpu_lora.yaml
+Wrote configs/rh-ep-2n.yaml  |  mode=ep nodes=2 world=2 gbs=16 grad_accum/rank=8 seq=3072 steps=2 lr=0.0001
+Distributed: {'strategy': 'fsdp2', 'dp_size': 2, 'tp_size': 1, 'cp_size': 1, 'ep_size': 2, 'sequence_parallel': False, 'activation_checkpointing': True}
+Launch (every node):  NNODES=2 NODE_RANK=<0..1> HEAD_ADDR=<node0 IP> PORT=<allowed port> bash scripts/launch_train.sh configs/rh-ep-2n.yaml
+==> results/two_nodes_rank0.out <==
+Training:  50%|█████     | 1/2 [00:53<00:32, 32.82s/step, loss=0.9832, lr=1.00e-04, tps=954]Training: 100%|██████████| 2/2 [00:53<00:00, 25.64s/step, loss=0.9832, lr=1.00e-04, tps=954]Training: 100%|██████████| 2/2 [00:53<00:00, 26.72s/step, loss=0.9832, lr=1.00e-04, tps=954]
+9bd56cf6e51b:48338:48338 [0] NCCL INFO Deregistering plugin entry for commId: 13485886146590542363
+9bd56cf6e51b:48338:48338 [0] NCCL INFO Deregistering plugin entry for commId: 7587962987340744943
+[finscale] exit=0 wall=119s log=results/runs/rh-ep-2n/logs/9bd56cf6e51b-n0.log
+rh-ep-2n: 2 steps | median tps=744.6742191189077 | median step=20.614s | loss 1.164994478225708 -> 0.9832497835159302 | peak mem 37.85803842544556 GiB
+
+==> results/two_nodes_rank1.out <==
+  output = self._register_pre_backward_hook(output)
+9bd56cf6e51b:48339:48339 [0] NCCL INFO Deregistering plugin entry for commId: 13485886146590542363
+9bd56cf6e51b:48339:48339 [0] NCCL INFO Deregistering plugin entry for commId: 7587962987340744943
+[finscale] exit=0 wall=119s log=results/runs/rh-ep-2n/logs/9bd56cf6e51b-n1.log
+rh-ep-2n: 2 steps | median tps=744.6742191189077 | median step=20.614s | loss 1.164994478225708 -> 0.9832497835159302 | peak mem 37.85803842544556 GiB
+MODE ep: OK
+
+========== DONE (modes) ==========
+##### STAGE modes OK 15:55:32
+##### RESULTS
+--- results/preflight/9bd56cf6e51b.json
+[
+  {
+    "check": "host",
+    "status": "INFO",
+    "detail": "9bd56cf6e51b x86_64 python 3.12.3"
+  },
+  {
+    "check": "cuda",
+    "status": "PASS",
+    "detail": "NVIDIA H200 | torch 2.14.0a0+4fdf77b940.nv26.08 cuda 13.4 | nccl 2.30.7"
+  },
+  {
+    "check": "cuda_matmul",
+    "status": "PASS",
+    "detail": "bf16 matmul ok (25.54)"
+  },
+  {
+    "check": "nemo_automodel",
+    "status": "PASS",
+    "detail": "0.7.0+efb2eb5df"
+  },
+  {
+    "check": "mamba_ssm",
+    "status": "PASS",
+    "detail": "2.3.0"
+  },
+  {
+    "check": "causal_conv1d",
+    "status": "PASS",
+    "detail": "1.6.0"
+  },
+  {
+    "check": "transformers",
+    "status": "PASS",
+    "detail": "5.18.0"
+  },
+  {
+    "check": "openai",
+    "status": "PASS",
+    "detail": "3.50.0"
+  },
+  {
+    "check": "yaml",
+    "status": "PASS",
+    "detail": "6.0.3"
+  },
+  {
+    "check": "matplotlib",
+    "status": "PASS",
+    "detail": "3.11.1"
+  },
+  {
+    "check": "model",
+    "status": "PASS",
+    "detail": "/workspace/models/nemotron-3-nano-30b: 13 shards, 58.8 GiB"
+  },
+  {
+    "check": "NVIDIA_API_KEY",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "HF_TOKEN",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "SEC_USER_AGENT",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "disk",
+    "status": "PASS",
+    "detail": "404972 GB free in /workspace/FinscaleNvidiaPlatform"
+  },
+  {
+    "check": "memory",
+    "status": "INFO",
+    "detail": "1866 GiB available of 2016 GiB"
+  }
+]
+--- results/runs/rh-ddp-2n/summary.json
+{
+  "run": "rh-ddp-2n",
+  "mode": "ddp",
+  "nodes": "2",
+  "gpus_per_node": "1",
+  "world_size": "2",
+  "grad_accum_per_rank": "8",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 2,
+  "warmup_excluded": 1,
+  "median_tps": 2764.6699473232948,
+  "median_tps_per_gpu": 1382.3349736616474,
+  "median_step_seconds": 4.165,
+  "peak_mem_gib": 63.7432804107666,
+  "first_loss": 1.1664440631866455,
+  "last_loss": 0.9759565591812134,
+  "validation": [],
+  "node_exits": [
+    {
+      "host": "9bd56cf6e51b-n0",
+      "exit_code": 0,
+      "wall_seconds": 104,
+      "start_epoch": 1794584605,
+      "end_epoch": 1794584709
+    },
+    {
+      "host": "9bd56cf6e51b-n1",
+      "exit_code": 0,
+      "wall_seconds": 104,
+      "start_epoch": 1794584605,
+      "end_epoch": 1794584709
+    }
+  ],
+  "tps_samples": [
+    808.0877272774858,
+    4721.2521673691035
+  ]
+}
+--- results/runs/rh-ep-2n/summary.json
+{
+  "run": "rh-ep-2n",
+  "mode": "ep",
+  "nodes": "2",
+  "gpus_per_node": "1",
+  "world_size": "2",
+  "grad_accum_per_rank": "8",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 2,
+  "warmup_excluded": 1,
+  "median_tps": 744.6742191189077,
+  "median_tps_per_gpu": 372.33710955945384,
+  "median_step_seconds": 20.614,
+  "peak_mem_gib": 37.85803842544556,
+  "first_loss": 1.164994478225708,
+  "last_loss": 0.9832497835159302,
+  "validation": [],
+  "node_exits": [
+    {
+      "host": "9bd56cf6e51b-n0",
+      "exit_code": 0,
+      "wall_seconds": 119,
+      "start_epoch": 1794585213,
+      "end_epoch": 1794585332
+    },
+    {
+      "host": "9bd56cf6e51b-n1",
+      "exit_code": 0,
+      "wall_seconds": 119,
+      "start_epoch": 1794585213,
+      "end_epoch": 1794585332
+    }
+  ],
+  "tps_samples": [
+    534.9931147985599,
+    954.3553234392555
+  ]
+}
+--- results/runs/rh-shard-2n/summary.json
+{
+  "run": "rh-shard-2n",
+  "mode": "shard",
+  "nodes": "2",
+  "gpus_per_node": "1",
+  "world_size": "2",
+  "grad_accum_per_rank": "8",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 2,
+  "warmup_excluded": 1,
+  "median_tps": 84.74512568803567,
+  "median_tps_per_gpu": 42.372562844017835,
+  "median_step_seconds": 211.429,
+  "peak_mem_gib": 38.558523654937744,
+  "first_loss": 1.165931224822998,
+  "last_loss": 0.9856070280075073,
+  "validation": [],
+  "node_exits": [
+    {
+      "host": "9bd56cf6e51b-n0",
+      "exit_code": 0,
+      "wall_seconds": 471,
+      "start_epoch": 1794584726,
+      "end_epoch": 1794585197
+    },
+    {
+      "host": "9bd56cf6e51b-n1",
+      "exit_code": 0,
+      "wall_seconds": 471,
+      "start_epoch": 1794584726,
+      "end_epoch": 1794585197
+    }
+  ],
+  "tps_samples": [
+    76.39522417451197,
+    93.09502720155938
+  ]
+}
+--- results/runs/rh-single-1n/summary.json
+{
+  "run": "rh-single-1n",
+  "mode": "single",
+  "nodes": "1",
+  "gpus_per_node": "1",
+  "world_size": "1",
+  "grad_accum_per_rank": "16",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 8,
+  "warmup_excluded": 3,
+  "median_tps": 2553.1171779213428,
+  "median_tps_per_gpu": 2553.1171779213428,
+  "median_step_seconds": 7.38,
+  "peak_mem_gib": 63.71842956542969,
+  "first_loss": 1.1623296737670898,
+  "last_loss": 0.5564489364624023,
+  "validation": [
+    {
+      "step": 7,
+      "val_loss": 0.5010753273963928
+    }
+  ],
+  "node_exits": [
+    {
+      "host": "9bd56cf6e51b",
+      "exit_code": 0,
+      "wall_seconds": 163,
+      "start_epoch": 1794584262,
+      "end_epoch": 1794584425
+    }
+  ],
+  "tps_samples": [
+    2382.20855098436,
+    2561.3880937113536,
+    2072.399423903119,
+    2553.1171779213428,
+    2853.7136116159672
+  ]
+}
+--- results/runs/rh-smoke-1n/summary.json
+{
+  "run": "rh-smoke-1n",
+  "mode": "single",
+  "nodes": "1",
+  "gpus_per_node": "1",
+  "world_size": "1",
+  "grad_accum_per_rank": "16",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 1,
+  "warmup_excluded": 0,
+  "median_tps": 217.64408727324357,
+  "median_tps_per_gpu": 217.64408727324357,
+  "median_step_seconds": null,
+  "peak_mem_gib": 61.92696285247803,
+  "first_loss": 1.1665363311767578,
+  "last_loss": 1.1665363311767578,
+  "validation": [],
+  "node_exits": [
+    {
+      "host": "9bd56cf6e51b",
+      "exit_code": 0,
+      "wall_seconds": 111,
+      "start_epoch": 1794584117,
+      "end_epoch": 1794584228
+    }
+  ],
+  "tps_samples": [
+    217.64408727324357
+  ]
+}
+--- results/rehearsal-nccl/nccl_report.json
+{
+  "status": "PASS_SAME_HOST",
+  "world_size": 2,
+  "distinct_hosts": [
+    "9bd56cf6e51b"
+  ],
+  "ranks": [
+    {
+      "rank": 0,
+      "host": "9bd56cf6e51b",
+      "gpu": "NVIDIA H200"
+    },
+    {
+      "rank": 1,
+      "host": "9bd56cf6e51b",
+      "gpu": "NVIDIA H200"
+    }
+  ],
+  "allreduce_sum": 3.0,
+  "expected_sum": 3.0,
+  "init_seconds": 0.39,
+  "bandwidth": [
+    {
+      "size_mb": 1,
+      "time_ms": 0.645,
+      "algbw_GBps": 1.625,
+      "busbw_GBps": 1.625
+    },
+    {
+      "size_mb": 8,
+      "time_ms": 3.712,
+      "algbw_GBps": 2.26,
+      "busbw_GBps": 2.26
+    },
+    {
+      "size_mb": 64,
+      "time_ms": 27.617,
+      "algbw_GBps": 2.43,
+      "busbw_GBps": 2.43
+    },
+    {
+      "size_mb": 256,
+      "time_ms": 110.158,
+      "algbw_GBps": 2.437,
+      "busbw_GBps": 2.437
+    },
+    {
+      "size_mb": 1024,
+      "time_ms": 449.066,
+      "algbw_GBps": 2.391,
+      "busbw_GBps": 2.391
+    }
+  ],
+  "nccl_env": {
+    "NCCL_P2P_DISABLE": "1",
+    "NCCL_NET_PLUGIN": "spcx",
+    "NCCL_VERSION": "2.30.7+cuda13.3",
+    "NCCL_SOCKET_IFNAME": "lo",
+    "NCCL_SHM_DISABLE": "1",
+    "NCCL_IB_DISABLE": "1"
+  },
+  "time_utc": "2026-11-13T15:37:30Z"
+}
+##### AUTORUN DONE 2026-11-13T15:55:32Z status=OK

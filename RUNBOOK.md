@@ -163,7 +163,7 @@ fuzzball workflow start fuzzball/rendered/04_train_2node.fz
 
 Why `replicate` first: each GB10 holds a full copy of the 30B model (it fits in 128 GB), and only the
 small LoRA gradients cross the network, so scaling should be close to 2×.
-If `replicate` fails at startup, try `--mode ddp`, then `--mode shard`.
+On 1-GPU nodes (GB10) `replicate` is generated as DDP automatically (verified: 1.90× on 2 GPUs). For the capacity story prefer `--mode ep` (≈38 GiB per node, ~10× faster than `shard` in the rehearsal), then `shard`.
 
 ## F. Repeats and the capacity story
 
@@ -248,3 +248,23 @@ Measured on H100 (reference only, **not** GB10 numbers): peak memory 61–64 GiB
 ~2,200 training tokens/s; 8 steps (GBS 16) ≈ 2.5 min incl. load; loss 1.17 → 0.56, val loss 0.50.
 Eval, 60 held-out rows: class accuracy 0.68 → 0.82, macro-F1 0.49 → 0.83, severity 0.47 → 0.70,
 JSON valid 0.98 → 1.00, quote fidelity 0.97 → 0.93.
+
+### 2-GPU rehearsal (2× H200, two "nodes" on one host, NCCL forced over sockets)
+
+Evidence: [results/rehearsal-runpod-2gpu/](results/rehearsal-runpod-2gpu/) (charts in `results/rehearsal-charts/`).
+The network is loopback, so speeds show that the code path works, **not** GB10 networking performance.
+
+| Symptom | Cause | Status |
+|---|---|---|
+| `dp_replicate_size=2 must be less than dp_size=2 since DDP usecase is not supported by FSDP2` | FSDP2 refuses a pure-replica mesh (1 GPU per node) | Fixed in `06_make_config.py`: `replicate` on 1-GPU nodes → `strategy: ddp` |
+| `shard` step looks hung: GPUs at 0 %, no step line for minutes | Weights all-gathered over the network every micro-batch | Not a hang: network-bound. Check traffic (`/proc/net/dev`); prefer `ep` |
+| Many `NCCL WARN ... gin_plugin` / `libnccl-*.so not found` lines | Optional NCCL plugins absent in the image | Harmless |
+
+| Mode (2 nodes, GBS 16, seq 3,072) | Memory per GPU | Median tokens/s | Loss after step 1 | Result |
+|---|---|---|---|---|
+| single (1 node, baseline) | 62–64 GiB | 2,553 | 0.984 | ✅ |
+| **replicate → ddp** | 62–64 GiB | **4,855 (1.90×, 95.1 % efficiency)** | 0.977 | ✅ 8 steps, val loss 0.497 vs 0.501 single |
+| ep (experts split) | 36–38 GiB | ~954 (2-step test) | 0.983 | ✅ capacity option |
+| shard (weights split) | 37–39 GiB | ~93 (2-step test, network-bound) | 0.986 | ✅ works, slow |
+
+NCCL all-reduce across the two ranks: sum correct (3.0), ~2.4 GB/s over loopback sockets.

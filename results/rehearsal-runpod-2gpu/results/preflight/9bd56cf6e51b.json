@@ -1,0 +1,82 @@
+[
+  {
+    "check": "host",
+    "status": "INFO",
+    "detail": "9bd56cf6e51b x86_64 python 3.12.3"
+  },
+  {
+    "check": "cuda",
+    "status": "PASS",
+    "detail": "NVIDIA H200 | torch 2.14.0a0+4fdf77b940.nv26.08 cuda 13.4 | nccl 2.30.7"
+  },
+  {
+    "check": "cuda_matmul",
+    "status": "PASS",
+    "detail": "bf16 matmul ok (25.54)"
+  },
+  {
+    "check": "nemo_automodel",
+    "status": "PASS",
+    "detail": "0.7.0+efb2eb5df"
+  },
+  {
+    "check": "mamba_ssm",
+    "status": "PASS",
+    "detail": "2.3.0"
+  },
+  {
+    "check": "causal_conv1d",
+    "status": "PASS",
+    "detail": "1.6.0"
+  },
+  {
+    "check": "transformers",
+    "status": "PASS",
+    "detail": "5.18.0"
+  },
+  {
+    "check": "openai",
+    "status": "PASS",
+    "detail": "3.50.0"
+  },
+  {
+    "check": "yaml",
+    "status": "PASS",
+    "detail": "6.0.3"
+  },
+  {
+    "check": "matplotlib",
+    "status": "PASS",
+    "detail": "3.11.1"
+  },
+  {
+    "check": "model",
+    "status": "PASS",
+    "detail": "/workspace/models/nemotron-3-nano-30b: 13 shards, 58.8 GiB"
+  },
+  {
+    "check": "NVIDIA_API_KEY",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "HF_TOKEN",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "SEC_USER_AGENT",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "disk",
+    "status": "PASS",
+    "detail": "404972 GB free in /workspace/FinscaleNvidiaPlatform"
+  },
+  {
+    "check": "memory",
+    "status": "INFO",
+    "detail": "1866 GiB available of 2016 GiB"
+  }
+]

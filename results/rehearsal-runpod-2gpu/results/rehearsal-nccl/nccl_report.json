@@ -1,0 +1,63 @@
+{
+  "status": "PASS_SAME_HOST",
+  "world_size": 2,
+  "distinct_hosts": [
+    "9bd56cf6e51b"
+  ],
+  "ranks": [
+    {
+      "rank": 0,
+      "host": "9bd56cf6e51b",
+      "gpu": "NVIDIA H200"
+    },
+    {
+      "rank": 1,
+      "host": "9bd56cf6e51b",
+      "gpu": "NVIDIA H200"
+    }
+  ],
+  "allreduce_sum": 3.0,
+  "expected_sum": 3.0,
+  "init_seconds": 0.39,
+  "bandwidth": [
+    {
+      "size_mb": 1,
+      "time_ms": 0.645,
+      "algbw_GBps": 1.625,
+      "busbw_GBps": 1.625
+    },
+    {
+      "size_mb": 8,
+      "time_ms": 3.712,
+      "algbw_GBps": 2.26,
+      "busbw_GBps": 2.26
+    },
+    {
+      "size_mb": 64,
+      "time_ms": 27.617,
+      "algbw_GBps": 2.43,
+      "busbw_GBps": 2.43
+    },
+    {
+      "size_mb": 256,
+      "time_ms": 110.158,
+      "algbw_GBps": 2.437,
+      "busbw_GBps": 2.437
+    },
+    {
+      "size_mb": 1024,
+      "time_ms": 449.066,
+      "algbw_GBps": 2.391,
+      "busbw_GBps": 2.391
+    }
+  ],
+  "nccl_env": {
+    "NCCL_P2P_DISABLE": "1",
+    "NCCL_NET_PLUGIN": "spcx",
+    "NCCL_VERSION": "2.30.7+cuda13.3",
+    "NCCL_SOCKET_IFNAME": "lo",
+    "NCCL_SHM_DISABLE": "1",
+    "NCCL_IB_DISABLE": "1"
+  },
+  "time_utc": "2026-11-13T15:37:30Z"
+}

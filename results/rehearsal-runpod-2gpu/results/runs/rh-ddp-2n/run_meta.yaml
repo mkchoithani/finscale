@@ -1,0 +1,8 @@
+run: rh-ddp-2n
+mode: ddp
+nodes: 2
+gpus_per_node: 1
+world_size: 2
+grad_accum_per_rank: 8
+seq_length: 3072
+gbs: 16

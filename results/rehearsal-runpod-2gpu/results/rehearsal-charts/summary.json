@@ -1,0 +1,15 @@
+{
+  "single-1n": {
+    "median_tps": 2553.1,
+    "speedup_vs_1node": 1.0,
+    "scaling_efficiency_pct": 100.0,
+    "repeats": 1
+  },
+  "replicate-2n": {
+    "median_tps": 4854.7,
+    "speedup_vs_1node": 1.901,
+    "scaling_efficiency_pct": 95.1,
+    "repeats": 1
+  },
+  "nccl_peak_busbw_GBps": 2.437
+}

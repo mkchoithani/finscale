@@ -1,0 +1,30 @@
+
+========== SETUP: python deps, model download (~59 GiB), preflight ==========
+GPU 0: NVIDIA H200 (UUID: GPU-1d3ba74f-6043-8518-1c66-c0f3e4834d15)
+GPU 1: NVIDIA H200 (UUID: GPU-64f8f29a-775e-d6d2-3c51-df32b8f2bdf6)
+[notice] A new release of pip is available: 26.2.1 -> 26.3
+[notice] To update, run: python3 -m pip install --upgrade pip
+Fetching 35 files:   0%|          | 0/35 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 35 files:   9%|▊         | 3/35 [00:00<00:01, 21.54it/s]Fetching 35 files:  29%|██▊       | 10/35 [00:00<00:00, 44.65it/s]Fetching 35 files:  40%|████      | 14/35 [00:20<00:00, 44.65it/s]Fetching 35 files:  43%|████▎     | 15/35 [00:20<00:35,  1.78s/it]Fetching 35 files:  46%|████▌     | 16/35 [00:21<00:33,  1.74s/it]Fetching 35 files:  54%|█████▍    | 19/35 [00:25<00:24,  1.54s/it]Fetching 35 files:  60%|██████    | 21/35 [00:25<00:16,  1.19s/it]Fetching 35 files:  66%|██████▌   | 23/35 [00:25<00:10,  1.10it/s]Fetching 35 files:  71%|███████▏  | 25/35 [00:25<00:06,  1.44it/s]Fetching 35 files:  77%|███████▋  | 27/35 [00:25<00:04,  1.89it/s]Fetching 35 files:  83%|████████▎ | 29/35 [00:28<00:04,  1.31it/s]Fetching 35 files:  86%|████████▌ | 30/35 [00:29<00:03,  1.31it/s]Fetching 35 files:  89%|████████▊ | 31/35 [00:29<00:02,  1.43it/s]Fetching 35 files:  91%|█████████▏| 32/35 [00:39<00:07,  2.59s/it]Fetching 35 files:  94%|█████████▍| 33/35 [00:46<00:07,  3.75s/it]Fetching 35 files:  97%|█████████▋| 34/35 [00:55<00:05,  5.02s/it]Fetching 35 files: 100%|██████████| 35/35 [00:59<00:00,  4.69s/it]Fetching 35 files: 100%|██████████| 35/35 [00:59<00:00,  1.69s/it]
+shards: 13/13 present
+downloaded nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16 -> /workspace/models/nemotron-3-nano-30b in 1.0 min
+[INFO] host: 9bd56cf6e51b x86_64 python 3.12.3
+[PASS] cuda: NVIDIA H200 | torch 2.14.0a0+4fdf77b940.nv26.08 cuda 13.4 | nccl 2.30.7
+[PASS] cuda_matmul: bf16 matmul ok (25.54)
+[PASS] nemo_automodel: 0.7.0+efb2eb5df
+[PASS] mamba_ssm: 2.3.0
+[PASS] causal_conv1d: 1.6.0
+[PASS] transformers: 5.18.0
+[PASS] openai: 3.50.0
+[PASS] yaml: 6.0.3
+[PASS] matplotlib: 3.11.1
+[PASS] model: /workspace/models/nemotron-3-nano-30b: 13 shards, 58.8 GiB
+[WARN] NVIDIA_API_KEY: not set
+[WARN] HF_TOKEN: not set
+[WARN] SEC_USER_AGENT: not set
+[PASS] disk: 404972 GB free in /workspace/FinscaleNvidiaPlatform
+[INFO] memory: 1866 GiB available of 2016 GiB
+
+OK: 0 failure(s). Saved results/preflight/9bd56cf6e51b.json
+
+========== DONE (setup) ==========

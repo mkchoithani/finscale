@@ -1,0 +1,117 @@
+W1113 15:57:35.699000 72543 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 15:57:35.720000 72543 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 15:57:36.159000 72543 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 15:57:36.159000 72543 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 15:57:36.160000 72543 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 15:57:36.161000 72543 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 15:57:36.162000 72543 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 15:57:36.162000 72543 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 15:57:36.163000 72543 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 15:57:36.163000 72543 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+{"hostname": "9bd56cf6e51b", "arch": "x86_64", "gpu": "NVIDIA H200", "torch": "2.14.0a0+4fdf77b940.nv26.08", "cuda": "13.4", "nccl": "2.30.7", "nemo_automodel_version": "0.7.0+efb2eb5df", "git_commit": "a6e5798d4eec12c234850bd9fed17474a80a8258"}
+[finscale] host=9bd56cf6e51b-n1 run=rh-replicate-2n nnodes=2 node_rank=1 head=127.0.0.1 port=29610
+[finscale] torchrun --nnodes=2 --nproc-per-node=1 --node-rank=1 --master-addr=127.0.0.1 --master-port=29610 -m nemo_automodel.cli.app configs/rh-replicate-2n.yaml
+cfg-path: /workspace/FinscaleNvidiaPlatform/configs/rh-replicate-2n.yaml
+/opt/venv/lib/python3.12/site-packages/ffpa_attn/cute/utils/cache_utils.py:23: UserWarning: FLASH_ATTENTION_CUTE_DSL_CACHE_ENABLED=1 is inert: cross-process kernel persistence was removed, so the compiled-kernel cache is in-process only and FLASH_ATTENTION_CUTE_DSL_CACHE_DIR is ignored.
+  warnings.warn(
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlopen(libnccl-env.so) failed: libnccl-env.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+9bd56cf6e51b:79355:79355 [0] NCCL INFO cudaDriverVersion 13040
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NCCL_SOCKET_IFNAME set to lo
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NCCL version 2.30.7+cuda13.3
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NCCL git version HEAD a5187fa2e
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NCCL_NET_PLUGIN set by environment to spcx
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlopen(spcx) failed: spcx: cannot open shared object file: No such file or directory
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NET/Plugin: Loaded net plugin SPCX (v12)
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NET/Plugin: Loaded collnet plugin SPCX (v12)
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Successfully loaded external network plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Failed to initialize NET plugin SPCX
+9bd56cf6e51b:79355:79355 [0] NCCL INFO transport/net_ib/init.cc:526 (ncclIbInit) -> 3
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Failed to initialize NET plugin IB
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NET/Socket : Using [0]lo:127.0.0.1<0>
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Initialized NET plugin Socket
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Assigned NET plugin Socket to comm
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlopen(libnccl-rma.so) failed: libnccl-rma.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:79355:79355 [0] NCCL INFO RMA/Plugin: Could not find: libnccl-rma.so
+9bd56cf6e51b:79355:79355 [0] NCCL INFO RMA/Plugin: Failed to load external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so, dlHandle: (nil), ncclRma: (nil)
+9bd56cf6e51b:79355:79355 [0] NCCL INFO RMA/Plugin: Loaded rma plugin SPCX_RMA (v13)
+9bd56cf6e51b:79355:79355 [0] NCCL INFO RMA/Plugin: Successfully loaded external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+
+[2026-11-13 15:57:55] 9bd56cf6e51b:79355:79355 [0] gin_plugin.cc:138 NCCL WARN gin_plugin.cc:138 Call to ncclNetPlugin_v12.init(ctx, commId, &config, logFunction, NULL) failed: 3
+
+[2026-11-13 15:57:55] 9bd56cf6e51b:79355:79355 [0] gin_plugin.cc:780 NCCL WARN gin_plugin.cc:780 Call to ginCommonInit(ctx, commId, logFunction) failed: 3
+9bd56cf6e51b:79355:79355 [0] NCCL INFO plugin/rma/rma_v13.cc:18 (ncclRma_init) -> 3
+
+[2026-11-13 15:57:55] 9bd56cf6e51b:79355:79355 [0] misc/ibvwrap.cc:185 (wrap_ibv_alloc_pd) NCCL WARN lib wrapper not initialized.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO transport/net_ib/gdr.cc:55 (ibDmaBufSupportInitOnce) -> 3
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Unable to use GIN: Peermem is not supported, nor DMA-BUF.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO RMA/Plugin: Failed to initialize any plugin
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlopen(libnccl-gin.so) failed: libnccl-gin.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:79355:79355 [0] NCCL INFO GIN/Plugin: Could not find: libnccl-gin.so
+9bd56cf6e51b:79355:79355 [0] NCCL INFO GIN/Plugin: Failed to load external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so, dlHandle: (nil), ncclGin: (nil)
+9bd56cf6e51b:79355:79355 [0] NCCL INFO GIN/Plugin: Loaded gin plugin SPCX_GIN (v13)
+9bd56cf6e51b:79355:79355 [0] NCCL INFO GIN/Plugin: Successfully loaded external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+
+[2026-11-13 15:57:55] 9bd56cf6e51b:79355:79355 [0] gin_plugin.cc:138 NCCL WARN gin_plugin.cc:138 Call to ncclNetPlugin_v12.init(ctx, commId, &config, logFunction, NULL) failed: 3
+
+[2026-11-13 15:57:55] 9bd56cf6e51b:79355:79355 [0] gin_plugin.cc:642 NCCL WARN gin_plugin.cc:642 Call to ginCommonInit(ctx, commId, logFunction) failed: 3
+9bd56cf6e51b:79355:79355 [0] NCCL INFO GIN/Plugin: Failed to initialize any GIN plugin
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Using network Socket
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Loaded NVML from libnvidia-ml.so.1
+9bd56cf6e51b:79355:79355 [0] NCCL INFO [Rank 1] ncclCommInitRankConfig comm 0x21051d10 rank 1 nranks 2 cudaDev 0 nvmlDev 1 busId ca000 commId 0x47b370e714655fad - Init START
+9bd56cf6e51b:79355:79355 [0] NCCL INFO RAS client listening socket at ::1<28028>
+9bd56cf6e51b:79355:79355 [0] NCCL INFO MNNVL busId 0xca000 fabric UUID 0.0 cliqueId 0x0 state 3 healthMask 0x0
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'lo'
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 1 is 48-95,144-191. (GPU affinity = 48-95,144-191 ; CPU affinity = 0-191).
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Rank 1: 1 Net devices
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Rank 1: 0 CollNet devices
+9bd56cf6e51b:79355:79355 [0] NCCL INFO comm 0x21051d10 rank 1 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Trees [0] -1/-1/-1->1->0 [1] 0/-1/-1->1->-1
+9bd56cf6e51b:79355:79355 [0] NCCL INFO P2P Chunksize set to 131072
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Tuning P2P operations with maxP2pPeers = 2
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlopen(libnccl-profiler.so) failed: libnccl-profiler.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:79355:79355 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v6) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v6
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v5) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v5
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v4) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v4
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v3) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v3
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v2) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v2
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v1) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v1
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Check P2P Type isAllDirectP2p 1 directMode 0 isAllCudaP2p 1
+9bd56cf6e51b:79355:81671 [0] NCCL INFO [Proxy Service] Device 0 CPU core 153
+9bd56cf6e51b:79355:81671 [0] NCCL INFO proxy listening socket at 127.0.0.1<36601>
+9bd56cf6e51b:79355:81674 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 155
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclOsDlopen(libnccl-tuner.so) failed: libnccl-tuner.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:79355:79355 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+9bd56cf6e51b:79355:79355 [0] NCCL INFO TUNER/Plugin: Using SPCX (v5)
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Registering new plugin entry for commId: 5166597335306035117
+9bd56cf6e51b:79355:79355 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+9bd56cf6e51b:79355:79355 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 1 p2p channels per peer
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Symmetric memory is not supported. cuMemEnable 1, globalGinSupport 0, cuMemGdrSupport 1
+9bd56cf6e51b:79355:79355 [0] NCCL INFO ncclCommInitRankConfig comm 0x21051d10 rank 1 nranks 2 cudaDev 0 nvmlDev 1 busId ca000 commId 0x47b370e714655fad - Init COMPLETE
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 1 nranks 2 total 0.32 (kernels 0.29, alloc 0.01, bootstrap 0.00, allgathers 0.00, topo 0.02, graphs 0.00, connections 0.00, rest 0.00)
+9bd56cf6e51b:79355:81676 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 60
+9bd56cf6e51b:79355:81671 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] [receive] via NET/Socket/0
+9bd56cf6e51b:79355:81671 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] [receive] via NET/Socket/0
+9bd56cf6e51b:79355:81671 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Channel 00/0 : 1[1] -> 0[0] [send] via NET/Socket/0
+9bd56cf6e51b:79355:81671 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Channel 01/0 : 1[1] -> 0[0] [send] via NET/Socket/0
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+/opt/Automodel/nemo_automodel/components/distributed/ddp.py:120: FutureWarning: `broadcast_buffers` is deprecated. Use `forward_sync_buffers` instead. IMPORTANT: unlike `broadcast_buffers=False`, `forward_sync_buffers=False` still syncs buffers at init. If you rely on buffers NOT being synced at init (e.g. rank-local buffers), keep using `broadcast_buffers=False` until `init_sync_buffers` is available.
+  return DDP(model, **ddp_kwargs)
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Symmetric VA size=140GB
+9bd56cf6e51b:79355:81671 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Channel 01/1 : 1[1] -> 0[0] [send] via NET/Socket/0/Shared
+9bd56cf6e51b:79355:81671 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Channel 01/1 : 0[0] -> 1[1] [receive] via NET/Socket/0/Shared
+/opt/venv/lib/python3.12/site-packages/torchdata/stateful_dataloader/stateful_dataloader.py:379: UserWarning: 'set_vital' is deprecated, please do not call
+  torch.set_vital("Dataloader", "enabled", "True")  # type: ignore[attr-defined]
+9bd56cf6e51b:79355:79355 [0] NCCL INFO Deregistering plugin entry for commId: 5166597335306035117
+[finscale] exit=0 wall=132s log=results/runs/rh-replicate-2n/logs/9bd56cf6e51b-n1.log
+rh-replicate-2n: 8 steps | median tps=4854.677488591161 | median step=3.687s | loss 1.1647268533706665 -> 0.5542996525764465 | peak mem 63.7432804107666 GiB | val 0.4970

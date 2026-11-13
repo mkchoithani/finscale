@@ -1,0 +1,289 @@
+cfg-path: /workspace/FinscaleNvidiaPlatform/configs/rh-ddp-2n.yaml
+W1113 15:43:33.178000 23466 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 15:43:33.200000 23466 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/opt/venv/lib/python3.12/site-packages/ffpa_attn/cute/utils/cache_utils.py:23: UserWarning: FLASH_ATTENTION_CUTE_DSL_CACHE_ENABLED=1 is inert: cross-process kernel persistence was removed, so the compiled-kernel cache is in-process only and FLASH_ATTENTION_CUTE_DSL_CACHE_DIR is ignored.
+  warnings.warn(
+W1113 15:43:34.345000 23466 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 15:43:34.346000 23466 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 15:43:34.347000 23466 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 15:43:34.347000 23466 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 15:43:34.348000 23466 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 15:43:34.348000 23466 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 15:43:34.349000 23466 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 15:43:34.349000 23466 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+> initializing torch distributed with 2 workers.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlopen(libnccl-env.so) failed: libnccl-env.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ENV/Plugin: Could not find: libnccl-env.so
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NCCL_SOCKET_IFNAME set to lo
+9bd56cf6e51b:23466:23466 [0] NCCL INFO cudaDriverVersion 13040
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NCCL version 2.30.7+cuda13.3
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NCCL git version HEAD a5187fa2e
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NCCL_NET_PLUGIN set by environment to spcx
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlopen(spcx) failed: spcx: cannot open shared object file: No such file or directory
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NET/Plugin: Loaded net plugin SPCX (v12)
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NET/Plugin: Loaded collnet plugin SPCX (v12)
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Successfully loaded external network plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Failed to initialize NET plugin SPCX
+9bd56cf6e51b:23466:23466 [0] NCCL INFO transport/net_ib/init.cc:526 (ncclIbInit) -> 3
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Failed to initialize NET plugin IB
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NET/Socket : Using [0]lo:127.0.0.1<0>
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Initialized NET plugin Socket
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Assigned NET plugin Socket to comm
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlopen(libnccl-rma.so) failed: libnccl-rma.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:23466:23466 [0] NCCL INFO RMA/Plugin: Could not find: libnccl-rma.so
+9bd56cf6e51b:23466:23466 [0] NCCL INFO RMA/Plugin: Failed to load external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so, dlHandle: (nil), ncclRma: (nil)
+9bd56cf6e51b:23466:23466 [0] NCCL INFO RMA/Plugin: Loaded rma plugin SPCX_RMA (v13)
+9bd56cf6e51b:23466:23466 [0] NCCL INFO RMA/Plugin: Successfully loaded external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+
+[2026-11-13 15:43:41] 9bd56cf6e51b:23466:23466 [0] gin_plugin.cc:138 NCCL WARN gin_plugin.cc:138 Call to ncclNetPlugin_v12.init(ctx, commId, &config, logFunction, NULL) failed: 3
+
+[2026-11-13 15:43:41] 9bd56cf6e51b:23466:23466 [0] gin_plugin.cc:780 NCCL WARN gin_plugin.cc:780 Call to ginCommonInit(ctx, commId, logFunction) failed: 3
+9bd56cf6e51b:23466:23466 [0] NCCL INFO plugin/rma/rma_v13.cc:18 (ncclRma_init) -> 3
+
+[2026-11-13 15:43:41] 9bd56cf6e51b:23466:23466 [0] misc/ibvwrap.cc:185 (wrap_ibv_alloc_pd) NCCL WARN lib wrapper not initialized.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO transport/net_ib/gdr.cc:55 (ibDmaBufSupportInitOnce) -> 3
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Unable to use GIN: Peermem is not supported, nor DMA-BUF.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO RMA/Plugin: Failed to initialize any plugin
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlopen(libnccl-gin.so) failed: libnccl-gin.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:23466:23466 [0] NCCL INFO GIN/Plugin: Could not find: libnccl-gin.so
+9bd56cf6e51b:23466:23466 [0] NCCL INFO GIN/Plugin: Failed to load external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so, dlHandle: (nil), ncclGin: (nil)
+9bd56cf6e51b:23466:23466 [0] NCCL INFO GIN/Plugin: Loaded gin plugin SPCX_GIN (v13)
+9bd56cf6e51b:23466:23466 [0] NCCL INFO GIN/Plugin: Successfully loaded external plugin /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so
+
+[2026-11-13 15:43:41] 9bd56cf6e51b:23466:23466 [0] gin_plugin.cc:138 NCCL WARN gin_plugin.cc:138 Call to ncclNetPlugin_v12.init(ctx, commId, &config, logFunction, NULL) failed: 3
+
+[2026-11-13 15:43:41] 9bd56cf6e51b:23466:23466 [0] gin_plugin.cc:642 NCCL WARN gin_plugin.cc:642 Call to ginCommonInit(ctx, commId, logFunction) failed: 3
+9bd56cf6e51b:23466:23466 [0] NCCL INFO GIN/Plugin: Failed to initialize any GIN plugin
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Using network Socket
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Loaded NVML from libnvidia-ml.so.1
+9bd56cf6e51b:23466:23466 [0] NCCL INFO [Rank 0] ncclCommInitRankConfig comm 0x460704e0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 3a000 commId 0xcd044e0e938a75bf - Init START
+9bd56cf6e51b:23466:23466 [0] NCCL INFO RAS client listening socket at ::1<28028>
+9bd56cf6e51b:23466:23466 [0] NCCL INFO MNNVL busId 0x3a000 fabric UUID 0.0 cliqueId 0x0 state 3 healthMask 0x0
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NCCL_P2P_DISABLE set by environment to 1
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO NET/Socket : GPU Direct RDMA Disabled for HCA 0 'lo'
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclTopoGetCpuAffinity: Affinity for GPU 0 is 0-47,96-143. (GPU affinity = 0-47,96-143 ; CPU affinity = 0-191).
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Rank 0: 1 Net devices
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Rank 0: 0 CollNet devices
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Local Net device counts across ranks: min 1 max 1
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Local CollNet device counts across ranks: min 0 max 0
+9bd56cf6e51b:23466:23466 [0] NCCL INFO comm 0x460704e0 rank 0 nRanks 2 nNodes 2 localRanks 1 localRank 0 MNNVL 0
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Channel 00/02 : 0 1
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Channel 01/02 : 0 1
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Trees [0] 1/-1/-1->0->-1 [1] -1/-1/-1->0->1
+9bd56cf6e51b:23466:23466 [0] NCCL INFO P2P Chunksize set to 131072
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Tuning P2P operations with maxP2pPeers = 2
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlopen(libnccl-profiler.so) failed: libnccl-profiler.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:23466:23466 [0] NCCL INFO PROFILER/Plugin: Could not find: libnccl-profiler.so
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v6) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v6
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v5) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v5
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v4) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v4
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v3) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v3
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v2) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v2
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlsym(ncclProfiler_v1) failed: /opt/hpcx/nccl_spectrum-x_plugin/lib/libnccl-net-spcx.so: undefined symbol: ncclProfiler_v1
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Check P2P Type isAllDirectP2p 1 directMode 0 isAllCudaP2p 1
+9bd56cf6e51b:23466:25784 [0] NCCL INFO [Proxy Service] Device 0 CPU core 32
+9bd56cf6e51b:23466:25784 [0] NCCL INFO proxy listening socket at 127.0.0.1<58661>
+9bd56cf6e51b:23466:25786 [0] NCCL INFO [Proxy Service UDS] Device 0 CPU core 129
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclOsDlopen(libnccl-tuner.so) failed: libnccl-tuner.so: cannot open shared object file: No such file or directory
+9bd56cf6e51b:23466:23466 [0] NCCL INFO TUNER/Plugin: Could not find: libnccl-tuner.so
+9bd56cf6e51b:23466:23466 [0] NCCL INFO TUNER/Plugin: Using SPCX (v5)
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Registering new plugin entry for commId: 14773018502193903039
+9bd56cf6e51b:23466:23466 [0] NCCL INFO threadThresholds 8/8/64 | 16/8/64 | 512 | 512
+9bd56cf6e51b:23466:23466 [0] NCCL INFO 2 coll channels, 2 collnet channels, 0 nvls channels, 2 p2p channels, 1 p2p channels per peer
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Symmetric memory is not supported. cuMemEnable 1, globalGinSupport 0, cuMemGdrSupport 1
+9bd56cf6e51b:23466:23466 [0] NCCL INFO CC Off, workFifoBytes 1048576
+9bd56cf6e51b:23466:23466 [0] NCCL INFO ncclCommInitRankConfig comm 0x460704e0 rank 0 nranks 2 cudaDev 0 nvmlDev 0 busId 3a000 commId 0xcd044e0e938a75bf - Init COMPLETE
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Init timings - ncclCommInitRankConfig: rank 0 nranks 2 total 0.45 (kernels 0.31, alloc 0.01, bootstrap 0.09, allgathers 0.00, topo 0.03, graphs 0.00, connections 0.01, rest 0.00)
+9bd56cf6e51b:23466:25787 [0] NCCL INFO [Proxy Progress] Device 0 CPU core 34
+9bd56cf6e51b:23466:25784 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Channel 00/0 : 1[1] -> 0[0] [receive] via NET/Socket/0
+9bd56cf6e51b:23466:25784 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Channel 01/0 : 1[1] -> 0[0] [receive] via NET/Socket/0
+9bd56cf6e51b:23466:25784 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Channel 00/0 : 0[0] -> 1[1] [send] via NET/Socket/0
+9bd56cf6e51b:23466:25784 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Channel 01/0 : 0[0] -> 1[1] [send] via NET/Socket/0
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Connected all rings, use ring PXN 0 GDR 0
+2026-11-13 15:43:41 | INFO | nemo_automodel.components.loggers.log_utils | Setting logging level to 20
+2026-11-13 15:43:41 | INFO | nemo_automodel.shared.te_patches | Applied FusedAdam empty-shard monkey-patch.
+2026-11-13 15:43:41 | INFO | root | Experiment_details:
+2026-11-13 15:43:41 | INFO | root | Timestamp: '2026-11-13T15:43:41'
+2026-11-13 15:43:41 | INFO | root | User: root
+2026-11-13 15:43:41 | INFO | root | Host: 9bd56cf6e51b
+2026-11-13 15:43:41 | INFO | root | World size: 2
+2026-11-13 15:43:41 | INFO | root | Backend: nccl
+2026-11-13 15:43:41 | INFO | root | Recipe: TrainFinetuneRecipeForNextTokenPrediction
+2026-11-13 15:43:41 | INFO | root | Model name: /workspace/models/nemotron-3-nano-30b
+recipe: TrainFinetuneRecipeForNextTokenPrediction
+step_scheduler:
+  global_batch_size: 16
+  local_batch_size: 1
+  ckpt_every_steps: 2
+  val_every_steps: 2
+  max_steps: 2
+dist_env:
+  backend: nccl
+  timeout_minutes: 30
+rng:
+  _target_: nemo_automodel.components.training.rng.StatefulRNG
+  seed: 1111
+  ranked: true
+model:
+  _target_: nemo_automodel.NeMoAutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: /workspace/models/nemotron-3-nano-30b
+  backend:
+    _target_: nemo_automodel.components.models.common.BackendConfig
+    rms_norm: torch_fp32
+    linear: torch
+    dispatcher: torch
+compile:
+  enabled: false
+checkpoint:
+  enabled: false
+  checkpoint_dir: results/runs/rh-ddp-2n/ckpt
+  model_save_format: safetensors
+  save_consolidated: false
+peft:
+  _target_: nemo_automodel.components._peft.lora.PeftConfig
+  exclude_modules:
+  - '*.out_proj'
+  dim: 16
+  alpha: 32
+  use_triton: true
+  use_memory_efficient_lora: true
+distributed:
+  strategy: ddp
+  dp_size: 2
+  tp_size: 1
+  cp_size: 1
+  ep_size: 1
+  activation_checkpointing: true
+loss_fn:
+  _target_: nemo_automodel.components.loss.masked_ce.MaskedCrossEntropy
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/train.jsonl
+  seq_length: 3072
+  truncation: longest_first
+packed_sequence:
+  packed_sequence_size: 0
+dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+  shuffle: true
+optimizer:
+  _target_: torch.optim.Adam
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  lr: 0.0001
+  weight_decay: 0
+2026-11-13 15:43:41 | INFO | root | Library versions:
+2026-11-13 15:43:41 | INFO | root | - nemo_automodel: 0.7.0+efb2eb5df (/opt/Automodel/nemo_automodel/__init__.py)
+2026-11-13 15:43:41 | INFO | root | - transformers: 5.18.0 (/opt/venv/lib/python3.12/site-packages/transformers/__init__.py)
+2026-11-13 15:43:41 | INFO | root | - torch: 2.14.0a0+4fdf77b940.nv26.08 CUDA 13.4
+2026-11-13 15:43:41 | INFO | root | No clip_grad_norm.max_norm specified in config, using default value of 1.0
+2026-11-13 15:43:41 | WARNING | nemo_automodel.components.models.common.utils | rope_fusion is temporarily force-disabled globally (see #3027).
+2026-11-13 15:43:41 | INFO | nemo_automodel._transformers.model_init | Using custom model implementation for NemotronHForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+2026-11-13 15:43:52 | INFO | nemo_automodel._transformers.kernel_patches | Set global SDPA backends to [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-13 15:43:52 | INFO | nemo_automodel._transformers.kernel_patches | Patched model with SDPA method= [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-13 15:43:52 | INFO | nemo_automodel.components._peft.lora | Fused 23 LoRA SwiGLU/ReLU2 MLP module(s) for memory-efficient backward.
+2026-11-13 15:43:52 | INFO | nemo_automodel.components.distributed.parallelizer | Structurally discovered layer groups for NemotronHForCausalLM: ('language',)
+2026-11-13 15:43:52 | INFO | nemo_automodel.components.distributed.parallelizer | Activation checkpointing scope ('all',) selected 52/52 trainable layers; groups={'language': 52} selected_groups={'language': 52} skipped_frozen=0
+2026-11-13 15:43:52 | INFO | nemo_automodel.components.distributed.activation_checkpointing | Applied submodule activation checkpointing to 52 layers: {'mlp': 23, 'attention': 29, 'pre_norm': 0, 'post_norm': 0, 'mot': 0}
+/opt/Automodel/nemo_automodel/components/distributed/ddp.py:120: FutureWarning: `broadcast_buffers` is deprecated. Use `forward_sync_buffers` instead. IMPORTANT: unlike `broadcast_buffers=False`, `forward_sync_buffers=False` still syncs buffers at init. If you rely on buffers NOT being synced at init (e.g. rank-local buffers), keep using `broadcast_buffers=False` until `init_sync_buffers` is available.
+  return DDP(model, **ddp_kwargs)
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Symmetric VA size=140GB
+2026-11-13 15:44:06 | INFO | nemo_automodel.components.utils.compile_utils | torch.compile is disabled
+9bd56cf6e51b:23466:25784 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Channel 01/1 : 1[1] -> 0[0] [receive] via NET/Socket/0/Shared
+9bd56cf6e51b:23466:25784 [0] NCCL INFO Could not get speed from /sys/class/net/lo/speed. Defaulting to 10 Gbps.
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Channel 01/1 : 0[0] -> 1[1] [send] via NET/Socket/0/Shared
+2026-11-13 15:44:39 | INFO | root | load_model: 58.82 GB loaded in 32.35s (1.82 GB/s overall | destinations 0.07s, storage read 32.20s, adapt 0.04s, install 0.04s)
+2026-11-13 15:44:39 | INFO | root | Model summary:
+2026-11-13 15:44:39 | INFO | root | --------------------------------
+2026-11-13 15:44:39 | INFO | root | Trainable parameters: 13,499,392
+2026-11-13 15:44:39 | INFO | root | Total parameters: 31,591,436,736
+2026-11-13 15:44:39 | INFO | root | Trainable parameters percentage: 0.04%
+2026-11-13 15:44:39 | INFO | root | Param L2 norm: 3990.6451
+2026-11-13 15:44:39 | INFO | root | --------------------------------
+2026-11-13 15:44:39 | INFO | root | Using model config to instantiate tokenizer
+2026-11-13 15:44:40 | WARNING | nemo_automodel._transformers.tokenization.nemo_auto_tokenizer | Tokenizer '/workspace/models/nemotron-3-nano-30b' has pad_token_id=None; defaulting to 0. This can cause incorrect MoE auxiliary loss calculations if valid tokens share token ID 0. Set pad_token_id explicitly in your tokenizer config to avoid this.
+/opt/venv/lib/python3.12/site-packages/torchdata/stateful_dataloader/stateful_dataloader.py:379: UserWarning: 'set_vital' is deprecated, please do not call
+  torch.set_vital("Dataloader", "enabled", "True")  # type: ignore[attr-defined]
+2026-11-13 15:44:40 | INFO | root | Signal handler installed for SIGTERM
+2026-11-13 15:44:40 | INFO | root | Model Part 0:
+2026-11-13 15:44:40 | INFO | root | DistributedDataParallel(
+2026-11-13 15:44:40 | INFO | root |   (module): NemotronHForCausalLM(
+2026-11-13 15:44:40 | INFO | root |     (model): NemotronV3Model(
+2026-11-13 15:44:40 | INFO | root |       (embed_tokens): Embedding(131072, 2688)
+2026-11-13 15:44:40 | INFO | root |       (layers): ModuleDict(
+2026-11-13 15:44:40 | INFO | root |         (0): NemotronV3Block(
+2026-11-13 15:44:40 | INFO | root |           (norm): Float32RMSNorm()
+2026-11-13 15:44:40 | INFO | root |           (mixer): CheckpointWrapper(
+2026-11-13 15:44:40 | INFO | root |             (_checkpoint_wrapped_module): NemotronV3Mamba2Mixer(
+2026-11-13 15:44:40 | INFO | root |               (in_proj): PatchedLinearLoRA(
+2026-11-13 15:44:40 | INFO | root |                 in_features=2688, out_features=10304, bias=False
+2026-11-13 15:44:40 | INFO | root |                 (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-13 15:44:40 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=10304, bias=False)
+2026-11-13 15:44:40 | INFO | root |               )
+2026-11-13 15:44:40 | INFO | root |               (conv1d): Conv1d(6144, 6144, kernel_size=(4,), stride=(1,), padding=(3,), groups=6144)
+2026-11-13 15:44:40 | INFO | root |               (_fp32_params): NemotronV3MambaFP32Params()
+2026-11-13 15:44:40 | INFO | root |               (norm): NemotronV3MambaRMSNormGated()
+2026-11-13 15:44:40 | INFO | root |               (out_proj): Linear(in_features=4096, out_features=2688, bias=False)
+2026-11-13 15:44:40 | INFO | root |             )
+2026-11-13 15:44:40 | INFO | root |           )
+2026-11-13 15:44:40 | INFO | root |         )
+2026-11-13 15:44:40 | INFO | root |         (1): NemotronV3Block(
+2026-11-13 15:44:40 | INFO | root |           (norm): Float32RMSNorm()
+2026-11-13 15:44:40 | INFO | root |           (mixer): CheckpointWrapper(
+2026-11-13 15:44:40 | INFO | root |             (_checkpoint_wrapped_module): MoE(
+2026-11-13 15:44:40 | INFO | root |               (gate): Gate(
+2026-11-13 15:44:40 | INFO | root |                 (routing_core): _GateRoutingCore()
+2026-11-13 15:44:40 | INFO | root |               )
+2026-11-13 15:44:40 | INFO | root |               (experts): GroupedExperts()
+2026-11-13 15:44:40 | INFO | root |               (shared_experts): MLP(
+2026-11-13 15:44:40 | INFO | root |                 (up_proj): PatchedLinearLoRA(
+2026-11-13 15:44:40 | INFO | root |                   in_features=2688, out_features=3712, bias=False
+2026-11-13 15:44:40 | INFO | root |                   (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-13 15:44:40 | INFO | root |                   (lora_B): Linear(in_features=16, out_features=3712, bias=False)
+2026-11-13 15:44:40 | INFO | root |                 )
+2026-11-13 15:44:40 | INFO | root |                 (down_proj): PatchedLinearLoRA(
+2026-11-13 15:44:40 | INFO | root |                   in_features=3712, out_features=2688, bias=False
+2026-11-13 15:44:40 | INFO | root |                   (lora_A): Linear(in_features=3712, out_features=16, bias=False)
+2026-11-13 15:44:40 | INFO | root |                   (lora_B): Linear(in_features=16, out_features=2688, bias=False)
+2026-11-13 15:44:40 | INFO | root |                 )
+2026-11-13 15:44:40 | INFO | root | ...
+2026-11-13 15:44:40 | INFO | root | Optimizer:
+2026-11-13 15:44:40 | INFO | root | Adam (
+2026-11-13 15:44:40 | INFO | root | Parameter Group 0
+2026-11-13 15:44:40 | INFO | root |     amsgrad: False
+2026-11-13 15:44:40 | INFO | root |     betas: (0.9, 0.999)
+2026-11-13 15:44:40 | INFO | root |     capturable: False
+2026-11-13 15:44:40 | INFO | root |     decoupled_weight_decay: False
+2026-11-13 15:44:40 | INFO | root |     differentiable: False
+2026-11-13 15:44:40 | INFO | root |     eps: 1e-08
+2026-11-13 15:44:40 | INFO | root |     foreach: None
+2026-11-13 15:44:40 | INFO | root |     fused: None
+2026-11-13 15:44:40 | INFO | root |     lr: 0.0001
+2026-11-13 15:44:40 | INFO | root |     maximize: False
+2026-11-13 15:44:40 | INFO | root |     weight_decay: 0
+2026-11-13 15:44:40 | INFO | root | )
+2026-11-13 15:44:40 | INFO | root | LR scheduler: <unavailable>
+2026-11-13 15:44:40 | INFO | root | Step scheduler:
+2026-11-13 15:44:40 | INFO | root | - Gradient accumulation steps: 8
+2026-11-13 15:44:40 | INFO | root | - Checkpoint every steps: 2
+2026-11-13 15:44:40 | INFO | root | - Garbage collect every steps: None
+2026-11-13 15:44:40 | INFO | root | - Current Epoch: 0
+2026-11-13 15:44:40 | INFO | root | - Number of epochs: 10
+2026-11-13 15:44:40 | INFO | root | - Validation every steps: 2
+2026-11-13 15:44:40 | INFO | root | - Max train steps: 2
+2026-11-13 15:44:40 | INFO | root | - Checkpoint retention: inactive because checkpointing is disabled
+Training:   0%|          | 0/2 [00:00<?, ?step/s]2026-11-13 15:45:02 | INFO | root | step 0 | epoch 0 | loss 1.1664 | grad_norm 2.1724 | lr 1.00e-04 | mem 61.95 GiB | tps 808.09(404.04/gpu) | num_label_tokens 1659
+Training:   0%|          | 0/2 [00:21<?, ?step/s, loss=1.1664, lr=1.00e-04, tps=808]Training:  50%|█████     | 1/2 [00:21<00:21, 21.73s/step, loss=1.1664, lr=1.00e-04, tps=808]2026-11-13 15:45:06 | INFO | root | step 1 | epoch 0 | loss 0.9760 | grad_norm 1.9983 | lr 1.00e-04 | mem 63.74 GiB | tps 4721.25(2360.63/gpu) | num_label_tokens 1672
+Training:  50%|█████     | 1/2 [00:25<00:21, 21.73s/step, loss=0.9760, lr=1.00e-04, tps=4721]Training: 100%|██████████| 2/2 [00:25<00:00, 11.40s/step, loss=0.9760, lr=1.00e-04, tps=4721]Training: 100%|██████████| 2/2 [00:25<00:00, 12.95s/step, loss=0.9760, lr=1.00e-04, tps=4721]
+9bd56cf6e51b:23466:23466 [0] NCCL INFO Deregistering plugin entry for commId: 14773018502193903039

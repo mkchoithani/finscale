@@ -1,0 +1,82 @@
+# FinScale run metadata (read by scripts/launch_train.sh and plot_results.py)
+# finscale.run: rh-replicate-2n
+# finscale.mode: replicate
+# finscale.nodes: 2
+# finscale.gpus_per_node: 1
+# finscale.world_size: 2
+# finscale.grad_accum_per_rank: 8
+# finscale.seq_length: 3072
+# finscale.gbs: 16
+recipe: TrainFinetuneRecipeForNextTokenPrediction
+step_scheduler:
+  global_batch_size: 16
+  local_batch_size: 1
+  ckpt_every_steps: 8
+  val_every_steps: 8
+  max_steps: 8
+dist_env:
+  backend: nccl
+  timeout_minutes: 30
+rng:
+  _target_: nemo_automodel.components.training.rng.StatefulRNG
+  seed: 1111
+  ranked: true
+model:
+  _target_: nemo_automodel.NeMoAutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: /workspace/models/nemotron-3-nano-30b
+  backend:
+    _target_: nemo_automodel.components.models.common.BackendConfig
+    rms_norm: torch_fp32
+    linear: torch
+    dispatcher: torch
+compile:
+  enabled: false
+checkpoint:
+  enabled: false
+  checkpoint_dir: results/runs/rh-replicate-2n/ckpt
+  model_save_format: safetensors
+  save_consolidated: false
+peft:
+  _target_: nemo_automodel.components._peft.lora.PeftConfig
+  exclude_modules:
+  - '*.out_proj'
+  dim: 16
+  alpha: 32
+  use_triton: true
+  use_memory_efficient_lora: true
+distributed:
+  strategy: ddp
+  dp_size: 2
+  tp_size: 1
+  cp_size: 1
+  ep_size: 1
+  activation_checkpointing: true
+loss_fn:
+  _target_: nemo_automodel.components.loss.masked_ce.MaskedCrossEntropy
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/train.jsonl
+  seq_length: 3072
+  truncation: longest_first
+packed_sequence:
+  packed_sequence_size: 0
+dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+  shuffle: true
+optimizer:
+  _target_: torch.optim.Adam
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1e-8
+  lr: 0.0001
+  weight_decay: 0
+validation_dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/val.jsonl
+  seq_length: 3072
+  truncation: longest_first
+validation_dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater

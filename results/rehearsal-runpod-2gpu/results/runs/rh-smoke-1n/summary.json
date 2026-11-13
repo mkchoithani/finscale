@@ -1,0 +1,31 @@
+{
+  "run": "rh-smoke-1n",
+  "mode": "single",
+  "nodes": "1",
+  "gpus_per_node": "1",
+  "world_size": "1",
+  "grad_accum_per_rank": "16",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 1,
+  "warmup_excluded": 0,
+  "median_tps": 217.64408727324357,
+  "median_tps_per_gpu": 217.64408727324357,
+  "median_step_seconds": null,
+  "peak_mem_gib": 61.92696285247803,
+  "first_loss": 1.1665363311767578,
+  "last_loss": 1.1665363311767578,
+  "validation": [],
+  "node_exits": [
+    {
+      "host": "9bd56cf6e51b",
+      "exit_code": 0,
+      "wall_seconds": 111,
+      "start_epoch": 1794584117,
+      "end_epoch": 1794584228
+    }
+  ],
+  "tps_samples": [
+    217.64408727324357
+  ]
+}
