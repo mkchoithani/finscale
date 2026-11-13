@@ -228,3 +228,23 @@ Commit `results/` (logs, CSV, JSON, charts; adapters are ignored).
 | "2 nodes give X× throughput" | ≥3 repeats each, same GBS/seq, `summary.json` speedup |
 | "2 nodes unlock Y" | failing 1-node log + succeeding 2-node log, same settings |
 | "Fine-tuning improves risk classification" | `scores.json` base vs fine-tuned on held-out companies |
+
+## Known issues and fixes (from the RunPod rehearsal, 13 Nov 2026)
+
+Rehearsal on 1× H100 80GB, image `nvcr.io/nvidia/nemo-automodel:26.10.00` (amd64; an arm64 build of the
+same tag exists for GB10). Evidence: [results/rehearsal-runpod/](results/rehearsal-runpod/).
+Versions that worked: AutoModel 0.7.0, transformers 5.18.0, torch 2.14 (CUDA 13.4), mamba_ssm 2.3.0,
+causal_conv1d 1.6.0, peft 0.20.0. **If the event image reports different versions, run `smoke` first.**
+
+| Symptom (exact text to look for) | Cause | Status |
+|---|---|---|
+| `ChatDatasetConfig got unexpected dataset config field(s): chat_template_kwargs` | AutoModel 0.7.0 lacks the field | Fixed in `06_make_config.py` (field omitted; template renders identically) |
+| `cache_position[-1] ... 'NoneType' object is not subscriptable` in `modeling_nemotron_h.py` during generate | Model repo's remote code vs transformers 5.18 | Fixed in `07_predict.py` (uses built-in `NemotronHForCausalLM`, falls back to remote code) |
+| Model download "stuck": `.incomplete` files not growing, 0 MB/s network, process still busy | Hugging Face xet download reassembling files; slower without a token | Not an error: wait. Set `HF_TOKEN`; start the download first. Took 24 min unauthenticated |
+| Step 0 takes ~60 s, later steps ~8 s | One-time warm-up / kernel compile | Normal. `parse_train_log.py` excludes the first 3 steps from throughput |
+| `torchrun ... ChildFailedError` at the end of a log | Only the wrapper reporting a child died | Search ~30 lines above for the real `Error:` line |
+
+Measured on H100 (reference only, **not** GB10 numbers): peak memory 61–64 GiB at seq 3,072;
+~2,200 training tokens/s; 8 steps (GBS 16) ≈ 2.5 min incl. load; loss 1.17 → 0.56, val loss 0.50.
+Eval, 60 held-out rows: class accuracy 0.68 → 0.82, macro-F1 0.49 → 0.83, severity 0.47 → 0.70,
+JSON valid 0.98 → 1.00, quote fidelity 0.97 → 0.93.

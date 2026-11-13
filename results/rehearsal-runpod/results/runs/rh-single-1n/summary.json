@@ -1,0 +1,40 @@
+{
+  "run": "rh-single-1n",
+  "mode": "single",
+  "nodes": "1",
+  "gpus_per_node": "1",
+  "world_size": "1",
+  "grad_accum_per_rank": "16",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 8,
+  "warmup_excluded": 3,
+  "median_tps": 2198.187168421762,
+  "median_tps_per_gpu": 2198.187168421762,
+  "median_step_seconds": 8.469,
+  "peak_mem_gib": 63.71842956542969,
+  "first_loss": 1.1654443740844727,
+  "last_loss": 0.5577728748321533,
+  "validation": [
+    {
+      "step": 7,
+      "val_loss": 0.5019682049751282
+    }
+  ],
+  "node_exits": [
+    {
+      "host": "42bf8f23b30c",
+      "exit_code": 0,
+      "wall_seconds": 185,
+      "start_epoch": 1794580735,
+      "end_epoch": 1794580920
+    }
+  ],
+  "tps_samples": [
+    2097.6062217301,
+    2198.187168421762,
+    1813.6545215896608,
+    2260.3991228172163,
+    2514.509364386644
+  ]
+}

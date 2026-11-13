@@ -1,0 +1,656 @@
+##### AUTORUN START 2026-11-13T14:36:11Z commit=aa5cdd7 stages: smoke single eval
+NVIDIA H100 80GB HBM3, 81559 MiB, 595.91.07
+##### STAGE smoke START 14:36:11
+
+========== SMOKE: 1 optimizer step on 1 GPU ==========
+Base recipe: /opt/Automodel/examples/llm_finetune/nemotron/nemotron_nano_v3_singlegpu_lora.yaml
+Wrote configs/rh-smoke-1n.yaml  |  mode=single nodes=1 world=1 gbs=16 grad_accum/rank=16 seq=3072 steps=1 lr=0.0001
+Distributed: {'strategy': 'fsdp2', 'dp_size': 1, 'tp_size': 1, 'cp_size': 1, 'ep_size': 1, 'sequence_parallel': False, 'activation_checkpointing': True}
+Launch:  bash scripts/launch_train.sh configs/rh-smoke-1n.yaml
+W1113 14:36:26.652000 65736 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:36:26.676000 65736 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:36:27.144000 65736 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:27.145000 65736 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:27.146000 65736 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:27.146000 65736 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:27.147000 65736 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:27.147000 65736 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:27.148000 65736 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:27.148000 65736 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+{"hostname": "42bf8f23b30c", "arch": "x86_64", "gpu": "NVIDIA H100 80GB HBM3", "torch": "2.14.0a0+4fdf77b940.nv26.08", "cuda": "13.4", "nccl": "2.30.7", "nemo_automodel_version": "0.7.0+efb2eb5df", "git_commit": "aa5cdd70a58a5d122e07697ceebf11a98a937910"}
+[finscale] host=42bf8f23b30c run=rh-smoke-1n nnodes=1 node_rank=auto head=local port=29400
+[finscale] torchrun --standalone --nnodes=1 --nproc-per-node=1 -m nemo_automodel.cli.app configs/rh-smoke-1n.yaml
+cfg-path: /workspace/FinscaleNvidiaPlatform/configs/rh-smoke-1n.yaml
+W1113 14:36:40.158000 69621 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:36:40.181000 69621 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/opt/venv/lib/python3.12/site-packages/ffpa_attn/cute/utils/cache_utils.py:23: UserWarning: FLASH_ATTENTION_CUTE_DSL_CACHE_ENABLED=1 is inert: cross-process kernel persistence was removed, so the compiled-kernel cache is in-process only and FLASH_ATTENTION_CUTE_DSL_CACHE_DIR is ignored.
+  warnings.warn(
+W1113 14:36:41.511000 69621 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:41.512000 69621 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:41.513000 69621 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:41.513000 69621 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:41.515000 69621 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:41.515000 69621 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:41.516000 69621 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:41.516000 69621 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+> initializing torch distributed with 1 workers.
+2026-11-13 14:36:49 | INFO | nemo_automodel.components.loggers.log_utils | Setting logging level to 20
+2026-11-13 14:36:49 | INFO | nemo_automodel.shared.te_patches | Applied FusedAdam empty-shard monkey-patch.
+2026-11-13 14:36:49 | INFO | root | Experiment_details:
+2026-11-13 14:36:49 | INFO | root | Timestamp: '2026-11-13T14:36:49'
+2026-11-13 14:36:49 | INFO | root | User: root
+2026-11-13 14:36:49 | INFO | root | Host: 42bf8f23b30c
+2026-11-13 14:36:49 | INFO | root | World size: 1
+2026-11-13 14:36:49 | INFO | root | Backend: nccl
+2026-11-13 14:36:49 | INFO | root | Recipe: TrainFinetuneRecipeForNextTokenPrediction
+2026-11-13 14:36:49 | INFO | root | Model name: /workspace/models/nemotron-3-nano-30b
+recipe: TrainFinetuneRecipeForNextTokenPrediction
+step_scheduler:
+  global_batch_size: 16
+  local_batch_size: 1
+  ckpt_every_steps: 1
+  val_every_steps: 1
+  max_steps: 1
+dist_env:
+  backend: nccl
+  timeout_minutes: 30
+rng:
+  _target_: nemo_automodel.components.training.rng.StatefulRNG
+  seed: 1111
+  ranked: true
+model:
+  _target_: nemo_automodel.NeMoAutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: /workspace/models/nemotron-3-nano-30b
+  backend:
+    _target_: nemo_automodel.components.models.common.BackendConfig
+    rms_norm: torch_fp32
+    linear: torch
+    dispatcher: torch
+compile:
+  enabled: false
+checkpoint:
+  enabled: false
+  checkpoint_dir: results/runs/rh-smoke-1n/ckpt
+  model_save_format: safetensors
+  save_consolidated: false
+peft:
+  _target_: nemo_automodel.components._peft.lora.PeftConfig
+  exclude_modules:
+  - '*.out_proj'
+  dim: 16
+  alpha: 32
+  use_triton: true
+  use_memory_efficient_lora: true
+distributed:
+  strategy: fsdp2
+  dp_size: 1
+  tp_size: 1
+  cp_size: 1
+  ep_size: 1
+  sequence_parallel: false
+  activation_checkpointing: true
+loss_fn:
+  _target_: nemo_automodel.components.loss.masked_ce.MaskedCrossEntropy
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/train.jsonl
+  seq_length: 3072
+  truncation: longest_first
+packed_sequence:
+  packed_sequence_size: 0
+dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+  shuffle: true
+optimizer:
+  _target_: torch.optim.Adam
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  lr: 0.0001
+  weight_decay: 0
+2026-11-13 14:36:49 | INFO | root | Library versions:
+2026-11-13 14:36:49 | INFO | root | - nemo_automodel: 0.7.0+efb2eb5df (/opt/Automodel/nemo_automodel/__init__.py)
+2026-11-13 14:36:49 | INFO | root | - transformers: 5.18.0 (/opt/venv/lib/python3.12/site-packages/transformers/__init__.py)
+2026-11-13 14:36:49 | INFO | root | - torch: 2.14.0a0+4fdf77b940.nv26.08 CUDA 13.4
+2026-11-13 14:36:49 | INFO | root | No clip_grad_norm.max_norm specified in config, using default value of 1.0
+2026-11-13 14:36:49 | WARNING | nemo_automodel.components.models.common.utils | rope_fusion is temporarily force-disabled globally (see #3027).
+2026-11-13 14:36:49 | INFO | nemo_automodel._transformers.model_init | Using custom model implementation for NemotronHForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+2026-11-13 14:36:49 | INFO | nemo_automodel._transformers.kernel_patches | Set global SDPA backends to [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-13 14:36:49 | INFO | nemo_automodel._transformers.kernel_patches | Patched model with SDPA method= [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-13 14:36:49 | INFO | nemo_automodel.components.distributed.parallelizer | Structurally discovered layer groups for NemotronHForCausalLM: ('language',)
+2026-11-13 14:36:49 | INFO | nemo_automodel.components.distributed.parallelizer | Activation checkpointing scope ('all',) selected 52/52 trainable layers; groups={'language': 52} selected_groups={'language': 52} skipped_frozen=0
+2026-11-13 14:36:49 | INFO | nemo_automodel.components.distributed.activation_checkpointing | Applied submodule activation checkpointing to 52 layers: {'mlp': 23, 'attention': 29, 'pre_norm': 0, 'post_norm': 0, 'mot': 0}
+2026-11-13 14:37:01 | INFO | root | load_model: 58.82 GB loaded in 11.79s (4.99 GB/s overall | destinations 0.07s, storage read 11.63s, adapt 0.04s, install 0.04s)
+2026-11-13 14:37:02 | INFO | root | Model summary:
+2026-11-13 14:37:02 | INFO | root | --------------------------------
+2026-11-13 14:37:02 | INFO | root | Trainable parameters: 13,499,392
+2026-11-13 14:37:02 | INFO | root | Total parameters: 31,591,436,736
+2026-11-13 14:37:02 | INFO | root | Trainable parameters percentage: 0.04%
+2026-11-13 14:37:02 | INFO | root | Param L2 norm: 3990.6451
+2026-11-13 14:37:02 | INFO | root | --------------------------------
+2026-11-13 14:37:02 | INFO | root | Using model config to instantiate tokenizer
+2026-11-13 14:37:03 | WARNING | nemo_automodel._transformers.tokenization.nemo_auto_tokenizer | Tokenizer '/workspace/models/nemotron-3-nano-30b' has pad_token_id=None; defaulting to 0. This can cause incorrect MoE auxiliary loss calculations if valid tokens share token ID 0. Set pad_token_id explicitly in your tokenizer config to avoid this.
+/opt/venv/lib/python3.12/site-packages/torchdata/stateful_dataloader/stateful_dataloader.py:379: UserWarning: 'set_vital' is deprecated, please do not call
+  torch.set_vital("Dataloader", "enabled", "True")  # type: ignore[attr-defined]
+2026-11-13 14:37:03 | INFO | root | Signal handler installed for SIGTERM
+2026-11-13 14:37:03 | INFO | root | Model Part 0:
+2026-11-13 14:37:03 | INFO | root | NemotronHForCausalLM(
+2026-11-13 14:37:03 | INFO | root |   (model): NemotronV3Model(
+2026-11-13 14:37:03 | INFO | root |     (embed_tokens): Embedding(131072, 2688)
+2026-11-13 14:37:03 | INFO | root |     (layers): ModuleDict(
+2026-11-13 14:37:03 | INFO | root |       (0): NemotronV3Block(
+2026-11-13 14:37:03 | INFO | root |         (norm): Float32RMSNorm()
+2026-11-13 14:37:03 | INFO | root |         (mixer): CheckpointWrapper(
+2026-11-13 14:37:03 | INFO | root |           (_checkpoint_wrapped_module): NemotronV3Mamba2Mixer(
+2026-11-13 14:37:03 | INFO | root |             (in_proj): PatchedLinearLoRA(
+2026-11-13 14:37:03 | INFO | root |               in_features=2688, out_features=10304, bias=False
+2026-11-13 14:37:03 | INFO | root |               (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-13 14:37:03 | INFO | root |               (lora_B): Linear(in_features=16, out_features=10304, bias=False)
+2026-11-13 14:37:03 | INFO | root |             )
+2026-11-13 14:37:03 | INFO | root |             (conv1d): Conv1d(6144, 6144, kernel_size=(4,), stride=(1,), padding=(3,), groups=6144)
+2026-11-13 14:37:03 | INFO | root |             (_fp32_params): NemotronV3MambaFP32Params()
+2026-11-13 14:37:03 | INFO | root |             (norm): NemotronV3MambaRMSNormGated()
+2026-11-13 14:37:03 | INFO | root |             (out_proj): Linear(in_features=4096, out_features=2688, bias=False)
+2026-11-13 14:37:03 | INFO | root |           )
+2026-11-13 14:37:03 | INFO | root |         )
+2026-11-13 14:37:03 | INFO | root |       )
+2026-11-13 14:37:03 | INFO | root |       (1): NemotronV3Block(
+2026-11-13 14:37:03 | INFO | root |         (norm): Float32RMSNorm()
+2026-11-13 14:37:03 | INFO | root |         (mixer): CheckpointWrapper(
+2026-11-13 14:37:03 | INFO | root |           (_checkpoint_wrapped_module): MoE(
+2026-11-13 14:37:03 | INFO | root |             (gate): Gate(
+2026-11-13 14:37:03 | INFO | root |               (routing_core): _GateRoutingCore()
+2026-11-13 14:37:03 | INFO | root |             )
+2026-11-13 14:37:03 | INFO | root |             (experts): GroupedExperts()
+2026-11-13 14:37:03 | INFO | root |             (shared_experts): MLP(
+2026-11-13 14:37:03 | INFO | root |               (up_proj): PatchedLinearLoRA(
+2026-11-13 14:37:03 | INFO | root |                 in_features=2688, out_features=3712, bias=False
+2026-11-13 14:37:03 | INFO | root |                 (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-13 14:37:03 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=3712, bias=False)
+2026-11-13 14:37:03 | INFO | root |               )
+2026-11-13 14:37:03 | INFO | root |               (down_proj): PatchedLinearLoRA(
+2026-11-13 14:37:03 | INFO | root |                 in_features=3712, out_features=2688, bias=False
+2026-11-13 14:37:03 | INFO | root |                 (lora_A): Linear(in_features=3712, out_features=16, bias=False)
+2026-11-13 14:37:03 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=2688, bias=False)
+2026-11-13 14:37:03 | INFO | root |               )
+2026-11-13 14:37:03 | INFO | root |             )
+2026-11-13 14:37:03 | INFO | root | ...
+2026-11-13 14:37:03 | INFO | root | Optimizer:
+2026-11-13 14:37:03 | INFO | root | Adam (
+2026-11-13 14:37:03 | INFO | root | Parameter Group 0
+2026-11-13 14:37:03 | INFO | root |     amsgrad: False
+2026-11-13 14:37:03 | INFO | root |     betas: (0.9, 0.999)
+2026-11-13 14:37:03 | INFO | root |     capturable: False
+2026-11-13 14:37:03 | INFO | root |     decoupled_weight_decay: False
+2026-11-13 14:37:03 | INFO | root |     differentiable: False
+2026-11-13 14:37:03 | INFO | root |     eps: 1e-08
+2026-11-13 14:37:03 | INFO | root |     foreach: None
+2026-11-13 14:37:03 | INFO | root |     fused: None
+2026-11-13 14:37:03 | INFO | root |     lr: 0.0001
+2026-11-13 14:37:03 | INFO | root |     maximize: False
+2026-11-13 14:37:03 | INFO | root |     weight_decay: 0
+2026-11-13 14:37:03 | INFO | root | )
+2026-11-13 14:37:03 | INFO | root | LR scheduler: <unavailable>
+2026-11-13 14:37:03 | INFO | root | Step scheduler:
+2026-11-13 14:37:03 | INFO | root | - Gradient accumulation steps: 16
+2026-11-13 14:37:03 | INFO | root | - Checkpoint every steps: 1
+2026-11-13 14:37:03 | INFO | root | - Garbage collect every steps: None
+2026-11-13 14:37:03 | INFO | root | - Current Epoch: 0
+2026-11-13 14:37:03 | INFO | root | - Number of epochs: 10
+2026-11-13 14:37:03 | INFO | root | - Validation every steps: 1
+2026-11-13 14:37:03 | INFO | root | - Max train steps: 1
+2026-11-13 14:37:03 | INFO | root | - Checkpoint retention: inactive because checkpointing is disabled
+Training:   0%|          | 0/1 [00:00<?, ?step/s]2026-11-13 14:38:30 | INFO | root | step 0 | epoch 0 | loss 1.1666 | grad_norm 2.1624 | lr 1.00e-04 | mem 61.93 GiB | tps 200.41(200.41/gpu) | num_label_tokens 1659
+Training:   0%|          | 0/1 [01:27<?, ?step/s, loss=1.1666, lr=1.00e-04, tps=200]Training: 100%|██████████| 1/1 [01:27<00:00, 87.60s/step, loss=1.1666, lr=1.00e-04, tps=200]Training: 100%|██████████| 1/1 [01:27<00:00, 87.60s/step, loss=1.1666, lr=1.00e-04, tps=200]
+[finscale] exit=0 wall=123s log=results/runs/rh-smoke-1n/logs/42bf8f23b30c.log
+rh-smoke-1n: 1 steps | median tps=200.4076341780685 | median step=Nones | loss 1.166619896888733 -> 1.166619896888733 | peak mem 61.92696285247803 GiB
+
+========== DONE (smoke) ==========
+##### STAGE smoke OK 14:38:34
+##### STAGE single START 14:38:34
+
+========== SINGLE: 1-node baseline, 8 steps, saves adapter ==========
+Base recipe: /opt/Automodel/examples/llm_finetune/nemotron/nemotron_nano_v3_singlegpu_lora.yaml
+Wrote configs/rh-single-1n.yaml  |  mode=single nodes=1 world=1 gbs=16 grad_accum/rank=16 seq=3072 steps=8 lr=0.0001
+Distributed: {'strategy': 'fsdp2', 'dp_size': 1, 'tp_size': 1, 'cp_size': 1, 'ep_size': 1, 'sequence_parallel': False, 'activation_checkpointing': True}
+Launch:  bash scripts/launch_train.sh configs/rh-single-1n.yaml
+W1113 14:38:50.229000 72228 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:38:50.252000 72228 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:38:50.730000 72228 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:38:50.730000 72228 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:38:50.732000 72228 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:38:50.732000 72228 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:38:50.733000 72228 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:38:50.733000 72228 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:38:50.734000 72228 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:38:50.734000 72228 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+{"hostname": "42bf8f23b30c", "arch": "x86_64", "gpu": "NVIDIA H100 80GB HBM3", "torch": "2.14.0a0+4fdf77b940.nv26.08", "cuda": "13.4", "nccl": "2.30.7", "nemo_automodel_version": "0.7.0+efb2eb5df", "git_commit": "aa5cdd70a58a5d122e07697ceebf11a98a937910"}
+[finscale] host=42bf8f23b30c run=rh-single-1n nnodes=1 node_rank=auto head=local port=29400
+[finscale] torchrun --standalone --nnodes=1 --nproc-per-node=1 -m nemo_automodel.cli.app configs/rh-single-1n.yaml
+cfg-path: /workspace/FinscaleNvidiaPlatform/configs/rh-single-1n.yaml
+W1113 14:39:03.739000 75559 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:39:03.763000 75559 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/opt/venv/lib/python3.12/site-packages/ffpa_attn/cute/utils/cache_utils.py:23: UserWarning: FLASH_ATTENTION_CUTE_DSL_CACHE_ENABLED=1 is inert: cross-process kernel persistence was removed, so the compiled-kernel cache is in-process only and FLASH_ATTENTION_CUTE_DSL_CACHE_DIR is ignored.
+  warnings.warn(
+W1113 14:39:05.130000 75559 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:39:05.131000 75559 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:39:05.132000 75559 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:39:05.132000 75559 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:39:05.133000 75559 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:39:05.133000 75559 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:39:05.134000 75559 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:39:05.134000 75559 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+> initializing torch distributed with 1 workers.
+2026-11-13 14:39:13 | INFO | nemo_automodel.components.loggers.log_utils | Setting logging level to 20
+2026-11-13 14:39:13 | INFO | nemo_automodel.shared.te_patches | Applied FusedAdam empty-shard monkey-patch.
+2026-11-13 14:39:13 | INFO | root | Experiment_details:
+2026-11-13 14:39:13 | INFO | root | Timestamp: '2026-11-13T14:39:13'
+2026-11-13 14:39:13 | INFO | root | User: root
+2026-11-13 14:39:13 | INFO | root | Host: 42bf8f23b30c
+2026-11-13 14:39:13 | INFO | root | World size: 1
+2026-11-13 14:39:13 | INFO | root | Backend: nccl
+2026-11-13 14:39:13 | INFO | root | Recipe: TrainFinetuneRecipeForNextTokenPrediction
+2026-11-13 14:39:13 | INFO | root | Model name: /workspace/models/nemotron-3-nano-30b
+recipe: TrainFinetuneRecipeForNextTokenPrediction
+step_scheduler:
+  global_batch_size: 16
+  local_batch_size: 1
+  ckpt_every_steps: 8
+  val_every_steps: 8
+  max_steps: 8
+dist_env:
+  backend: nccl
+  timeout_minutes: 30
+rng:
+  _target_: nemo_automodel.components.training.rng.StatefulRNG
+  seed: 1111
+  ranked: true
+model:
+  _target_: nemo_automodel.NeMoAutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: /workspace/models/nemotron-3-nano-30b
+  backend:
+    _target_: nemo_automodel.components.models.common.BackendConfig
+    rms_norm: torch_fp32
+    linear: torch
+    dispatcher: torch
+compile:
+  enabled: false
+checkpoint:
+  enabled: true
+  checkpoint_dir: results/runs/rh-single-1n/ckpt
+  model_save_format: safetensors
+  save_consolidated: false
+peft:
+  _target_: nemo_automodel.components._peft.lora.PeftConfig
+  exclude_modules:
+  - '*.out_proj'
+  dim: 16
+  alpha: 32
+  use_triton: true
+  use_memory_efficient_lora: true
+distributed:
+  strategy: fsdp2
+  dp_size: 1
+  tp_size: 1
+  cp_size: 1
+  ep_size: 1
+  sequence_parallel: false
+  activation_checkpointing: true
+loss_fn:
+  _target_: nemo_automodel.components.loss.masked_ce.MaskedCrossEntropy
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/train.jsonl
+  seq_length: 3072
+  truncation: longest_first
+packed_sequence:
+  packed_sequence_size: 0
+dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+  shuffle: true
+optimizer:
+  _target_: torch.optim.Adam
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  lr: 0.0001
+  weight_decay: 0
+validation_dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/val.jsonl
+  seq_length: 3072
+  truncation: longest_first
+validation_dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+2026-11-13 14:39:13 | INFO | root | Library versions:
+2026-11-13 14:39:13 | INFO | root | - nemo_automodel: 0.7.0+efb2eb5df (/opt/Automodel/nemo_automodel/__init__.py)
+2026-11-13 14:39:13 | INFO | root | - transformers: 5.18.0 (/opt/venv/lib/python3.12/site-packages/transformers/__init__.py)
+2026-11-13 14:39:13 | INFO | root | - torch: 2.14.0a0+4fdf77b940.nv26.08 CUDA 13.4
+2026-11-13 14:39:13 | INFO | root | No clip_grad_norm.max_norm specified in config, using default value of 1.0
+2026-11-13 14:39:13 | WARNING | nemo_automodel.components.models.common.utils | rope_fusion is temporarily force-disabled globally (see #3027).
+2026-11-13 14:39:13 | INFO | nemo_automodel._transformers.model_init | Using custom model implementation for NemotronHForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+2026-11-13 14:39:13 | INFO | nemo_automodel._transformers.kernel_patches | Set global SDPA backends to [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-13 14:39:13 | INFO | nemo_automodel._transformers.kernel_patches | Patched model with SDPA method= [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-13 14:39:13 | INFO | nemo_automodel.components.distributed.parallelizer | Structurally discovered layer groups for NemotronHForCausalLM: ('language',)
+2026-11-13 14:39:13 | INFO | nemo_automodel.components.distributed.parallelizer | Activation checkpointing scope ('all',) selected 52/52 trainable layers; groups={'language': 52} selected_groups={'language': 52} skipped_frozen=0
+2026-11-13 14:39:13 | INFO | nemo_automodel.components.distributed.activation_checkpointing | Applied submodule activation checkpointing to 52 layers: {'mlp': 23, 'attention': 29, 'pre_norm': 0, 'post_norm': 0, 'mot': 0}
+2026-11-13 14:39:27 | INFO | root | load_model: 58.82 GB loaded in 14.14s (4.16 GB/s overall | destinations 0.08s, storage read 13.98s, adapt 0.04s, install 0.04s)
+2026-11-13 14:39:28 | INFO | root | Model summary:
+2026-11-13 14:39:28 | INFO | root | --------------------------------
+2026-11-13 14:39:28 | INFO | root | Trainable parameters: 13,499,392
+2026-11-13 14:39:28 | INFO | root | Total parameters: 31,591,436,736
+2026-11-13 14:39:28 | INFO | root | Trainable parameters percentage: 0.04%
+2026-11-13 14:39:28 | INFO | root | Param L2 norm: 3990.6451
+2026-11-13 14:39:28 | INFO | root | --------------------------------
+2026-11-13 14:39:28 | INFO | root | Using model config to instantiate tokenizer
+2026-11-13 14:39:29 | WARNING | nemo_automodel._transformers.tokenization.nemo_auto_tokenizer | Tokenizer '/workspace/models/nemotron-3-nano-30b' has pad_token_id=None; defaulting to 0. This can cause incorrect MoE auxiliary loss calculations if valid tokens share token ID 0. Set pad_token_id explicitly in your tokenizer config to avoid this.
+/opt/venv/lib/python3.12/site-packages/torchdata/stateful_dataloader/stateful_dataloader.py:379: UserWarning: 'set_vital' is deprecated, please do not call
+  torch.set_vital("Dataloader", "enabled", "True")  # type: ignore[attr-defined]
+2026-11-13 14:39:29 | INFO | root | Signal handler installed for SIGTERM
+2026-11-13 14:39:29 | INFO | root | Model Part 0:
+2026-11-13 14:39:29 | INFO | root | NemotronHForCausalLM(
+2026-11-13 14:39:29 | INFO | root |   (model): NemotronV3Model(
+2026-11-13 14:39:29 | INFO | root |     (embed_tokens): Embedding(131072, 2688)
+2026-11-13 14:39:29 | INFO | root |     (layers): ModuleDict(
+2026-11-13 14:39:29 | INFO | root |       (0): NemotronV3Block(
+2026-11-13 14:39:29 | INFO | root |         (norm): Float32RMSNorm()
+2026-11-13 14:39:29 | INFO | root |         (mixer): CheckpointWrapper(
+2026-11-13 14:39:29 | INFO | root |           (_checkpoint_wrapped_module): NemotronV3Mamba2Mixer(
+2026-11-13 14:39:29 | INFO | root |             (in_proj): PatchedLinearLoRA(
+2026-11-13 14:39:29 | INFO | root |               in_features=2688, out_features=10304, bias=False
+2026-11-13 14:39:29 | INFO | root |               (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-13 14:39:29 | INFO | root |               (lora_B): Linear(in_features=16, out_features=10304, bias=False)
+2026-11-13 14:39:29 | INFO | root |             )
+2026-11-13 14:39:29 | INFO | root |             (conv1d): Conv1d(6144, 6144, kernel_size=(4,), stride=(1,), padding=(3,), groups=6144)
+2026-11-13 14:39:29 | INFO | root |             (_fp32_params): NemotronV3MambaFP32Params()
+2026-11-13 14:39:29 | INFO | root |             (norm): NemotronV3MambaRMSNormGated()
+2026-11-13 14:39:29 | INFO | root |             (out_proj): Linear(in_features=4096, out_features=2688, bias=False)
+2026-11-13 14:39:29 | INFO | root |           )
+2026-11-13 14:39:29 | INFO | root |         )
+2026-11-13 14:39:29 | INFO | root |       )
+2026-11-13 14:39:29 | INFO | root |       (1): NemotronV3Block(
+2026-11-13 14:39:29 | INFO | root |         (norm): Float32RMSNorm()
+2026-11-13 14:39:29 | INFO | root |         (mixer): CheckpointWrapper(
+2026-11-13 14:39:29 | INFO | root |           (_checkpoint_wrapped_module): MoE(
+2026-11-13 14:39:29 | INFO | root |             (gate): Gate(
+2026-11-13 14:39:29 | INFO | root |               (routing_core): _GateRoutingCore()
+2026-11-13 14:39:29 | INFO | root |             )
+2026-11-13 14:39:29 | INFO | root |             (experts): GroupedExperts()
+2026-11-13 14:39:29 | INFO | root |             (shared_experts): MLP(
+2026-11-13 14:39:29 | INFO | root |               (up_proj): PatchedLinearLoRA(
+2026-11-13 14:39:29 | INFO | root |                 in_features=2688, out_features=3712, bias=False
+2026-11-13 14:39:29 | INFO | root |                 (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-13 14:39:29 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=3712, bias=False)
+2026-11-13 14:39:29 | INFO | root |               )
+2026-11-13 14:39:29 | INFO | root |               (down_proj): PatchedLinearLoRA(
+2026-11-13 14:39:29 | INFO | root |                 in_features=3712, out_features=2688, bias=False
+2026-11-13 14:39:29 | INFO | root |                 (lora_A): Linear(in_features=3712, out_features=16, bias=False)
+2026-11-13 14:39:29 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=2688, bias=False)
+2026-11-13 14:39:29 | INFO | root |               )
+2026-11-13 14:39:29 | INFO | root |             )
+2026-11-13 14:39:29 | INFO | root | ...
+2026-11-13 14:39:29 | INFO | root | Optimizer:
+2026-11-13 14:39:29 | INFO | root | Adam (
+2026-11-13 14:39:29 | INFO | root | Parameter Group 0
+2026-11-13 14:39:29 | INFO | root |     amsgrad: False
+2026-11-13 14:39:29 | INFO | root |     betas: (0.9, 0.999)
+2026-11-13 14:39:29 | INFO | root |     capturable: False
+2026-11-13 14:39:29 | INFO | root |     decoupled_weight_decay: False
+2026-11-13 14:39:29 | INFO | root |     differentiable: False
+2026-11-13 14:39:29 | INFO | root |     eps: 1e-08
+2026-11-13 14:39:29 | INFO | root |     foreach: None
+2026-11-13 14:39:29 | INFO | root |     fused: None
+2026-11-13 14:39:29 | INFO | root |     lr: 0.0001
+2026-11-13 14:39:29 | INFO | root |     maximize: False
+2026-11-13 14:39:29 | INFO | root |     weight_decay: 0
+2026-11-13 14:39:29 | INFO | root | )
+2026-11-13 14:39:29 | INFO | root | LR scheduler: <unavailable>
+2026-11-13 14:39:29 | INFO | root | Step scheduler:
+2026-11-13 14:39:29 | INFO | root | - Gradient accumulation steps: 16
+2026-11-13 14:39:29 | INFO | root | - Checkpoint every steps: 8
+2026-11-13 14:39:29 | INFO | root | - Garbage collect every steps: None
+2026-11-13 14:39:29 | INFO | root | - Current Epoch: 0
+2026-11-13 14:39:29 | INFO | root | - Number of epochs: 10
+2026-11-13 14:39:29 | INFO | root | - Validation every steps: 8
+2026-11-13 14:39:29 | INFO | root | - Max train steps: 8
+2026-11-13 14:39:29 | INFO | root | - Checkpoint retention: disabled; keeping all checkpoints (checkpoint.max_recent_checkpoints=None)
+Training:   0%|          | 0/8 [00:00<?, ?step/s]2026-11-13 14:40:29 | INFO | root | step 0 | epoch 0 | loss 1.1654 | grad_norm 2.1599 | lr 1.00e-04 | mem 61.93 GiB | tps 292.52(292.52/gpu) | num_label_tokens 1659
+Training:   0%|          | 0/8 [01:00<?, ?step/s, loss=1.1654, lr=1.00e-04, tps=293]Training:  12%|█▎        | 1/8 [01:00<07:00, 60.01s/step, loss=1.1654, lr=1.00e-04, tps=293]2026-11-13 14:40:44 | INFO | root | step 1 | epoch 0 | loss 0.9823 | grad_norm 2.0066 | lr 1.00e-04 | mem 63.72 GiB | tps 1336.71(1336.71/gpu) | num_label_tokens 1672
+Training:  12%|█▎        | 1/8 [01:14<07:00, 60.01s/step, loss=0.9823, lr=1.00e-04, tps=1337]Training:  25%|██▌       | 2/8 [01:14<03:20, 33.37s/step, loss=0.9823, lr=1.00e-04, tps=1337]2026-11-13 14:40:53 | INFO | root | step 2 | epoch 0 | loss 0.9264 | grad_norm 1.9232 | lr 1.00e-04 | mem 61.60 GiB | tps 1885.62(1885.62/gpu) | num_label_tokens 1614
+Training:  25%|██▌       | 2/8 [01:24<03:20, 33.37s/step, loss=0.9264, lr=1.00e-04, tps=1886]Training:  38%|███▊      | 3/8 [01:24<01:51, 22.37s/step, loss=0.9264, lr=1.00e-04, tps=1886]2026-11-13 14:41:02 | INFO | root | step 3 | epoch 0 | loss 0.7309 | grad_norm 1.5534 | lr 1.00e-04 | mem 63.30 GiB | tps 2097.61(2097.61/gpu) | num_label_tokens 1740
+Training:  38%|███▊      | 3/8 [01:32<01:51, 22.37s/step, loss=0.7309, lr=1.00e-04, tps=2098]Training:  50%|█████     | 4/8 [01:32<01:07, 16.97s/step, loss=0.7309, lr=1.00e-04, tps=2098]2026-11-13 14:41:10 | INFO | root | step 4 | epoch 0 | loss 0.7041 | grad_norm 1.4596 | lr 1.00e-04 | mem 62.21 GiB | tps 2198.19(2198.19/gpu) | num_label_tokens 1647
+Training:  50%|█████     | 4/8 [01:41<01:07, 16.97s/step, loss=0.7041, lr=1.00e-04, tps=2198]Training:  62%|██████▎   | 5/8 [01:41<00:41, 13.90s/step, loss=0.7041, lr=1.00e-04, tps=2198]2026-11-13 14:41:19 | INFO | root | step 5 | epoch 0 | loss 0.6356 | grad_norm 1.2754 | lr 1.00e-04 | mem 61.39 GiB | tps 1813.65(1813.65/gpu) | num_label_tokens 1706
+Training:  62%|██████▎   | 5/8 [01:50<00:41, 13.90s/step, loss=0.6356, lr=1.00e-04, tps=1814]Training:  75%|███████▌  | 6/8 [01:50<00:24, 12.24s/step, loss=0.6356, lr=1.00e-04, tps=1814]2026-11-13 14:41:27 | INFO | root | step 6 | epoch 0 | loss 0.5767 | grad_norm 1.1007 | lr 1.00e-04 | mem 62.41 GiB | tps 2260.40(2260.40/gpu) | num_label_tokens 1747
+Training:  75%|███████▌  | 6/8 [01:58<00:24, 12.24s/step, loss=0.5767, lr=1.00e-04, tps=2260]Training:  88%|████████▊ | 7/8 [01:58<00:10, 10.96s/step, loss=0.5767, lr=1.00e-04, tps=2260]2026-11-13 14:41:35 | INFO | root | step 7 | epoch 0 | loss 0.5578 | grad_norm 1.0977 | lr 1.00e-04 | mem 62.38 GiB | tps 2514.51(2514.51/gpu) | num_label_tokens 1684
+Training:  88%|████████▊ | 7/8 [02:06<00:10, 10.96s/step, loss=0.5578, lr=1.00e-04, tps=2515]Training: 100%|██████████| 8/8 [02:06<00:00,  9.94s/step, loss=0.5578, lr=1.00e-04, tps=2515]2026-11-13 14:41:53 | INFO | root | [val] name "default" | step 7 | epoch 0 | loss 0.5020 | lr 1.00e-04 | num_label_tokens 11215
+2026-11-13 14:41:53 | INFO | nemo_automodel.recipes.base_recipe | Saving checkpoint to results/runs/rh-single-1n/ckpt/epoch_0_step_7
+2026-11-13 14:41:55 | INFO | nemo_automodel.components.checkpoint.lifecycle | Updated LOWEST_VAL checkpoint symlink to epoch_0_step_7 (val_loss=0.5020)
+Training: 100%|██████████| 8/8 [02:26<00:00, 18.27s/step, loss=0.5578, lr=1.00e-04, tps=2515]
+[finscale] exit=0 wall=185s log=results/runs/rh-single-1n/logs/42bf8f23b30c.log
+rh-single-1n: 8 steps | median tps=2198.187168421762 | median step=8.469s | loss 1.1654443740844727 -> 0.5577728748321533 | peak mem 63.71842956542969 GiB | val 0.5020
+adapter_config.json
+adapter_model.safetensors
+automodel_peft_config.json
+chat_template.jinja
+configuration_nemotron_h.py
+modeling_nemotron_h.py
+nano_v3_reasoning_parser.py
+special_tokens_map.json
+tokenizer.json
+tokenizer_config.json
+
+========== DONE (single) ==========
+##### STAGE single OK 14:42:00
+##### STAGE eval START 14:42:00
+
+========== EVAL: same 30B weights without vs with the LoRA adapter, on GPU (20 test rows) ==========
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+W1113 14:42:09.684000 78813 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:42:09.708000 78813 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Loading weights:   0%|          | 0/6243 [00:00<?, ?it/s]Loading weights:   1%|          | 74/6243 [00:00<00:08, 726.73it/s]Loading weights:   2%|▏         | 147/6243 [00:00<00:14, 419.44it/s]Loading weights:   3%|▎         | 196/6243 [00:00<00:16, 376.64it/s]Loading weights:   4%|▍         | 238/6243 [00:00<00:16, 358.53it/s]Loading weights:   4%|▍         | 276/6243 [00:00<00:16, 353.69it/s]Loading weights:   5%|▌         | 330/6243 [00:00<00:14, 401.92it/s]Loading weights:   6%|▌         | 372/6243 [00:00<00:15, 390.59it/s]Loading weights:   7%|▋         | 413/6243 [00:01<00:15, 379.38it/s]Loading weights:   7%|▋         | 452/6243 [00:01<00:15, 371.88it/s]Loading weights:   8%|▊         | 490/6243 [00:01<00:15, 364.72it/s]Loading weights:   8%|▊         | 527/6243 [00:01<00:15, 358.80it/s]Loading weights:   9%|▉         | 580/6243 [00:01<00:13, 406.13it/s]Loading weights:  10%|█         | 628/6243 [00:01<00:13, 426.03it/s]Loading weights:  11%|█         | 672/6243 [00:01<00:12, 429.85it/s]Loading weights:  11%|█▏        | 716/6243 [00:01<00:12, 429.38it/s]Loading weights:  12%|█▏        | 760/6243 [00:01<00:13, 408.28it/s]Loading weights:  13%|█▎        | 802/6243 [00:02<00:14, 378.74it/s]Loading weights:  14%|█▎        | 848/6243 [00:02<00:13, 398.04it/s]Loading weights:  14%|█▍        | 890/6243 [00:02<00:13, 401.41it/s]Loading weights:  15%|█▍        | 931/6243 [00:02<00:13, 387.82it/s]Loading weights:  16%|█▌        | 971/6243 [00:02<00:14, 365.81it/s]Loading weights:  16%|█▌        | 1009/6243 [00:02<00:14, 354.41it/s]Loading weights:  17%|█▋        | 1046/6243 [00:02<00:14, 355.95it/s]Loading weights:  17%|█▋        | 1083/6243 [00:02<00:15, 343.11it/s]Loading weights:  18%|█▊        | 1143/6243 [00:02<00:12, 413.62it/s]Loading weights:  19%|█▉        | 1186/6243 [00:03<00:12, 396.30it/s]Loading weights:  20%|█▉        | 1227/6243 [00:03<00:13, 385.08it/s]Loading weights:  20%|██        | 1266/6243 [00:03<00:13, 378.21it/s]Loading weights:  21%|██        | 1305/6243 [00:03<00:13, 368.66it/s]Loading weights:  22%|██▏       | 1343/6243 [00:03<00:13, 353.16it/s]Loading weights:  22%|██▏       | 1391/6243 [00:03<00:12, 384.84it/s]Loading weights:  23%|██▎       | 1430/6243 [00:03<00:13, 369.61it/s]Loading weights:  24%|██▎       | 1468/6243 [00:03<00:13, 353.85it/s]Loading weights:  24%|██▍       | 1504/6243 [00:03<00:13, 344.20it/s]Loading weights:  25%|██▍       | 1539/6243 [00:04<00:14, 335.67it/s]Loading weights:  25%|██▌       | 1574/6243 [00:04<00:13, 337.33it/s]Loading weights:  26%|██▌       | 1610/6243 [00:04<00:13, 342.04it/s]Loading weights:  26%|██▋       | 1648/6243 [00:04<00:13, 352.64it/s]Loading weights:  27%|██▋       | 1684/6243 [00:04<00:13, 342.20it/s]Loading weights:  28%|██▊       | 1719/6243 [00:04<00:13, 336.54it/s]Loading weights:  28%|██▊       | 1753/6243 [00:04<00:13, 331.89it/s]Loading weights:  29%|██▊       | 1787/6243 [00:04<00:13, 328.61it/s]Loading weights:  29%|██▉       | 1820/6243 [00:04<00:13, 325.79it/s]Loading weights:  30%|██▉       | 1853/6243 [00:04<00:13, 323.67it/s]Loading weights:  30%|███       | 1886/6243 [00:05<00:13, 323.18it/s]Loading weights:  31%|███       | 1921/6243 [00:05<00:13, 330.35it/s]Loading weights:  31%|███▏      | 1955/6243 [00:05<00:13, 327.35it/s]Loading weights:  32%|███▏      | 1988/6243 [00:05<00:13, 323.12it/s]Loading weights:  32%|███▏      | 2021/6243 [00:05<00:13, 323.07it/s]Loading weights:  33%|███▎      | 2054/6243 [00:05<00:12, 322.28it/s]Loading weights:  33%|███▎      | 2087/6243 [00:05<00:12, 320.47it/s]Loading weights:  34%|███▍      | 2120/6243 [00:05<00:12, 320.10it/s]Loading weights:  34%|███▍      | 2153/6243 [00:05<00:12, 317.92it/s]Loading weights:  35%|███▌      | 2187/6243 [00:06<00:12, 323.05it/s]Loading weights:  36%|███▌      | 2220/6243 [00:06<00:12, 317.90it/s]Loading weights:  36%|███▌      | 2252/6243 [00:06<00:12, 314.18it/s]Loading weights:  37%|███▋      | 2284/6243 [00:06<00:12, 312.13it/s]Loading weights:  37%|███▋      | 2318/6243 [00:06<00:12, 319.09it/s]Loading weights:  38%|███▊      | 2354/6243 [00:06<00:11, 330.25it/s]Loading weights:  38%|███▊      | 2388/6243 [00:06<00:11, 329.27it/s]Loading weights:  39%|███▉      | 2421/6243 [00:06<00:11, 327.69it/s]Loading weights:  39%|███▉      | 2459/6243 [00:06<00:11, 339.67it/s]Loading weights:  40%|███▉      | 2497/6243 [00:06<00:10, 348.97it/s]Loading weights:  41%|████      | 2532/6243 [00:07<00:10, 342.81it/s]Loading weights:  41%|████      | 2567/6243 [00:07<00:11, 334.04it/s]Loading weights:  42%|████▏     | 2601/6243 [00:07<00:11, 330.14it/s]Loading weights:  42%|████▏     | 2635/6243 [00:07<00:11, 327.31it/s]Loading weights:  43%|████▎     | 2668/6243 [00:07<00:10, 325.57it/s]Loading weights:  43%|████▎     | 2701/6243 [00:07<00:10, 324.49it/s]Loading weights:  44%|████▍     | 2735/6243 [00:07<00:10, 328.30it/s]Loading weights:  44%|████▍     | 2768/6243 [00:07<00:10, 325.99it/s]Loading weights:  45%|████▍     | 2801/6243 [00:07<00:10, 324.63it/s]Loading weights:  45%|████▌     | 2834/6243 [00:08<00:10, 322.82it/s]Loading weights:  46%|████▌     | 2867/6243 [00:08<00:10, 322.53it/s]Loading weights:  46%|████▋     | 2900/6243 [00:08<00:10, 322.30it/s]Loading weights:  47%|████▋     | 2934/6243 [00:08<00:10, 324.96it/s]Loading weights:  48%|████▊     | 2969/6243 [00:08<00:09, 331.57it/s]Loading weights:  48%|████▊     | 3005/6243 [00:08<00:09, 339.72it/s]Loading weights:  49%|████▊     | 3040/6243 [00:08<00:09, 341.72it/s]Loading weights:  49%|████▉     | 3075/6243 [00:08<00:09, 343.51it/s]Loading weights:  50%|████▉     | 3110/6243 [00:08<00:09, 341.82it/s]Loading weights:  50%|█████     | 3145/6243 [00:08<00:09, 343.12it/s]Loading weights:  51%|█████     | 3180/6243 [00:09<00:08, 343.93it/s]Loading weights:  51%|█████▏    | 3215/6243 [00:09<00:08, 338.25it/s]Loading weights:  52%|█████▏    | 3249/6243 [00:09<00:09, 331.98it/s]Loading weights:  53%|█████▎    | 3289/6243 [00:09<00:08, 350.92it/s]Loading weights:  53%|█████▎    | 3325/6243 [00:09<00:08, 340.43it/s]Loading weights:  54%|█████▍    | 3360/6243 [00:09<00:08, 339.20it/s]Loading weights:  54%|█████▍    | 3394/6243 [00:09<00:08, 333.14it/s]Loading weights:  55%|█████▍    | 3428/6243 [00:09<00:08, 329.72it/s]Loading weights:  55%|█████▌    | 3462/6243 [00:09<00:08, 321.15it/s]Loading weights:  56%|█████▌    | 3495/6243 [00:09<00:08, 320.77it/s]Loading weights:  57%|█████▋    | 3529/6243 [00:10<00:08, 324.59it/s]Loading weights:  57%|█████▋    | 3562/6243 [00:10<00:08, 325.34it/s]Loading weights:  58%|█████▊    | 3597/6243 [00:10<00:07, 331.64it/s]Loading weights:  58%|█████▊    | 3631/6243 [00:10<00:07, 327.45it/s]Loading weights:  59%|█████▊    | 3664/6243 [00:10<00:07, 325.63it/s]Loading weights:  59%|█████▉    | 3697/6243 [00:10<00:07, 323.90it/s]Loading weights:  60%|█████▉    | 3730/6243 [00:10<00:07, 322.62it/s]Loading weights:  60%|██████    | 3763/6243 [00:10<00:07, 317.61it/s]Loading weights:  61%|██████    | 3795/6243 [00:10<00:07, 316.67it/s]Loading weights:  61%|██████▏   | 3836/6243 [00:11<00:07, 341.30it/s]Loading weights:  62%|██████▏   | 3871/6243 [00:11<00:07, 335.47it/s]Loading weights:  63%|██████▎   | 3905/6243 [00:11<00:07, 331.69it/s]Loading weights:  63%|██████▎   | 3943/6243 [00:11<00:06, 343.38it/s]Loading weights:  64%|██████▎   | 3978/6243 [00:11<00:06, 343.41it/s]Loading weights:  64%|██████▍   | 4013/6243 [00:11<00:06, 341.19it/s]Loading weights:  65%|██████▍   | 4048/6243 [00:11<00:06, 326.48it/s]Loading weights:  65%|██████▌   | 4081/6243 [00:11<00:06, 324.39it/s]Loading weights:  66%|██████▌   | 4116/6243 [00:11<00:06, 329.34it/s]Loading weights:  66%|██████▋   | 4150/6243 [00:11<00:06, 326.44it/s]Loading weights:  67%|██████▋   | 4183/6243 [00:12<00:06, 323.90it/s]Loading weights:  68%|██████▊   | 4216/6243 [00:12<00:06, 323.08it/s]Loading weights:  68%|██████▊   | 4249/6243 [00:12<00:06, 322.60it/s]Loading weights:  69%|██████▊   | 4282/6243 [00:12<00:06, 320.61it/s]Loading weights:  69%|██████▉   | 4315/6243 [00:12<00:06, 320.39it/s]Loading weights:  70%|██████▉   | 4352/6243 [00:12<00:05, 322.42it/s]Loading weights:  70%|███████   | 4385/6243 [00:12<00:05, 323.14it/s]Loading weights:  71%|███████   | 4418/6243 [00:12<00:05, 323.63it/s]Loading weights:  71%|███████▏  | 4451/6243 [00:12<00:05, 322.38it/s]Loading weights:  72%|███████▏  | 4484/6243 [00:13<00:05, 320.90it/s]Loading weights:  72%|███████▏  | 4517/6243 [00:13<00:05, 319.06it/s]Loading weights:  73%|███████▎  | 4549/6243 [00:13<00:05, 318.47it/s]Loading weights:  73%|███████▎  | 4581/6243 [00:13<00:05, 313.93it/s]Loading weights:  74%|███████▍  | 4615/6243 [00:13<00:05, 315.97it/s]Loading weights:  74%|███████▍  | 4649/6243 [00:13<00:04, 321.57it/s]Loading weights:  75%|███████▍  | 4682/6243 [00:13<00:04, 321.11it/s]Loading weights:  76%|███████▌  | 4715/6243 [00:13<00:04, 320.51it/s]Loading weights:  76%|███████▌  | 4748/6243 [00:13<00:04, 319.21it/s]Loading weights:  77%|███████▋  | 4780/6243 [00:13<00:04, 316.44it/s]Loading weights:  77%|███████▋  | 4812/6243 [00:14<00:04, 315.98it/s]Loading weights:  78%|███████▊  | 4844/6243 [00:14<00:04, 315.22it/s]Loading weights:  78%|███████▊  | 4876/6243 [00:14<00:04, 315.91it/s]Loading weights:  79%|███████▊  | 4910/6243 [00:14<00:04, 321.78it/s]Loading weights:  79%|███████▉  | 4943/6243 [00:14<00:04, 320.69it/s]Loading weights:  80%|███████▉  | 4976/6243 [00:14<00:03, 319.42it/s]Loading weights:  80%|████████  | 5008/6243 [00:14<00:03, 318.97it/s]Loading weights:  81%|████████  | 5044/6243 [00:14<00:03, 328.44it/s]Loading weights:  81%|████████▏ | 5081/6243 [00:14<00:03, 339.76it/s]Loading weights:  82%|████████▏ | 5115/6243 [00:14<00:03, 328.73it/s]Loading weights:  82%|████████▏ | 5150/6243 [00:15<00:03, 332.19it/s]Loading weights:  83%|████████▎ | 5185/6243 [00:15<00:03, 336.17it/s]Loading weights:  84%|████████▎ | 5219/6243 [00:15<00:03, 330.33it/s]Loading weights:  84%|████████▍ | 5253/6243 [00:15<00:03, 326.19it/s]Loading weights:  85%|████████▍ | 5286/6243 [00:15<00:03, 317.72it/s]Loading weights:  85%|████████▌ | 5318/6243 [00:15<00:02, 311.06it/s]Loading weights:  86%|████████▌ | 5350/6243 [00:15<00:02, 305.80it/s]Loading weights:  86%|████████▌ | 5381/6243 [00:15<00:02, 305.54it/s]Loading weights:  87%|████████▋ | 5414/6243 [00:15<00:02, 309.92it/s]Loading weights:  87%|████████▋ | 5449/6243 [00:16<00:02, 318.22it/s]Loading weights:  88%|████████▊ | 5481/6243 [00:16<00:02, 312.76it/s]Loading weights:  88%|████████▊ | 5513/6243 [00:16<00:02, 302.58it/s]Loading weights:  89%|████████▉ | 5544/6243 [00:16<00:02, 299.80it/s]Loading weights:  89%|████████▉ | 5575/6243 [00:16<00:02, 298.07it/s]Loading weights:  90%|████████▉ | 5605/6243 [00:16<00:02, 296.33it/s]Loading weights:  90%|█████████ | 5635/6243 [00:16<00:02, 292.94it/s]Loading weights:  91%|█████████ | 5665/6243 [00:16<00:02, 288.24it/s]Loading weights:  91%|█████████ | 5694/6243 [00:16<00:01, 284.23it/s]Loading weights:  92%|█████████▏| 5724/6243 [00:16<00:01, 286.84it/s]Loading weights:  92%|█████████▏| 5753/6243 [00:17<00:01, 284.88it/s]Loading weights:  93%|█████████▎| 5782/6243 [00:17<00:01, 285.40it/s]Loading weights:  93%|█████████▎| 5812/6243 [00:17<00:01, 287.30it/s]Loading weights:  94%|█████████▎| 5841/6243 [00:17<00:01, 287.07it/s]Loading weights:  94%|█████████▍| 5870/6243 [00:17<00:01, 287.38it/s]Loading weights:  94%|█████████▍| 5899/6243 [00:17<00:01, 287.08it/s]Loading weights:  95%|█████████▍| 5929/6243 [00:17<00:01, 288.60it/s]Loading weights:  95%|█████████▌| 5958/6243 [00:17<00:01, 284.85it/s]Loading weights:  96%|█████████▌| 5989/6243 [00:17<00:00, 290.42it/s]Loading weights:  96%|█████████▋| 6021/6243 [00:18<00:00, 297.31it/s]Loading weights:  97%|█████████▋| 6059/6243 [00:18<00:00, 321.58it/s]Loading weights:  98%|█████████▊| 6098/6243 [00:18<00:00, 341.48it/s]Loading weights:  98%|█████████▊| 6133/6243 [00:18<00:00, 337.18it/s]Loading weights:  99%|█████████▉| 6167/6243 [00:18<00:00, 328.72it/s]Loading weights:  99%|█████████▉| 6200/6243 [00:18<00:00, 327.11it/s]Loading weights: 100%|█████████▉| 6233/6243 [00:18<00:00, 321.72it/s]Loading weights: 100%|██████████| 6243/6243 [00:18<00:00, 332.24it/s]
+Predicting 20 rows as 'base' (hf, /workspace/models/nemotron-3-nano-30b)
+Traceback (most recent call last):
+  File "/workspace/FinscaleNvidiaPlatform/scripts/07_predict.py", line 108, in <module>
+    main()
+  File "/workspace/FinscaleNvidiaPlatform/scripts/07_predict.py", line 98, in main
+    outs = list(pool.map(predict, rows))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/FinscaleNvidiaPlatform/scripts/07_predict.py", line 64, in predict
+    out = model.generate(input_ids=ids, max_new_tokens=a.max_new_tokens, do_sample=False,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 2976, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 3176, in _sample
+    outputs = self._prefill(
+              ^^^^^^^^^^^^^^
+  File "/opt/venv/lib/python3.12/site-packages/transformers/generation/utils.py", line 4281, in _prefill
+    model_inputs = self.prepare_inputs_for_generation(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.cache/huggingface/modules/transformers_modules/nemotron_hyphen_3_hyphen_nano_hyphen_30b/f06245fae7870619/modeling_nemotron_h.py", line 1633, in prepare_inputs_for_generation
+    or cache_position[-1] >= input_ids.shape[1]  # Exception 3
+       ~~~~~~~~~~~~~~^^^^
+TypeError: 'NoneType' object is not subscriptable
+##### STAGE eval FAILED 14:42:33: last lines above; full log results/rh-eval.log
+##### RESULTS
+--- results/preflight/42bf8f23b30c.json
+[
+  {
+    "check": "host",
+    "status": "INFO",
+    "detail": "42bf8f23b30c x86_64 python 3.12.3"
+  },
+  {
+    "check": "cuda",
+    "status": "PASS",
+    "detail": "NVIDIA H100 80GB HBM3 | torch 2.14.0a0+4fdf77b940.nv26.08 cuda 13.4 | nccl 2.30.7"
+  },
+  {
+    "check": "cuda_matmul",
+    "status": "PASS",
+    "detail": "bf16 matmul ok (25.53)"
+  },
+  {
+    "check": "nemo_automodel",
+    "status": "PASS",
+    "detail": "0.7.0+efb2eb5df"
+  },
+  {
+    "check": "mamba_ssm",
+    "status": "PASS",
+    "detail": "2.3.0"
+  },
+  {
+    "check": "causal_conv1d",
+    "status": "PASS",
+    "detail": "1.6.0"
+  },
+  {
+    "check": "transformers",
+    "status": "PASS",
+    "detail": "5.18.0"
+  },
+  {
+    "check": "openai",
+    "status": "PASS",
+    "detail": "3.50.0"
+  },
+  {
+    "check": "yaml",
+    "status": "PASS",
+    "detail": "6.0.3"
+  },
+  {
+    "check": "matplotlib",
+    "status": "PASS",
+    "detail": "3.11.1"
+  },
+  {
+    "check": "model",
+    "status": "PASS",
+    "detail": "/workspace/models/nemotron-3-nano-30b: 13 shards, 58.8 GiB"
+  },
+  {
+    "check": "NVIDIA_API_KEY",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "HF_TOKEN",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "SEC_USER_AGENT",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "disk",
+    "status": "PASS",
+    "detail": "191 GB free in /workspace/FinscaleNvidiaPlatform"
+  },
+  {
+    "check": "memory",
+    "status": "INFO",
+    "detail": "1896 GiB available of 2015 GiB"
+  }
+]
+--- results/runs/rh-single-1n/summary.json
+{
+  "run": "rh-single-1n",
+  "mode": "single",
+  "nodes": "1",
+  "gpus_per_node": "1",
+  "world_size": "1",
+  "grad_accum_per_rank": "16",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 8,
+  "warmup_excluded": 3,
+  "median_tps": 2198.187168421762,
+  "median_tps_per_gpu": 2198.187168421762,
+  "median_step_seconds": 8.469,
+  "peak_mem_gib": 63.71842956542969,
+  "first_loss": 1.1654443740844727,
+  "last_loss": 0.5577728748321533,
+  "validation": [
+    {
+      "step": 7,
+      "val_loss": 0.5019682049751282
+    }
+  ],
+  "node_exits": [
+    {
+      "host": "42bf8f23b30c",
+      "exit_code": 0,
+      "wall_seconds": 185,
+      "start_epoch": 1794580735,
+      "end_epoch": 1794580920
+    }
+  ],
+  "tps_samples": [
+    2097.6062217301,
+    2198.187168421762,
+    1813.6545215896608,
+    2260.3991228172163,
+    2514.509364386644
+  ]
+}
+--- results/runs/rh-smoke-1n/summary.json
+{
+  "run": "rh-smoke-1n",
+  "mode": "single",
+  "nodes": "1",
+  "gpus_per_node": "1",
+  "world_size": "1",
+  "grad_accum_per_rank": "16",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 1,
+  "warmup_excluded": 0,
+  "median_tps": 200.4076341780685,
+  "median_tps_per_gpu": 200.4076341780685,
+  "median_step_seconds": null,
+  "peak_mem_gib": 61.92696285247803,
+  "first_loss": 1.166619896888733,
+  "last_loss": 1.166619896888733,
+  "validation": [],
+  "node_exits": [
+    {
+      "host": "42bf8f23b30c",
+      "exit_code": 0,
+      "wall_seconds": 123,
+      "start_epoch": 1794580591,
+      "end_epoch": 1794580714
+    }
+  ],
+  "tps_samples": [
+    200.4076341780685
+  ]
+}
+##### AUTORUN DONE 2026-11-13T14:42:33Z status=FAILED at eval

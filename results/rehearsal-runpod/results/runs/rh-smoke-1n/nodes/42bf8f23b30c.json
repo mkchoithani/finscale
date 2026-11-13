@@ -1,0 +1,37 @@
+{
+  "time_utc": "2026-11-13T14:36:13Z",
+  "hostname": "42bf8f23b30c",
+  "fqdn": "42bf8f23b30c",
+  "arch": "x86_64",
+  "python": "3.12.3",
+  "ip_addrs": "",
+  "nvidia_smi": "NVIDIA H100 80GB HBM3, 595.91.07",
+  "mem_total_kib": "2113225036",
+  "git_commit": "aa5cdd70a58a5d122e07697ceebf11a98a937910",
+  "git_dirty": true,
+  "config": "configs/rh-smoke-1n.yaml",
+  "config_sha256": "26ab25df9b6d681b23df5eecfbb7774f54e8a9cb1985e9cfbffbb2d776703157",
+  "env": {
+    "NCCL_NET_PLUGIN": "spcx",
+    "NCCL_VERSION": "2.30.7+cuda13.3",
+    "CUDA_VISIBLE_DEVICES": "0",
+    "OMP_NUM_THREADS": "8"
+  },
+  "disk_free_gb": 186.7,
+  "data_sha256": {
+    "test.jsonl": "941c8a48a443c3db756831e91e466ad6a2239036dbb9801e63dc465525b1853c",
+    "train.jsonl": "d972de945cc5616ab2cde963fbaa7ae5ac50390d781c458a60a76c26a4198b1a",
+    "val.jsonl": "889a83433476f1a9497ec735a9585263dbb4f24159e39e30a522c28812407fc8"
+  },
+  "torch": "2.14.0a0+4fdf77b940.nv26.08",
+  "cuda": "13.4",
+  "cuda_available": true,
+  "gpu": "NVIDIA H100 80GB HBM3",
+  "gpu_capability": "9.0",
+  "nccl": "2.30.7",
+  "nemo_automodel_version": "0.7.0+efb2eb5df",
+  "transformers_version": "5.18.0",
+  "mamba_ssm_version": "2.3.0",
+  "causal_conv1d_version": "1.6.0",
+  "peft_version": "0.20.0"
+}

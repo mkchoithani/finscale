@@ -1,0 +1,29 @@
+
+========== SETUP: python deps, model download (~59 GiB), preflight ==========
+GPU 0: NVIDIA H100 80GB HBM3 (UUID: GPU-28332c6c-b782-aa90-7f81-24b028c4e66e)
+[notice] A new release of pip is available: 26.2.1 -> 26.3
+[notice] To update, run: python3 -m pip install --upgrade pip
+Fetching 35 files:   0%|          | 0/35 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 35 files:   3%|▎         | 1/35 [00:00<00:10,  3.27it/s]Fetching 35 files:   9%|▊         | 3/35 [00:00<00:04,  7.37it/s]Fetching 35 files:  14%|█▍        | 5/35 [00:00<00:02, 10.87it/s]Fetching 35 files:  23%|██▎       | 8/35 [00:00<00:01, 15.93it/s]Fetching 35 files:  31%|███▏      | 11/35 [00:00<00:01, 17.87it/s]Fetching 35 files:  34%|███▍      | 12/35 [00:20<00:01, 17.87it/s]Fetching 35 files:  37%|███▋      | 13/35 [00:25<01:19,  3.61s/it]Fetching 35 files:  40%|████      | 14/35 [00:27<01:11,  3.40s/it]Fetching 35 files:  46%|████▌     | 16/35 [00:32<00:58,  3.08s/it]Fetching 35 files:  49%|████▊     | 17/35 [00:36<00:59,  3.31s/it]Fetching 35 files:  51%|█████▏    | 18/35 [04:47<15:55, 56.23s/it]Fetching 35 files:  54%|█████▍    | 19/35 [04:48<11:30, 43.16s/it]Fetching 35 files:  57%|█████▋    | 20/35 [04:48<08:06, 32.43s/it]Fetching 35 files:  60%|██████    | 21/35 [04:48<05:35, 23.95s/it]Fetching 35 files:  63%|██████▎   | 22/35 [04:49<03:47, 17.48s/it]Fetching 35 files:  66%|██████▌   | 23/35 [04:49<02:31, 12.65s/it]Fetching 35 files:  69%|██████▊   | 24/35 [04:49<01:40,  9.10s/it]Fetching 35 files:  71%|███████▏  | 25/35 [04:50<01:05,  6.54s/it]Fetching 35 files:  74%|███████▍  | 26/35 [04:50<00:42,  4.71s/it]Fetching 35 files:  77%|███████▋  | 27/35 [04:52<00:31,  3.98s/it]Fetching 35 files:  80%|████████  | 28/35 [04:52<00:20,  2.89s/it]Fetching 35 files:  83%|████████▎ | 29/35 [09:06<07:45, 77.54s/it]Fetching 35 files:  86%|████████▌ | 30/35 [12:49<10:04, 121.00s/it]Fetching 35 files:  89%|████████▊ | 31/35 [14:34<07:44, 116.13s/it]Fetching 35 files:  91%|█████████▏| 32/35 [16:43<05:59, 119.97s/it]Fetching 35 files:  94%|█████████▍| 33/35 [19:08<04:14, 127.47s/it]Fetching 35 files:  97%|█████████▋| 34/35 [23:54<02:55, 175.06s/it]Fetching 35 files: 100%|██████████| 35/35 [24:00<00:00, 124.28s/it]Fetching 35 files: 100%|██████████| 35/35 [24:00<00:00, 41.15s/it] 
+shards: 13/13 present
+downloaded nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16 -> /workspace/models/nemotron-3-nano-30b in 24.0 min
+[INFO] host: 42bf8f23b30c x86_64 python 3.12.3
+[PASS] cuda: NVIDIA H100 80GB HBM3 | torch 2.14.0a0+4fdf77b940.nv26.08 cuda 13.4 | nccl 2.30.7
+[PASS] cuda_matmul: bf16 matmul ok (25.53)
+[PASS] nemo_automodel: 0.7.0+efb2eb5df
+[PASS] mamba_ssm: 2.3.0
+[PASS] causal_conv1d: 1.6.0
+[PASS] transformers: 5.18.0
+[PASS] openai: 3.50.0
+[PASS] yaml: 6.0.3
+[PASS] matplotlib: 3.11.1
+[PASS] model: /workspace/models/nemotron-3-nano-30b: 13 shards, 58.8 GiB
+[WARN] NVIDIA_API_KEY: not set
+[WARN] HF_TOKEN: not set
+[WARN] SEC_USER_AGENT: not set
+[PASS] disk: 191 GB free in /workspace/FinscaleNvidiaPlatform
+[INFO] memory: 1896 GiB available of 2015 GiB
+
+OK: 0 failure(s). Saved results/preflight/42bf8f23b30c.json
+
+========== DONE (setup) ==========

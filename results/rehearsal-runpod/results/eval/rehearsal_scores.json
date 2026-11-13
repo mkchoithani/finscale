@@ -1,0 +1,71 @@
+{
+  "gold_source": "teacher labels",
+  "n_gold": 60,
+  "systems": {
+    "base": {
+      "file": "results/eval/pred-base.jsonl",
+      "n": 60,
+      "json_valid_rate": 0.9833,
+      "fully_valid_rate": 0.6833,
+      "class_accuracy": 0.6833,
+      "class_macro_f1": 0.4942,
+      "severity_accuracy": 0.4667,
+      "quote_fidelity": 0.9667,
+      "median_latency_s": 6.313,
+      "confusion": {
+        "credit->cybersecurity": 1,
+        "credit->market": 1,
+        "cybersecurity->cybersecurity": 7,
+        "cybersecurity->supply_chain": 1,
+        "liquidity->INVALID": 1,
+        "liquidity->liquidity": 1,
+        "market->cybersecurity": 1,
+        "market->market": 10,
+        "market->operational": 1,
+        "market->regulatory_legal": 3,
+        "operational->cybersecurity": 1,
+        "operational->operational": 5,
+        "operational->regulatory_legal": 1,
+        "operational->supply_chain": 1,
+        "other->governance": 1,
+        "other->market": 1,
+        "other->operational": 1,
+        "other->regulatory_legal": 1,
+        "regulatory_legal->credit": 1,
+        "regulatory_legal->cybersecurity": 1,
+        "regulatory_legal->liquidity": 1,
+        "regulatory_legal->regulatory_legal": 17,
+        "supply_chain->supply_chain": 1
+      }
+    },
+    "finetuned": {
+      "file": "results/eval/pred-finetuned.jsonl",
+      "n": 60,
+      "json_valid_rate": 1.0,
+      "fully_valid_rate": 0.8333,
+      "class_accuracy": 0.8167,
+      "class_macro_f1": 0.8338,
+      "severity_accuracy": 0.7,
+      "quote_fidelity": 0.9333,
+      "median_latency_s": 4.472,
+      "confusion": {
+        "credit->credit": 1,
+        "credit->market": 1,
+        "cybersecurity->cybersecurity": 8,
+        "liquidity->liquidity": 2,
+        "market->market": 10,
+        "market->operational": 1,
+        "market->regulatory_legal": 4,
+        "operational->operational": 8,
+        "other->governance": 1,
+        "other->market": 1,
+        "other->other": 2,
+        "regulatory_legal->market": 1,
+        "regulatory_legal->operational": 1,
+        "regulatory_legal->other": 1,
+        "regulatory_legal->regulatory_legal": 17,
+        "supply_chain->supply_chain": 1
+      }
+    }
+  }
+}

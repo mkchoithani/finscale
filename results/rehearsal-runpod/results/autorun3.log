@@ -1,0 +1,200 @@
+##### AUTORUN START 2026-11-13T14:51:40Z commit=c011c7c stages: eval
+NVIDIA H100 80GB HBM3, 81559 MiB, 595.91.07
+##### STAGE eval START 14:51:40
+
+========== EVAL: same 30B weights without vs with the LoRA adapter, on GPU (60 test rows) ==========
+W1113 14:51:49.847000 119424 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:51:49.871000 119424 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Loading weights:   0%|          | 0/401 [00:00<?, ?it/s]Loading weights:   3%|▎         | 11/401 [00:00<00:27, 14.31it/s]Loading weights:   7%|▋         | 27/401 [00:01<00:22, 16.86it/s]Loading weights:  12%|█▏        | 48/401 [00:02<00:17, 20.10it/s]Loading weights:  16%|█▌        | 64/401 [00:03<00:17, 19.46it/s]Loading weights:  20%|█▉        | 80/401 [00:04<00:16, 19.29it/s]Loading weights:  25%|██▌       | 101/401 [00:05<00:14, 20.89it/s]Loading weights:  29%|██▉       | 117/401 [00:05<00:13, 20.32it/s]Loading weights:  33%|███▎      | 133/401 [00:06<00:13, 19.83it/s]Loading weights:  38%|███▊      | 154/401 [00:07<00:11, 21.03it/s]Loading weights:  42%|████▏     | 170/401 [00:08<00:11, 20.24it/s]Loading weights:  46%|████▋     | 186/401 [00:09<00:10, 19.61it/s]Loading weights:  52%|█████▏    | 207/401 [00:10<00:09, 20.92it/s]Loading weights:  56%|█████▌    | 223/401 [00:11<00:08, 20.20it/s]Loading weights:  60%|█████▉    | 239/401 [00:12<00:08, 19.57it/s]Loading weights:  65%|██████▍   | 260/401 [00:12<00:06, 20.88it/s]Loading weights:  69%|██████▉   | 276/401 [00:13<00:06, 20.16it/s]Loading weights:  73%|███████▎  | 292/401 [00:14<00:05, 19.62it/s]Loading weights:  77%|███████▋  | 308/401 [00:15<00:04, 19.22it/s]Loading weights:  82%|████████▏ | 329/401 [00:16<00:03, 20.53it/s]Loading weights:  86%|████████▌ | 345/401 [00:17<00:02, 19.91it/s]Loading weights:  90%|█████████ | 361/401 [00:18<00:02, 19.44it/s]Loading weights:  94%|█████████▍| 377/401 [00:19<00:01, 19.05it/s]Loading weights:  98%|█████████▊| 393/401 [00:19<00:00, 18.72it/s]Loading weights:  99%|█████████▊| 395/401 [00:20<00:00, 18.35it/s]Loading weights: 100%|██████████| 401/401 [00:20<00:00, 19.94it/s]
+model class: NemotronHForCausalLM
+Predicting 60 rows as 'base' (hf, /workspace/models/nemotron-3-nano-30b)
+Wrote results/eval/pred-base.jsonl | parsed JSON: 59/60 | errors: 0
+W1113 14:59:32.345000 120691 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:59:32.369000 120691 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Loading weights:   0%|          | 0/401 [00:00<?, ?it/s]Loading weights:   3%|▎         | 11/401 [00:00<00:26, 14.46it/s]Loading weights:   7%|▋         | 27/401 [00:01<00:22, 16.84it/s]Loading weights:  12%|█▏        | 48/401 [00:02<00:17, 20.22it/s]Loading weights:  16%|█▌        | 64/401 [00:03<00:17, 19.47it/s]Loading weights:  20%|█▉        | 80/401 [00:04<00:16, 19.10it/s]Loading weights:  25%|██▌       | 101/401 [00:05<00:14, 20.64it/s]Loading weights:  29%|██▉       | 117/401 [00:06<00:14, 19.96it/s]Loading weights:  33%|███▎      | 133/401 [00:06<00:13, 19.47it/s]Loading weights:  38%|███▊      | 154/401 [00:07<00:11, 20.81it/s]Loading weights:  42%|████▏     | 170/401 [00:08<00:11, 20.13it/s]Loading weights:  46%|████▋     | 186/401 [00:09<00:10, 19.57it/s]Loading weights:  52%|█████▏    | 207/401 [00:10<00:09, 20.96it/s]Loading weights:  56%|█████▌    | 223/401 [00:11<00:08, 20.15it/s]Loading weights:  60%|█████▉    | 239/401 [00:12<00:08, 19.60it/s]Loading weights:  65%|██████▍   | 260/401 [00:12<00:06, 20.94it/s]Loading weights:  69%|██████▉   | 276/401 [00:13<00:06, 20.35it/s]Loading weights:  73%|███████▎  | 292/401 [00:14<00:05, 19.81it/s]Loading weights:  77%|███████▋  | 308/401 [00:15<00:04, 19.41it/s]Loading weights:  82%|████████▏ | 329/401 [00:16<00:03, 20.88it/s]Loading weights:  86%|████████▌ | 345/401 [00:17<00:02, 20.82it/s]Loading weights:  90%|█████████ | 361/401 [00:17<00:01, 20.96it/s]Loading weights:  94%|█████████▍| 377/401 [00:18<00:01, 21.11it/s]Loading weights:  98%|█████████▊| 393/401 [00:19<00:00, 20.62it/s]Loading weights:  99%|█████████▉| 396/401 [00:19<00:00, 20.59it/s]Loading weights: 100%|██████████| 401/401 [00:19<00:00, 20.40it/s]
+model class: NemotronHForCausalLM
+W1113 14:59:54.538000 120691 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:59:54.539000 120691 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:59:54.540000 120691 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:59:54.540000 120691 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:59:54.541000 120691 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:59:54.541000 120691 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:59:54.542000 120691 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:59:54.542000 120691 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+Predicting 60 rows as 'finetuned' (hf, /workspace/models/nemotron-3-nano-30b)
+Wrote results/eval/pred-finetuned.jsonl | parsed JSON: 60/60 | errors: 0
+Scoring the 60 rows answered by all systems (of 152 gold rows)
+Gold: teacher labels, n=60
+system            json_valid_rate     class_accuracy     class_macro_f1  severity_accuracy     quote_fidelity   median_latency_s
+base                       0.9833             0.6833             0.4942             0.4667             0.9667              6.313
+finetuned                     1.0             0.8167             0.8338                0.7             0.9333              4.472
+saved results/eval/rehearsal_scores.json and results/eval/rehearsal_scores.md
+
+========== DONE (eval) ==========
+##### STAGE eval OK 15:05:10
+##### RESULTS
+--- results/preflight/42bf8f23b30c.json
+[
+  {
+    "check": "host",
+    "status": "INFO",
+    "detail": "42bf8f23b30c x86_64 python 3.12.3"
+  },
+  {
+    "check": "cuda",
+    "status": "PASS",
+    "detail": "NVIDIA H100 80GB HBM3 | torch 2.14.0a0+4fdf77b940.nv26.08 cuda 13.4 | nccl 2.30.7"
+  },
+  {
+    "check": "cuda_matmul",
+    "status": "PASS",
+    "detail": "bf16 matmul ok (25.53)"
+  },
+  {
+    "check": "nemo_automodel",
+    "status": "PASS",
+    "detail": "0.7.0+efb2eb5df"
+  },
+  {
+    "check": "mamba_ssm",
+    "status": "PASS",
+    "detail": "2.3.0"
+  },
+  {
+    "check": "causal_conv1d",
+    "status": "PASS",
+    "detail": "1.6.0"
+  },
+  {
+    "check": "transformers",
+    "status": "PASS",
+    "detail": "5.18.0"
+  },
+  {
+    "check": "openai",
+    "status": "PASS",
+    "detail": "3.50.0"
+  },
+  {
+    "check": "yaml",
+    "status": "PASS",
+    "detail": "6.0.3"
+  },
+  {
+    "check": "matplotlib",
+    "status": "PASS",
+    "detail": "3.11.1"
+  },
+  {
+    "check": "model",
+    "status": "PASS",
+    "detail": "/workspace/models/nemotron-3-nano-30b: 13 shards, 58.8 GiB"
+  },
+  {
+    "check": "NVIDIA_API_KEY",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "HF_TOKEN",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "SEC_USER_AGENT",
+    "status": "WARN",
+    "detail": "not set"
+  },
+  {
+    "check": "disk",
+    "status": "PASS",
+    "detail": "191 GB free in /workspace/FinscaleNvidiaPlatform"
+  },
+  {
+    "check": "memory",
+    "status": "INFO",
+    "detail": "1896 GiB available of 2015 GiB"
+  }
+]
+--- results/runs/rh-single-1n/summary.json
+{
+  "run": "rh-single-1n",
+  "mode": "single",
+  "nodes": "1",
+  "gpus_per_node": "1",
+  "world_size": "1",
+  "grad_accum_per_rank": "16",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 8,
+  "warmup_excluded": 3,
+  "median_tps": 2198.187168421762,
+  "median_tps_per_gpu": 2198.187168421762,
+  "median_step_seconds": 8.469,
+  "peak_mem_gib": 63.71842956542969,
+  "first_loss": 1.1654443740844727,
+  "last_loss": 0.5577728748321533,
+  "validation": [
+    {
+      "step": 7,
+      "val_loss": 0.5019682049751282
+    }
+  ],
+  "node_exits": [
+    {
+      "host": "42bf8f23b30c",
+      "exit_code": 0,
+      "wall_seconds": 185,
+      "start_epoch": 1794580735,
+      "end_epoch": 1794580920
+    }
+  ],
+  "tps_samples": [
+    2097.6062217301,
+    2198.187168421762,
+    1813.6545215896608,
+    2260.3991228172163,
+    2514.509364386644
+  ]
+}
+--- results/runs/rh-smoke-1n/summary.json
+{
+  "run": "rh-smoke-1n",
+  "mode": "single",
+  "nodes": "1",
+  "gpus_per_node": "1",
+  "world_size": "1",
+  "grad_accum_per_rank": "16",
+  "seq_length": "3072",
+  "gbs": "16",
+  "steps_logged": 1,
+  "warmup_excluded": 0,
+  "median_tps": 200.4076341780685,
+  "median_tps_per_gpu": 200.4076341780685,
+  "median_step_seconds": null,
+  "peak_mem_gib": 61.92696285247803,
+  "first_loss": 1.166619896888733,
+  "last_loss": 1.166619896888733,
+  "validation": [],
+  "node_exits": [
+    {
+      "host": "42bf8f23b30c",
+      "exit_code": 0,
+      "wall_seconds": 123,
+      "start_epoch": 1794580591,
+      "end_epoch": 1794580714
+    }
+  ],
+  "tps_samples": [
+    200.4076341780685
+  ]
+}
+--- results/eval/rehearsal_scores.md
+Gold: teacher labels, n=60
+
+| system | json_valid_rate | class_accuracy | class_macro_f1 | severity_accuracy | quote_fidelity | median_latency_s |
+|---|---|---|---|---|---|---|
+| base | 0.9833 | 0.6833 | 0.4942 | 0.4667 | 0.9667 | 6.313 |
+| finetuned | 1.0 | 0.8167 | 0.8338 | 0.7 | 0.9333 | 4.472 |
+
+##### AUTORUN DONE 2026-11-13T15:05:10Z status=OK

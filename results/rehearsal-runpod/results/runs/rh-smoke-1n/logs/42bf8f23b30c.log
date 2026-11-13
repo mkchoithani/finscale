@@ -1,0 +1,185 @@
+cfg-path: /workspace/FinscaleNvidiaPlatform/configs/rh-smoke-1n.yaml
+W1113 14:36:40.158000 69621 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:36:40.181000 69621 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+/opt/venv/lib/python3.12/site-packages/ffpa_attn/cute/utils/cache_utils.py:23: UserWarning: FLASH_ATTENTION_CUTE_DSL_CACHE_ENABLED=1 is inert: cross-process kernel persistence was removed, so the compiled-kernel cache is in-process only and FLASH_ATTENTION_CUTE_DSL_CACHE_DIR is ignored.
+  warnings.warn(
+W1113 14:36:41.511000 69621 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:41.512000 69621 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:41.513000 69621 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:41.513000 69621 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:41.515000 69621 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:41.515000 69621 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+W1113 14:36:41.516000 69621 torch/_library/opaque_object.py:288] register_opaque_type is deprecated, use register_custom_class instead
+W1113 14:36:41.516000 69621 torch/_library/opaque_object.py:211] typ='value' is deprecated, use typ='constant' instead
+> initializing torch distributed with 1 workers.
+2026-11-13 14:36:49 | INFO | nemo_automodel.components.loggers.log_utils | Setting logging level to 20
+2026-11-13 14:36:49 | INFO | nemo_automodel.shared.te_patches | Applied FusedAdam empty-shard monkey-patch.
+2026-11-13 14:36:49 | INFO | root | Experiment_details:
+2026-11-13 14:36:49 | INFO | root | Timestamp: '2026-11-13T14:36:49'
+2026-11-13 14:36:49 | INFO | root | User: root
+2026-11-13 14:36:49 | INFO | root | Host: 42bf8f23b30c
+2026-11-13 14:36:49 | INFO | root | World size: 1
+2026-11-13 14:36:49 | INFO | root | Backend: nccl
+2026-11-13 14:36:49 | INFO | root | Recipe: TrainFinetuneRecipeForNextTokenPrediction
+2026-11-13 14:36:49 | INFO | root | Model name: /workspace/models/nemotron-3-nano-30b
+recipe: TrainFinetuneRecipeForNextTokenPrediction
+step_scheduler:
+  global_batch_size: 16
+  local_batch_size: 1
+  ckpt_every_steps: 1
+  val_every_steps: 1
+  max_steps: 1
+dist_env:
+  backend: nccl
+  timeout_minutes: 30
+rng:
+  _target_: nemo_automodel.components.training.rng.StatefulRNG
+  seed: 1111
+  ranked: true
+model:
+  _target_: nemo_automodel.NeMoAutoModelForCausalLM.from_pretrained
+  pretrained_model_name_or_path: /workspace/models/nemotron-3-nano-30b
+  backend:
+    _target_: nemo_automodel.components.models.common.BackendConfig
+    rms_norm: torch_fp32
+    linear: torch
+    dispatcher: torch
+compile:
+  enabled: false
+checkpoint:
+  enabled: false
+  checkpoint_dir: results/runs/rh-smoke-1n/ckpt
+  model_save_format: safetensors
+  save_consolidated: false
+peft:
+  _target_: nemo_automodel.components._peft.lora.PeftConfig
+  exclude_modules:
+  - '*.out_proj'
+  dim: 16
+  alpha: 32
+  use_triton: true
+  use_memory_efficient_lora: true
+distributed:
+  strategy: fsdp2
+  dp_size: 1
+  tp_size: 1
+  cp_size: 1
+  ep_size: 1
+  sequence_parallel: false
+  activation_checkpointing: true
+loss_fn:
+  _target_: nemo_automodel.components.loss.masked_ce.MaskedCrossEntropy
+dataset:
+  _target_: nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig
+  path_or_dataset_id: data/sft/train.jsonl
+  seq_length: 3072
+  truncation: longest_first
+packed_sequence:
+  packed_sequence_size: 0
+dataloader:
+  _target_: torchdata.stateful_dataloader.StatefulDataLoader
+  collate_fn: nemo_automodel.components.datasets.utils.default_collater
+  shuffle: true
+optimizer:
+  _target_: torch.optim.Adam
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  lr: 0.0001
+  weight_decay: 0
+2026-11-13 14:36:49 | INFO | root | Library versions:
+2026-11-13 14:36:49 | INFO | root | - nemo_automodel: 0.7.0+efb2eb5df (/opt/Automodel/nemo_automodel/__init__.py)
+2026-11-13 14:36:49 | INFO | root | - transformers: 5.18.0 (/opt/venv/lib/python3.12/site-packages/transformers/__init__.py)
+2026-11-13 14:36:49 | INFO | root | - torch: 2.14.0a0+4fdf77b940.nv26.08 CUDA 13.4
+2026-11-13 14:36:49 | INFO | root | No clip_grad_norm.max_norm specified in config, using default value of 1.0
+2026-11-13 14:36:49 | WARNING | nemo_automodel.components.models.common.utils | rope_fusion is temporarily force-disabled globally (see #3027).
+2026-11-13 14:36:49 | INFO | nemo_automodel._transformers.model_init | Using custom model implementation for NemotronHForCausalLM
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+2026-11-13 14:36:49 | INFO | nemo_automodel._transformers.kernel_patches | Set global SDPA backends to [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-13 14:36:49 | INFO | nemo_automodel._transformers.kernel_patches | Patched model with SDPA method= [<SDPBackend.FLASH_ATTENTION: 1>, <SDPBackend.EFFICIENT_ATTENTION: 2>, <SDPBackend.MATH: 0>]
+2026-11-13 14:36:49 | INFO | nemo_automodel.components.distributed.parallelizer | Structurally discovered layer groups for NemotronHForCausalLM: ('language',)
+2026-11-13 14:36:49 | INFO | nemo_automodel.components.distributed.parallelizer | Activation checkpointing scope ('all',) selected 52/52 trainable layers; groups={'language': 52} selected_groups={'language': 52} skipped_frozen=0
+2026-11-13 14:36:49 | INFO | nemo_automodel.components.distributed.activation_checkpointing | Applied submodule activation checkpointing to 52 layers: {'mlp': 23, 'attention': 29, 'pre_norm': 0, 'post_norm': 0, 'mot': 0}
+2026-11-13 14:37:01 | INFO | root | load_model: 58.82 GB loaded in 11.79s (4.99 GB/s overall | destinations 0.07s, storage read 11.63s, adapt 0.04s, install 0.04s)
+2026-11-13 14:37:02 | INFO | root | Model summary:
+2026-11-13 14:37:02 | INFO | root | --------------------------------
+2026-11-13 14:37:02 | INFO | root | Trainable parameters: 13,499,392
+2026-11-13 14:37:02 | INFO | root | Total parameters: 31,591,436,736
+2026-11-13 14:37:02 | INFO | root | Trainable parameters percentage: 0.04%
+2026-11-13 14:37:02 | INFO | root | Param L2 norm: 3990.6451
+2026-11-13 14:37:02 | INFO | root | --------------------------------
+2026-11-13 14:37:02 | INFO | root | Using model config to instantiate tokenizer
+2026-11-13 14:37:03 | WARNING | nemo_automodel._transformers.tokenization.nemo_auto_tokenizer | Tokenizer '/workspace/models/nemotron-3-nano-30b' has pad_token_id=None; defaulting to 0. This can cause incorrect MoE auxiliary loss calculations if valid tokens share token ID 0. Set pad_token_id explicitly in your tokenizer config to avoid this.
+/opt/venv/lib/python3.12/site-packages/torchdata/stateful_dataloader/stateful_dataloader.py:379: UserWarning: 'set_vital' is deprecated, please do not call
+  torch.set_vital("Dataloader", "enabled", "True")  # type: ignore[attr-defined]
+2026-11-13 14:37:03 | INFO | root | Signal handler installed for SIGTERM
+2026-11-13 14:37:03 | INFO | root | Model Part 0:
+2026-11-13 14:37:03 | INFO | root | NemotronHForCausalLM(
+2026-11-13 14:37:03 | INFO | root |   (model): NemotronV3Model(
+2026-11-13 14:37:03 | INFO | root |     (embed_tokens): Embedding(131072, 2688)
+2026-11-13 14:37:03 | INFO | root |     (layers): ModuleDict(
+2026-11-13 14:37:03 | INFO | root |       (0): NemotronV3Block(
+2026-11-13 14:37:03 | INFO | root |         (norm): Float32RMSNorm()
+2026-11-13 14:37:03 | INFO | root |         (mixer): CheckpointWrapper(
+2026-11-13 14:37:03 | INFO | root |           (_checkpoint_wrapped_module): NemotronV3Mamba2Mixer(
+2026-11-13 14:37:03 | INFO | root |             (in_proj): PatchedLinearLoRA(
+2026-11-13 14:37:03 | INFO | root |               in_features=2688, out_features=10304, bias=False
+2026-11-13 14:37:03 | INFO | root |               (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-13 14:37:03 | INFO | root |               (lora_B): Linear(in_features=16, out_features=10304, bias=False)
+2026-11-13 14:37:03 | INFO | root |             )
+2026-11-13 14:37:03 | INFO | root |             (conv1d): Conv1d(6144, 6144, kernel_size=(4,), stride=(1,), padding=(3,), groups=6144)
+2026-11-13 14:37:03 | INFO | root |             (_fp32_params): NemotronV3MambaFP32Params()
+2026-11-13 14:37:03 | INFO | root |             (norm): NemotronV3MambaRMSNormGated()
+2026-11-13 14:37:03 | INFO | root |             (out_proj): Linear(in_features=4096, out_features=2688, bias=False)
+2026-11-13 14:37:03 | INFO | root |           )
+2026-11-13 14:37:03 | INFO | root |         )
+2026-11-13 14:37:03 | INFO | root |       )
+2026-11-13 14:37:03 | INFO | root |       (1): NemotronV3Block(
+2026-11-13 14:37:03 | INFO | root |         (norm): Float32RMSNorm()
+2026-11-13 14:37:03 | INFO | root |         (mixer): CheckpointWrapper(
+2026-11-13 14:37:03 | INFO | root |           (_checkpoint_wrapped_module): MoE(
+2026-11-13 14:37:03 | INFO | root |             (gate): Gate(
+2026-11-13 14:37:03 | INFO | root |               (routing_core): _GateRoutingCore()
+2026-11-13 14:37:03 | INFO | root |             )
+2026-11-13 14:37:03 | INFO | root |             (experts): GroupedExperts()
+2026-11-13 14:37:03 | INFO | root |             (shared_experts): MLP(
+2026-11-13 14:37:03 | INFO | root |               (up_proj): PatchedLinearLoRA(
+2026-11-13 14:37:03 | INFO | root |                 in_features=2688, out_features=3712, bias=False
+2026-11-13 14:37:03 | INFO | root |                 (lora_A): Linear(in_features=2688, out_features=16, bias=False)
+2026-11-13 14:37:03 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=3712, bias=False)
+2026-11-13 14:37:03 | INFO | root |               )
+2026-11-13 14:37:03 | INFO | root |               (down_proj): PatchedLinearLoRA(
+2026-11-13 14:37:03 | INFO | root |                 in_features=3712, out_features=2688, bias=False
+2026-11-13 14:37:03 | INFO | root |                 (lora_A): Linear(in_features=3712, out_features=16, bias=False)
+2026-11-13 14:37:03 | INFO | root |                 (lora_B): Linear(in_features=16, out_features=2688, bias=False)
+2026-11-13 14:37:03 | INFO | root |               )
+2026-11-13 14:37:03 | INFO | root |             )
+2026-11-13 14:37:03 | INFO | root | ...
+2026-11-13 14:37:03 | INFO | root | Optimizer:
+2026-11-13 14:37:03 | INFO | root | Adam (
+2026-11-13 14:37:03 | INFO | root | Parameter Group 0
+2026-11-13 14:37:03 | INFO | root |     amsgrad: False
+2026-11-13 14:37:03 | INFO | root |     betas: (0.9, 0.999)
+2026-11-13 14:37:03 | INFO | root |     capturable: False
+2026-11-13 14:37:03 | INFO | root |     decoupled_weight_decay: False
+2026-11-13 14:37:03 | INFO | root |     differentiable: False
+2026-11-13 14:37:03 | INFO | root |     eps: 1e-08
+2026-11-13 14:37:03 | INFO | root |     foreach: None
+2026-11-13 14:37:03 | INFO | root |     fused: None
+2026-11-13 14:37:03 | INFO | root |     lr: 0.0001
+2026-11-13 14:37:03 | INFO | root |     maximize: False
+2026-11-13 14:37:03 | INFO | root |     weight_decay: 0
+2026-11-13 14:37:03 | INFO | root | )
+2026-11-13 14:37:03 | INFO | root | LR scheduler: <unavailable>
+2026-11-13 14:37:03 | INFO | root | Step scheduler:
+2026-11-13 14:37:03 | INFO | root | - Gradient accumulation steps: 16
+2026-11-13 14:37:03 | INFO | root | - Checkpoint every steps: 1
+2026-11-13 14:37:03 | INFO | root | - Garbage collect every steps: None
+2026-11-13 14:37:03 | INFO | root | - Current Epoch: 0
+2026-11-13 14:37:03 | INFO | root | - Number of epochs: 10
+2026-11-13 14:37:03 | INFO | root | - Validation every steps: 1
+2026-11-13 14:37:03 | INFO | root | - Max train steps: 1
+2026-11-13 14:37:03 | INFO | root | - Checkpoint retention: inactive because checkpointing is disabled
+Training:   0%|          | 0/1 [00:00<?, ?step/s]2026-11-13 14:38:30 | INFO | root | step 0 | epoch 0 | loss 1.1666 | grad_norm 2.1624 | lr 1.00e-04 | mem 61.93 GiB | tps 200.41(200.41/gpu) | num_label_tokens 1659
+Training:   0%|          | 0/1 [01:27<?, ?step/s, loss=1.1666, lr=1.00e-04, tps=200]Training: 100%|██████████| 1/1 [01:27<00:00, 87.60s/step, loss=1.1666, lr=1.00e-04, tps=200]Training: 100%|██████████| 1/1 [01:27<00:00, 87.60s/step, loss=1.1666, lr=1.00e-04, tps=200]

@@ -1,0 +1,17 @@
+
+========== GATE: every answer survives the real AutoModel ChatDataset at seq 3072 ==========
+data/sft/train.jsonl: 728 rows | tokens median=1104 p95=1539 max=2340 | answer tokens median=100 max=155 | over 3072: 0
+W1113 14:33:54.204000 60976 torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1113 14:33:54.229000 60976 torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+  note: this AutoModel version has no chat_template_kwargs; using template defaults
+Tokenizer has no pad_token_id; falling back to eos_token_id (11). This may cause issues if downstream code masks padding by token ID.
+  note: this AutoModel version has no chat_template_kwargs; using template defaults
+pad_token_id (11) == eos_token_id (11) for tokenizer '/workspace/models/nemotron-3-nano-30b'. Ensure loss masking uses positional logic rather than token-ID comparison.
+  AutoModel ChatDataset @ 3072: complete=728 partial=0 empty=0 of 728
+data/sft/val.jsonl: 106 rows | tokens median=1074 p95=1552 max=2953 | answer tokens median=96 max=151 | over 3072: 0
+  note: this AutoModel version has no chat_template_kwargs; using template defaults
+  note: this AutoModel version has no chat_template_kwargs; using template defaults
+  AutoModel ChatDataset @ 3072: complete=106 partial=0 empty=0 of 106
+PASS
+
+========== DONE (gate) ==========

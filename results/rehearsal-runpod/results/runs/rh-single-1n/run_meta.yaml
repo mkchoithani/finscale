@@ -1,0 +1,8 @@
+run: rh-single-1n
+mode: single
+nodes: 1
+gpus_per_node: 1
+world_size: 1
+grad_accum_per_rank: 16
+seq_length: 3072
+gbs: 16
