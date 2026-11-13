@@ -175,11 +175,13 @@ Save the failing 1-node log too: it is the evidence that the second node unlocke
 
 ## G. Evaluation (base vs fine-tuned, held-out companies)
 
-Base model through the NVIDIA API (same prompt as training):
+Run both on a GB10 (inside a 1-node Fuzzball job or interactive shell): the same 30B weights,
+first without and then with the adapter, same prompt as training. (The NVIDIA API does not serve
+`nemotron-nano-3-30b-a3b` to our key, and same-weights is the fairer comparison anyway.)
 ```bash
-python scripts/07_predict.py --name base --backend api --model nvidia/nemotron-nano-3-30b-a3b
+python scripts/07_predict.py --name base --backend hf --model-path $MODEL_DIR
 ```
-Fine-tuned adapter on a GB10 (run inside a 1-node Fuzzball job or interactive shell):
+Optional extra reference, the teacher itself: `--name teacher --backend api --model nvidia/nemotron-3-ultra-550b-a55b`.
 ```bash
 pip install "peft>=0.19.1"
 python scripts/07_predict.py --name finetuned --backend hf --model-path $MODEL_DIR \

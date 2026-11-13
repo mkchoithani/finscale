@@ -91,8 +91,8 @@ if want modes; then
 fi
 
 if want eval; then
-  say "EVAL: base via NVIDIA API vs fine-tuned adapter via HF+PEFT (20 test rows)"
-  python3 scripts/07_predict.py --name base --backend api --limit 20
+  say "EVAL: same 30B weights without vs with the LoRA adapter, on GPU (20 test rows)"
+  CUDA_VISIBLE_DEVICES=0 python3 scripts/07_predict.py --name base --backend hf --limit 20 --model-path "$MODEL_DIR"
   CUDA_VISIBLE_DEVICES=0 python3 scripts/07_predict.py --name finetuned --backend hf --limit 20 \
     --model-path "$MODEL_DIR" --adapter results/runs/rh-single-1n/ckpt/LATEST/model
   python3 scripts/08_score.py results/eval/pred-base.jsonl results/eval/pred-finetuned.jsonl --out results/eval/rehearsal_scores.json
