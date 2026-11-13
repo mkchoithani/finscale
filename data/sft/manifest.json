@@ -1,0 +1,101 @@
+{
+  "seed": 17,
+  "tickers": {
+    "train": [
+      "AAPL",
+      "AMD",
+      "AMZN",
+      "BA",
+      "BAC",
+      "CAT",
+      "COST",
+      "CVX",
+      "DIS",
+      "GS",
+      "INTC",
+      "JNJ",
+      "JPM",
+      "MA",
+      "META",
+      "MSFT",
+      "NFLX",
+      "NVDA",
+      "PYPL",
+      "TSLA",
+      "V"
+    ],
+    "val": [
+      "ABBV",
+      "HD",
+      "UNH"
+    ],
+    "test": [
+      "GOOGL",
+      "MS",
+      "PFE",
+      "WMT"
+    ]
+  },
+  "counts": {
+    "train": 728,
+    "test": 152,
+    "val": 106
+  },
+  "class_distribution": {
+    "train": {
+      "cybersecurity": 75,
+      "market": 182,
+      "supply_chain": 25,
+      "regulatory_legal": 212,
+      "operational": 83,
+      "credit": 35,
+      "liquidity": 57,
+      "other": 59
+    },
+    "test": {
+      "regulatory_legal": 39,
+      "operational": 19,
+      "liquidity": 10,
+      "market": 41,
+      "cybersecurity": 18,
+      "other": 11,
+      "credit": 11,
+      "supply_chain": 3
+    },
+    "val": {
+      "cybersecurity": 12,
+      "market": 27,
+      "liquidity": 10,
+      "regulatory_legal": 22,
+      "operational": 10,
+      "supply_chain": 6,
+      "other": 15,
+      "credit": 4
+    }
+  },
+  "severity_distribution": {
+    "train": {
+      "high": 260,
+      "medium": 324,
+      "low": 144
+    },
+    "test": {
+      "medium": 73,
+      "high": 40,
+      "low": 39
+    },
+    "val": {
+      "high": 34,
+      "medium": 48,
+      "low": 24
+    }
+  },
+  "teachers": {
+    "nvidia/nemotron-3-ultra-550b-a55b": 986
+  },
+  "sha256": {
+    "test.jsonl": "941c8a48a443c3db756831e91e466ad6a2239036dbb9801e63dc465525b1853c",
+    "train.jsonl": "d972de945cc5616ab2cde963fbaa7ae5ac50390d781c458a60a76c26a4198b1a",
+    "val.jsonl": "889a83433476f1a9497ec735a9585263dbb4f24159e39e30a522c28812407fc8"
+  }
+}
