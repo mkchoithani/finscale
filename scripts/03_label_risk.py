@@ -58,15 +58,21 @@ def call(client, model, messages, max_tokens, temperature, no_think):
     return r.choices[0].message.content or ""
 
 
+FATAL_CODES = {400, 401, 403, 404, 422}  # wrong model / key / request: retrying will not help
+
+
 def label_one(client, args, p):
     msgs = [{"role": "system", "content": TEACHER_SYSTEM}, {"role": "user", "content": teacher_prompt(p)}]
     reason, raw = "", ""
     for attempt in range(args.max_attempts):
         try:
             raw = call(client, args.model, msgs, args.max_tokens, args.temperature, not args.allow_thinking)
-        except Exception as e:  # rate limit / network: back off and retry
-            reason = f"api error: {str(e)[:200]}"
-            time.sleep(min(60, 2 ** attempt * 2) + random.random())
+        except Exception as e:
+            code = getattr(e, "status_code", None)
+            reason = f"api error {code}: {str(e)[:200]}"
+            if code in FATAL_CODES:
+                return {"id": p["id"], "status": "api_error", "code": code, "reason": reason, "teacher": args.model}
+            time.sleep(min(60, 2 ** attempt * 2) + random.random())  # rate limit / network: back off
             continue
         label, reason = validate_label(parse_json_answer(raw), p["text"])
         if label:
@@ -75,7 +81,35 @@ def label_one(client, args, p):
         msgs = msgs[:2] + [{"role": "assistant", "content": raw[:2000]},
                            {"role": "user", "content": f"Invalid: {reason}. Return only the corrected JSON object; "
                                                        "evidence_quote must be copied exactly from the passage."}]
-    return {"id": p["id"], "status": "invalid", "reason": reason, "raw": raw[:500], "teacher": args.model}
+    status = "api_error" if reason.startswith("api error") else "invalid"
+    return {"id": p["id"], "status": status, "reason": reason, "raw": raw[:500], "teacher": args.model}
+
+
+PROBE_MODELS = [
+    "nvidia/nemotron-3-super-120b-a12b", "nvidia/nemotron-3-ultra-550b-a55b",
+    "nvidia/llama-3.1-nemotron-ultra-253b-v1", "nvidia/llama-3.1-nemotron-70b-instruct",
+    "nvidia/nemotron-3.5-lightning-30b-a3b", "nvidia/nemotron-nano-3-30b-a3b",
+    "meta/llama-3.3-70b-instruct", "meta/llama-3.1-405b-instruct",
+]
+
+
+def probe(base_url, extra):
+    """Send one tiny request to each candidate model and report which ones this key can use."""
+    client = make_client(base_url)
+    try:
+        listed = {m.id for m in client.models.list().data}
+    except Exception:
+        listed = set()
+    print("model".ljust(45), "result")
+    for m in dict.fromkeys(([extra] if extra else []) + PROBE_MODELS):
+        t = time.time()
+        try:
+            out = call(client, m, [{"role": "user", "content": 'Reply with exactly: {"ok": true}'}], 30, 0.0, True)
+            res = f"OK ({time.time() - t:.1f}s): {out.strip()[:40]!r}"
+        except Exception as e:
+            res = f"FAIL {getattr(e, 'status_code', '')} {str(e)[:80]}"
+        print(m.ljust(45), res, "" if m in listed or not listed else "(not in model list)")
+    print("\nPick the largest model that says OK, then: python scripts/03_label_risk.py --model <name> --limit 20")
 
 
 def dry_label(p):
@@ -102,8 +136,12 @@ def main():
     ap.add_argument("--retry-invalid", action="store_true", help="re-label passages previously marked invalid")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--list-models", action="store_true")
+    ap.add_argument("--probe", action="store_true", help="test which teacher models your key can call")
     a = ap.parse_args()
 
+    if a.probe:
+        probe(a.base_url, os.environ.get("FINSCALE_TEACHER"))
+        return
     if a.list_models:
         for m in make_client(a.base_url).models.list().data:
             if "nemotron" in m.id or "llama" in m.id:
@@ -114,7 +152,9 @@ def main():
     if not passages:
         sys.exit(f"No passages in {a.input}. Run scripts/02_make_passages.py first.")
     previous = {r["id"]: r for r in read_jsonl(a.output)}
-    keep = {i: r for i, r in previous.items() if r["status"] == "ok" or not a.retry_invalid}
+    # Keep good labels; keep content-invalid rows unless --retry-invalid; ALWAYS retry API errors.
+    keep = {i: r for i, r in previous.items()
+            if r["status"] == "ok" or (r["status"] == "invalid" and not a.retry_invalid)}
     todo = [p for p in passages if p["id"] not in keep]
     if a.limit:
         todo = todo[: a.limit]
@@ -140,9 +180,15 @@ def main():
                 stats[r["status"]] += 1
                 if r["status"] == "ok":
                     stats["class:" + r["label"]["risk_class"]] += 1
+            if n >= 5 and stats["api_error"] == n and r.get("code") in FATAL_CODES:
+                for f in futs:
+                    f.cancel()
+                sys.exit(f"\nSTOPPED: first {n} requests all failed with API error {r.get('code')} "
+                         f"for model {a.model}.\n  {r['reason'][:200]}\n"
+                         "Run: python scripts/03_label_risk.py --probe   (shows which models your key can use)")
             if n % 25 == 0 or n == len(todo):
                 rate = n / max(time.time() - t0, 1e-6)
-                print(f"  {n}/{len(todo)} ok={stats['ok']} invalid={stats['invalid']} "
+                print(f"  {n}/{len(todo)} ok={stats['ok']} invalid={stats['invalid']} api_error={stats['api_error']} "
                       f"({rate:.2f}/s, ~{(len(todo) - n) / max(rate, 1e-6) / 60:.1f} min left)", flush=True)
 
     all_rows = read_jsonl(a.output)
