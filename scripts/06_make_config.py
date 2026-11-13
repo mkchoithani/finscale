@@ -102,7 +102,7 @@ def main():
     ap.add_argument("--model", default=os.environ.get("MODEL_DIR", "/shared/models/nemotron-3-nano-30b"))
     ap.add_argument("--train", default="data/sft/train.jsonl")
     ap.add_argument("--val", default="data/sft/val.jsonl", help="'' to disable validation")
-    ap.add_argument("--seq-length", type=int, default=2048)
+    ap.add_argument("--seq-length", type=int, default=3072)
     ap.add_argument("--gbs", type=int, default=16, help="global batch size (keep identical across runs)")
     ap.add_argument("--mbs", type=int, default=1, help="micro batch per GPU")
     ap.add_argument("--steps", type=int, default=40)

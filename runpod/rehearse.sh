@@ -15,7 +15,7 @@ export MODEL_DIR=${MODEL_DIR:-/workspace/models/nemotron-3-nano-30b}
 PORT=${PORT:-29610}
 STEPS=${STEPS:-8}            # short runs: enough steps for a steady-state tokens/s median
 GBS=${GBS:-16}
-SEQ=${SEQ:-2048}
+SEQ=${SEQ:-3072}
 STAGE=${1:-all}
 mkdir -p results
 

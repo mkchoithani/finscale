@@ -57,9 +57,9 @@ export SEC_USER_AGENT="FinScale Hackathon <your real email>"   # SEC rule: real 
    ```bash
    python -c "from huggingface_hub import snapshot_download as d; d('nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16', \
        allow_patterns=['*.json','*.jinja','*.py'], local_dir='models/nemotron-tokenizer')"
-   python scripts/05_check_tokens.py --model models/nemotron-tokenizer --seq-length 2048
+   python scripts/05_check_tokens.py --model models/nemotron-tokenizer --seq-length 3072
    ```
-   Must print `PASS`. (Tested: longest row ~1,500 tokens; answers ~60–130 tokens.)
+   Must print `PASS`. (Real data: median ~1,100 tokens, longest ~2,950; answers 100–155 tokens.)
 7. Team task during labeling: open `data/sft/gold_review.csv` and fill in `human_class` /
    `human_severity` where the teacher is wrong. This becomes the human-checked test set.
 8. Commit the data so every node gets the identical files:
@@ -127,7 +127,7 @@ export MODEL_DIR=/shared/models/nemotron-3-nano-30b
 # 1-step smoke first
 python scripts/06_make_config.py --mode single --run smoke-1n --steps 1 --no-save --val ''
 # the real baseline (same GBS/seq as the 2-node runs!)
-python scripts/06_make_config.py --mode single --run single-1n-r1 --steps 40 --gbs 16 --seq-length 2048
+python scripts/06_make_config.py --mode single --run single-1n-r1 --steps 40 --gbs 16 --seq-length 3072
 git add configs && git commit -m "Configs" && git push
 ```
 Point the 1-node Fuzzfile at the smoke config (render.sh remembers the cluster values) and run it:
@@ -137,7 +137,7 @@ fuzzball workflow start fuzzball/rendered/00_setup.fz     # git pull on the shar
 fuzzball workflow start fuzzball/rendered/03_train_1node.fz
 ```
 **GATE D (smoke):** the log shows `step 1 | ... | loss <finite number>` and exit=0.
-- Out of memory / process killed → job memory limit (ask staff) or lower `--seq-length 1536`.
+- Out of memory / process killed → job memory limit (ask staff) or lower `--seq-length 2048` and drop the few longer rows.
 - Kernel / Triton error in Mamba → save the log, ask staff for an image with working `mamba-ssm`.
 Then run `single-1n-r1` (40 steps). Watch `results/runs/single-1n-r1/summary.json`: median tokens/s,
 loss going down, adapter saved under `results/runs/single-1n-r1/ckpt/LATEST/model/`.
@@ -145,7 +145,7 @@ loss going down, adapter saved under `results/runs/single-1n-r1/ckpt/LATEST/mode
 ## E. Two-node training (the core result)
 
 ```bash
-python scripts/06_make_config.py --mode replicate --nodes 2 --run replicate-2n-r1 --steps 40 --gbs 16 --seq-length 2048
+python scripts/06_make_config.py --mode replicate --nodes 2 --run replicate-2n-r1 --steps 40 --gbs 16 --seq-length 3072
 git add configs && git commit -m "2-node config" && git push
 CONFIG_2N=configs/replicate-2n-r1.yaml bash fuzzball/render.sh
 fuzzball workflow start fuzzball/rendered/00_setup.fz     # git pull on the shared volume

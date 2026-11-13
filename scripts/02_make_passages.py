@@ -3,7 +3,7 @@
 
 Sections used: Item 1A Risk Factors, 1C Cybersecurity, 3 Legal Proceedings,
 7 MD&A, 7A Market Risk. Passages are ~4,000 characters (~1,000 tokens), so the
-prompt + JSON answer fits easily in a 2,048-token training sequence and the
+prompt + JSON answer fits in a 3,072-token training sequence (median ~1,100) and the
 answer can never be truncated away.
 
 Example:

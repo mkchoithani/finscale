@@ -6,7 +6,7 @@ Two checks:
   2. NeMo AutoModel ChatDataset (on the GPU node): the exact loader used in training must keep
      ALL answer tokens as labels (labels != -100) for EVERY row.
 
-    python scripts/05_check_tokens.py --model $MODEL_DIR --data data/sft/train.jsonl --seq-length 2048
+    python scripts/05_check_tokens.py --model $MODEL_DIR --data data/sft/train.jsonl --seq-length 3072
 Exit code 0 = PASS. Anything else: do not train.
 """
 import argparse
@@ -57,7 +57,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--model", required=True, help="local model dir or HF id (only the tokenizer is loaded)")
     ap.add_argument("--data", nargs="+", default=["data/sft/train.jsonl", "data/sft/val.jsonl"])
-    ap.add_argument("--seq-length", type=int, default=2048)
+    ap.add_argument("--seq-length", type=int, default=3072)
     ap.add_argument("--limit", type=int, default=0, help="AutoModel check: rows to check (0 = all)")
     ap.add_argument("--enable-thinking", action="store_true")
     ap.add_argument("--skip-automodel", action="store_true")
