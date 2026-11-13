@@ -21,7 +21,7 @@ NPROC=${NPROC_PER_NODE:-1}
 PORT=${PORT:-29400}
 RUN=$(basename "$CONFIG" .yaml)
 RUN_DIR=${RESULTS_DIR:-results/runs}/$RUN
-HOST=$(hostname -s)
+HOST=$(hostname -s)${NODE_RANK:+-n$NODE_RANK}   # rank suffix keeps files apart when 2 "nodes" share a host (rehearsal)
 mkdir -p "$RUN_DIR/logs" "$RUN_DIR/nodes"
 
 export OMP_NUM_THREADS=${OMP_NUM_THREADS:-8} MKL_NUM_THREADS=${MKL_NUM_THREADS:-8}
