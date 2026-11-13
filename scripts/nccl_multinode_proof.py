@@ -13,6 +13,9 @@ def main():
     dist.init_process_group("nccl")
     hostname = socket.gethostname()
     device = torch.device("cuda", local_rank)
+    # Warm-up: the first collective includes NCCL communicator setup; don't time it.
+    warm = torch.ones(1, device=device)
+    dist.all_reduce(warm)
     x = torch.tensor([float(rank + 1)], device=device)
     torch.cuda.synchronize()
     start = time.perf_counter()

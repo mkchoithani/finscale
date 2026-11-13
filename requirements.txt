@@ -2,5 +2,7 @@
 requests>=2.31
 numpy>=1.26
 openai>=1.0
+pyyaml>=6
+matplotlib>=3.8
 # GPU-specific NVIDIA NeMo/Megatron-Bridge dependencies belong to their
 # officially supported image and pinned checkout. Do not replace CUDA torch.

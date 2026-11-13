@@ -227,6 +227,8 @@ def main():
     ap.add_argument("--max-sections", type=int, default=5)
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--no-api", action="store_true")
+    ap.add_argument("--split-by", choices=["ticker", "row"], default="ticker",
+                    help="ticker = held-out companies (no context leakage); row = legacy behaviour")
     a = ap.parse_args()
     if not 0 <= a.val_fraction < 1:
         ap.error("--val-fraction must be in [0, 1)")
@@ -241,10 +243,21 @@ def main():
                     raise SystemExit(f"Bad JSONL line {n}: {e}")
     if not rows:
         raise SystemExit("No examples produced. Check input and section headings.")
-    random.Random(a.seed).shuffle(rows)
-    nv = int(len(rows) * a.val_fraction)
+    rng = random.Random(a.seed)
+    if a.split_by == "ticker":
+        tickers = sorted({r["metadata"]["ticker"] for r in rows})
+        rng.shuffle(tickers)
+        held = set(tickers[:int(round(len(tickers) * a.val_fraction))])
+        train_rows = [r for r in rows if r["metadata"]["ticker"] not in held]
+        val_rows = [r for r in rows if r["metadata"]["ticker"] in held]
+        rng.shuffle(train_rows)
+        print(f"Held-out tickers: {' '.join(sorted(held)) or '(none)'}")
+    else:
+        rng.shuffle(rows)
+        nv = int(len(rows) * a.val_fraction)
+        train_rows, val_rows = rows[nv:], rows[:nv]
     a.output_dir.mkdir(parents=True, exist_ok=True)
-    for name, data in (("train", rows[nv:]), ("val", rows[:nv])):
+    for name, data in (("train", train_rows), ("val", val_rows)):
         if name == "train" and not data:
             raise SystemExit("Training split is empty")
         path = a.output_dir / f"{name}.jsonl"

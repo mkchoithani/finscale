@@ -6,6 +6,7 @@ __pycache__/
 !.env.example
 .cache/
 *.log
+!results/**/*.log
 HF_TOKEN
 NVIDIA_API_KEY
 *.token

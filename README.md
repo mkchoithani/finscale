@@ -2,7 +2,9 @@
 
 **[FINScale end-to-end master runbook](FINSCALE_HACKATHON_MASTER_RUNBOOK.md)** — business problem, model and LoRA choices, actual GB10 challenges, end-to-end single-node commands, Fuzzball CLI, two-node NCCL proof, multi-node model-training gates, performance metrics and demo. **[Fuzzball starter YAML](fuzzball/)** requires organizer-provided ARM64 CUDA image and staging; no two-node 30B optimizer step has yet been validated.
 
-> **Hackathon Nov 13 update:** [GB10 verified training runbook](GB10_HACKATHON_RUNBOOK.md) documents the successful ARM64 Mamba/Causal CUDA builds, 59 GiB Nemotron 30B download, remaining **zero-supervised-token blocker**, and the real one-step LoRA launch. [Fuzzball two-node playbook](FINSCALE_FUZZBALL_TWO_NODE.md) includes rank proof, two-host workflow gates, fair performance measurement, and charts. New scripts: [supervision check](scripts/check_gb10_supervision.py), [recipe preparation](scripts/prepare_gb10_config.py), [NCCL two-host proof](scripts/nccl_multinode_proof.py), [training plots](scripts/plot_training_comparison.py). **No Nemotron 30B training step or two-node model training has been verified yet.**\n\n# FinScale — Nemotron 3 Nano 30B-A3B + SEC EDGAR
+> **Hackathon Nov 13 update:** [GB10 verified training runbook](GB10_HACKATHON_RUNBOOK.md) documents the successful ARM64 Mamba/Causal CUDA builds, 59 GiB Nemotron 30B download, remaining **zero-supervised-token blocker**, and the real one-step LoRA launch. [Fuzzball two-node playbook](FINSCALE_FUZZBALL_TWO_NODE.md) includes rank proof, two-host workflow gates, fair performance measurement, and charts. New scripts: [supervision check](scripts/check_gb10_supervision.py), [recipe preparation](scripts/prepare_gb10_config.py), [NCCL two-host proof](scripts/nccl_multinode_proof.py), [training plots](scripts/plot_training_comparison.py). **No Nemotron 30B training step or two-node model training has been verified yet.**
+
+# FinScale — Nemotron 3 Nano 30B-A3B + SEC EDGAR
 
 **Branch:** `Nemotron` | **Student model:** `nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16` | **Dataset:** SEC EDGAR 10-K filings from a target universe of 30 US public companies.
 
