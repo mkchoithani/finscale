@@ -3,12 +3,16 @@
 
 Parallel modes (one GPU per GB10 node, world size = nodes):
   single     1 node. Baseline.
-  replicate  N nodes, full model copy per node (HSDP, shard=1). Only LoRA gradients cross the
-             network -> best throughput scaling. START HERE for the 2-node run.
+  replicate  N nodes, full model copy per node. Only LoRA gradients cross the network -> best
+             throughput scaling. START HERE for the 2-node run. With 1 GPU per node (GB10) this is
+             plain DDP: FSDP2 rejects a pure-replica mesh ("dp_replicate_size=2 must be less than
+             dp_size=2 since DDP usecase is not supported by FSDP2", AutoModel 0.7.0, found in the
+             RunPod 2-GPU rehearsal). With >1 GPU per node it is HSDP: replicate across nodes,
+             shard within a node.
   shard      N nodes, weights sharded across nodes (FSDP). Less memory per node -> longer
              sequences / bigger micro-batches ("capacity" story). Much more network traffic.
   ep         N nodes, MoE experts split across nodes (expert parallel). Capacity + MoE story.
-  ddp        N nodes, torch DDP strategy. Fallback if 'replicate' fails.
+  ddp        N nodes, torch DDP strategy (what 'replicate' uses on 1-GPU nodes).
 
 Fair scaling rule: global batch size (--gbs) is identical in every mode; only the
 per-node gradient-accumulation changes. Compare tokens/s at the same --gbs and --seq-length.
@@ -80,15 +84,17 @@ def chat_ds(path, seq_length, thinking):
     return ds
 
 
-def distributed_for(mode, world, base):
+def distributed_for(mode, world, base, nodes=1):
     d = copy.deepcopy(base)
     d.update({"tp_size": 1, "cp_size": 1, "ep_size": 1, "sequence_parallel": False,
               "activation_checkpointing": True})
     d.pop("dp_replicate_size", None)
+    if mode == "replicate" and world == nodes:
+        mode = "ddp"  # 1 GPU per node: a full replica per node IS DDP (FSDP2 refuses shard=1 meshes)
     if mode == "single":
         d.update(strategy="fsdp2", dp_size=1)
-    elif mode == "replicate":
-        d.update(strategy="fsdp2", dp_size=world, dp_replicate_size=world)
+    elif mode == "replicate":  # >1 GPU per node: HSDP, replicate across nodes, shard inside a node
+        d.update(strategy="fsdp2", dp_size=world, dp_replicate_size=nodes)
     elif mode == "shard":
         d.update(strategy="fsdp2", dp_size=world)
     elif mode == "ep":
@@ -165,7 +171,7 @@ def main():
     cfg["peft"].update(dim=a.lora_dim, alpha=a.lora_alpha)
     cfg["rng"]["seed"] = a.seed
     cfg["dist_env"]["timeout_minutes"] = a.timeout_min
-    cfg["distributed"] = distributed_for(a.mode, world, cfg.get("distributed", TEMPLATE["distributed"]))
+    cfg["distributed"] = distributed_for(a.mode, world, cfg.get("distributed", TEMPLATE["distributed"]), nodes)
     # checkpoint_dir is ALSO where AutoModel writes training.jsonl / validation.jsonl.
     cfg["checkpoint"] = {"enabled": not a.no_save, "checkpoint_dir": str(run_dir / "ckpt"),
                          "model_save_format": "safetensors", "save_consolidated": False}
