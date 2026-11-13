@@ -69,9 +69,15 @@ def find_recipe():
 def chat_ds(path, seq_length, thinking):
     # Paths stay RELATIVE to the repo root (launch_train.sh cd's there), so a config generated on one
     # machine works on every node as long as each node runs from its own copy / the shared repo.
-    return {"_target_": "nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig",
-            "path_or_dataset_id": str(path), "seq_length": seq_length,
-            "truncation": "longest_first", "chat_template_kwargs": {"enable_thinking": thinking}}
+    ds = {"_target_": "nemo_automodel.components.datasets.llm.chat_dataset.ChatDatasetConfig",
+          "path_or_dataset_id": str(path), "seq_length": seq_length, "truncation": "longest_first"}
+    # chat_template_kwargs is omitted by default: AutoModel 0.7.0 (NGC nemo-automodel:26.10.00) rejects
+    # the field, and Nemotron 3's template renders a training row identically for enable_thinking
+    # True/False/unset ("<think></think>{answer}"), so it changes nothing. Inference passes
+    # enable_thinking=False, whose generation prompt ends in "<think></think>", matching training.
+    if thinking:
+        ds["chat_template_kwargs"] = {"enable_thinking": True}
+    return ds
 
 
 def distributed_for(mode, world, base):
