@@ -26,7 +26,8 @@ from finscale.common import DEFAULT_TICKERS, read_jsonl  # noqa: E402
 
 TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik}.json"
-ARCHIVE_URL = "https://www.sec.gov/Archives/edgar/data/{cik_int}/{acc}/{doc}"
+OLDER_URL = "https://data.sec.gov/submissions/{name}"
+ARCHIVE_URL ="https://www.sec.gov/Archives/edgar/data/{cik_int}/{acc}/{doc}"
 
 BLOCK_TAGS = {"p", "div", "br", "tr", "li", "h1", "h2", "h3", "h4", "h5", "h6", "table", "section", "td"}
 SKIP_TAGS = {"script", "style", "head", "ix:header", "title"}
@@ -80,6 +81,26 @@ def get(session, url, pause, retries=4):
     raise RuntimeError(f"GET failed after {retries} tries: {url} (last status {r.status_code})")
 
 
+def find_10k(session, cik, n, pause):
+    """Newest-first list of (accession, primary document, filing date) for 10-K filings.
+    The submissions file only holds the most recent ~1,000 filings; companies that file many
+    other forms (e.g. XOM) can push their 10-K into the older pages listed under filings.files."""
+    sub = get(session, SUBMISSIONS_URL.format(cik=cik), pause).json()
+    pages = [sub["filings"]["recent"]]
+    older = [f["name"] for f in sub["filings"].get("files", [])]
+    found = []
+    while True:
+        page = pages.pop(0)
+        for i, form in enumerate(page["form"]):
+            if form == "10-K" and page["primaryDocument"][i]:
+                found.append((page["accessionNumber"][i], page["primaryDocument"][i], page["filingDate"][i]))
+        if len(found) >= n or not older:
+            break
+        pages.append(get(session, OLDER_URL.format(name=older.pop(0)), pause).json())
+    found.sort(key=lambda x: x[2], reverse=True)
+    return found[:n]
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--tickers", nargs="+", default=None)
@@ -116,19 +137,16 @@ def main():
                 continue
             cik, company = lookup[t]
             try:
-                recent = get(s, SUBMISSIONS_URL.format(cik=cik), a.pause).json()["filings"]["recent"]
-                idx = [i for i, f in enumerate(recent["form"]) if f == "10-K"][: a.filings_per_company]
-                if not idx:
-                    print(f"  {t}: no 10-K in recent filings", file=sys.stderr)
+                filings = find_10k(s, cik, a.filings_per_company, a.pause)
+                if not filings:
+                    print(f"  {t}: no 10-K found (checked recent and older filing pages)", file=sys.stderr)
                     failed += 1
                     continue
-                for i in idx[done.get(t, 0):]:
-                    acc = recent["accessionNumber"][i]
-                    url = ARCHIVE_URL.format(cik_int=int(cik), acc=acc.replace("-", ""),
-                                             doc=recent["primaryDocument"][i])
+                for acc, doc, filed in filings[done.get(t, 0):]:
+                    url = ARCHIVE_URL.format(cik_int=int(cik), acc=acc.replace("-", ""), doc=doc)
                     text = html_to_text(get(s, url, a.pause).text)
                     rec = {"ticker": t, "cik": cik, "company": company, "form": "10-K",
-                           "filing_date": recent["filingDate"][i], "accession": acc, "url": url, "text": text}
+                           "filing_date": filed, "accession": acc, "url": url, "text": text}
                     out.write(json.dumps(rec, ensure_ascii=False) + "\n")
                     out.flush()
                     ok += 1
