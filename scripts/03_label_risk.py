@@ -153,8 +153,10 @@ def main():
         sys.exit(f"No passages in {a.input}. Run scripts/02_make_passages.py first.")
     previous = {r["id"]: r for r in read_jsonl(a.output)}
     # Keep good labels; keep content-invalid rows unless --retry-invalid; ALWAYS retry API errors.
+    # (older files stored API errors as status "invalid" with reason "api error...", so check the reason too)
     keep = {i: r for i, r in previous.items()
-            if r["status"] == "ok" or (r["status"] == "invalid" and not a.retry_invalid)}
+            if r["status"] == "ok" or (r["status"] == "invalid" and not a.retry_invalid
+                                       and not r.get("reason", "").startswith("api error"))}
     todo = [p for p in passages if p["id"] not in keep]
     if a.limit:
         todo = todo[: a.limit]
