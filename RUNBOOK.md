@@ -20,7 +20,7 @@ Do not move past a gate that fails. Every command is run from the repo root.
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt transformers
+pip install -r requirements.txt transformers jinja2
 export NVIDIA_API_KEY=nvapi-...                 # never commit
 export HF_TOKEN=hf_...
 export SEC_USER_AGENT="FinScale Hackathon <your real email>"   # SEC rule: real contact
