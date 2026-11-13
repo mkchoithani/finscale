@@ -91,9 +91,10 @@ if want modes; then
 fi
 
 if want eval; then
-  say "EVAL: same 30B weights without vs with the LoRA adapter, on GPU (20 test rows)"
-  CUDA_VISIBLE_DEVICES=0 python3 scripts/07_predict.py --name base --backend hf --limit 20 --model-path "$MODEL_DIR"
-  CUDA_VISIBLE_DEVICES=0 python3 scripts/07_predict.py --name finetuned --backend hf --limit 20 \
+  EVAL_LIMIT=${EVAL_LIMIT:-60}   # ~4 s per answer on H100 after warm-up; 0 = all 152 test rows
+  say "EVAL: same 30B weights without vs with the LoRA adapter, on GPU ($EVAL_LIMIT test rows)"
+  CUDA_VISIBLE_DEVICES=0 python3 scripts/07_predict.py --name base --backend hf --limit "$EVAL_LIMIT" --model-path "$MODEL_DIR"
+  CUDA_VISIBLE_DEVICES=0 python3 scripts/07_predict.py --name finetuned --backend hf --limit "$EVAL_LIMIT" \
     --model-path "$MODEL_DIR" --adapter results/runs/rh-single-1n/ckpt/LATEST/model
   python3 scripts/08_score.py results/eval/pred-base.jsonl results/eval/pred-finetuned.jsonl --out results/eval/rehearsal_scores.json
 fi

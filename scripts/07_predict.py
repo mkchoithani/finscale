@@ -47,9 +47,25 @@ def api_predictor(a):
 def hf_predictor(a):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
-    tok = AutoTokenizer.from_pretrained(a.adapter or a.model_path, trust_remote_code=True)
-    model = AutoModelForCausalLM.from_pretrained(a.model_path, trust_remote_code=True, torch_dtype=torch.bfloat16,
-                                                 device_map="cuda")
+    tok = AutoTokenizer.from_pretrained(a.model_path)
+
+    def load(remote_code):
+        kw = dict(device_map="cuda", trust_remote_code=remote_code)
+        try:
+            return AutoModelForCausalLM.from_pretrained(a.model_path, dtype=torch.bfloat16, **kw)
+        except TypeError:  # transformers 4.x names the argument torch_dtype
+            return AutoModelForCausalLM.from_pretrained(a.model_path, torch_dtype=torch.bfloat16, **kw)
+
+    # Prefer transformers' built-in Nemotron-H class: the model repo's own modeling_nemotron_h.py
+    # (trust_remote_code) crashes in generate() on transformers 5.18 (NGC nemo-automodel:26.10.00:
+    # "cache_position[-1] ... 'NoneType' object is not subscriptable"). Fall back to the repo code only
+    # when the installed transformers has no built-in class for this model.
+    try:
+        model = load(remote_code=False)
+    except (ValueError, KeyError, OSError) as e:
+        print(f"built-in model class unavailable ({type(e).__name__}); using the repo's remote code", flush=True)
+        model = load(remote_code=True)
+    print(f"model class: {type(model).__name__}", flush=True)
     if a.adapter:
         from peft import PeftModel
         model = PeftModel.from_pretrained(model, a.adapter)
@@ -57,7 +73,7 @@ def hf_predictor(a):
 
     def predict(row):
         ids = tok.apply_chat_template(student_messages(row), add_generation_prompt=True, return_tensors="pt",
-                                      enable_thinking=a.thinking)
+                                      return_dict=True, enable_thinking=a.thinking)
         ids = (ids["input_ids"] if hasattr(ids, "keys") else ids).to("cuda")
         t = time.perf_counter()
         with torch.no_grad():

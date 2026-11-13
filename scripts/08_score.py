@@ -58,6 +58,13 @@ def main():
     a = ap.parse_args()
 
     gold, source = load_gold(read_jsonl(a.test), a.gold)
+    # Score only rows that EVERY system answered (e.g. 07_predict.py --limit 60), so a partial run is
+    # neither penalised for unasked rows nor compared on different rows than the other system.
+    answered = [{p["id"] for p in read_jsonl(path)} for path in a.preds]
+    common = set.intersection(*answered) if answered else set()
+    if common and len(common) < len(gold):
+        print(f"Scoring the {len(common & set(gold))} rows answered by all systems (of {len(gold)} gold rows)")
+        gold = {k: v for k, v in gold.items() if k in common}
     if not gold:
         sys.exit("No gold rows")
     report = {"gold_source": source, "n_gold": len(gold), "systems": {}}
