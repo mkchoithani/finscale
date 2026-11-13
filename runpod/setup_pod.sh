@@ -10,8 +10,8 @@
 set -euo pipefail
 
 WS="${WS:-/workspace}"
-REPO_URL="${REPO_URL:-https://github.com/haranadhar/FinscaleNvidiaPlatform.git}"
-BRANCH="${BRANCH:-Nemotron}"
+REPO_URL="${REPO_URL:-https://github.com/mkchoithani/finscale.git}"
+BRANCH="${BRANCH:-nemotron-runpod-setup}"
 REPO="$WS/FinscaleNvidiaPlatform"
 MODEL_ID="${MODEL_ID:-nvidia/NVIDIA-Nemotron-3-Nano-30B-A3B-BF16}"
 MODEL_DIR="${MODEL_DIR:-$WS/models/nemotron-30b}"

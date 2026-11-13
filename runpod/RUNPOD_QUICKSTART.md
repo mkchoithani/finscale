@@ -23,8 +23,7 @@ H100 is **not** a GB10 result. Label it as a cloud baseline.
 
 ```bash
 cd /workspace
-git clone --branch Nemotron https://github.com/haranadhar/FinscaleNvidiaPlatform.git
-# (or copy this runpod-setup branch over until it is merged)
+git clone --branch nemotron-runpod-setup https://github.com/mkchoithani/finscale.git FinscaleNvidiaPlatform
 bash /workspace/FinscaleNvidiaPlatform/runpod/setup_pod.sh 2>&1 | tee /workspace/setup.log
 ```
 
