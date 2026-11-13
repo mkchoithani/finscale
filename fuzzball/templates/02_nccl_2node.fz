@@ -1,0 +1,40 @@
+# Two GB10 nodes: NCCL all-reduce correctness + bandwidth sweep. Communication proof only.
+# Output: results/nccl/nccl_report.json on the shared volume (status must be PASS with 2 distinct hosts).
+version: v4
+volumes:
+  shared:
+    use: @PROVISIONER@
+    name: @VOLUME@
+jobs:
+  nccl-2node:
+    image:
+      uri: @IMAGE@
+    mounts:
+      /shared: shared
+    env:
+      - MULTINODE_WRAPPER_FORWARD_STREAMS=1
+      - PYTHONUNBUFFERED=1
+    script: |
+      #!/bin/bash
+      set -eu
+      . /multinode/generic-helper
+      HEAD=$MULTINODE_NODE_IP
+      echo "hosts: $MULTINODE_HOSTLIST_NOSLOTS  head: $HEAD"
+      exec_rank0 "bash @REPO_DIR@/fuzzball/node_entry.sh 0 $HEAD nccl"
+      exec_rankN "bash @REPO_DIR@/fuzzball/node_entry.sh 1 $HEAD nccl"
+      wait_rank0
+    resource:
+      cpu:
+        cores: 8
+      memory:
+        size: 32GB
+      devices:
+        nvidia.com/gpu: 1
+      exclusive: true
+    multinode:
+      nodes: 2
+      implementation: generic
+      procs-per-node: 1
+    policy:
+      timeout:
+        execute: 20m

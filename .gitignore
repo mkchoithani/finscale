@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Big raw downloads stay out of Git (re-download with scripts/01_download_edgar.py).
+# The labeled training data (data/labels.jsonl, data/passages.jsonl, data/sft/) IS committed:
+# it is small public SEC text, and committing it pins exactly which data each run used.
+data/raw/
+
+# Model weights, adapters, optimizer state
+models/
+results/runs/*/ckpt/
+*.safetensors
+*.bin
+*.pt
+*.distcp
+
+# Secrets
+.env
+*.key
+
+# Rendered Fuzzfiles are cluster specific (regenerate with fuzzball/render.sh)
+fuzzball/rendered/
+
+# Test configs
+configs/*-test.yaml

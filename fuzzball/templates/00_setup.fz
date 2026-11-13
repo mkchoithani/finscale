@@ -1,0 +1,36 @@
+# Stage code + model on the shared volume ONCE. Re-running is safe (git pull, resumable download).
+# Needs internet from the job (GitHub + Hugging Face). If blocked, ask staff how to load data onto the volume.
+version: v4
+volumes:
+  shared:
+    use: @PROVISIONER@
+    name: @VOLUME@
+jobs:
+  stage:
+    image:
+      uri: @IMAGE@
+    mounts:
+      /shared: shared
+    env:
+      - PYTHONUNBUFFERED=1
+    script: |
+      #!/bin/bash
+      set -euo pipefail
+      if [ -d @REPO_DIR@/.git ]; then
+        git -C @REPO_DIR@ pull --ff-only
+      else
+        git clone --branch @GIT_BRANCH@ @GIT_URL@ @REPO_DIR@
+      fi
+      cd @REPO_DIR@
+      git log -1 --format='code: %h %s'
+      python3 -m pip install --quiet --no-deps huggingface_hub pyyaml openai || true
+      python3 scripts/download_model.py --dest @MODEL_DIR@
+      ls -la @MODEL_DIR@ | head
+    resource:
+      cpu:
+        cores: 8
+      memory:
+        size: 16GB
+    policy:
+      timeout:
+        execute: 90m

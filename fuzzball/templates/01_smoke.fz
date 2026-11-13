@@ -1,0 +1,32 @@
+# Single GB10 smoke test: GPU visible, CUDA works, AutoModel + Mamba kernels import, model present.
+version: v4
+volumes:
+  shared:
+    use: @PROVISIONER@
+    name: @VOLUME@
+jobs:
+  preflight:
+    image:
+      uri: @IMAGE@
+    mounts:
+      /shared: shared
+    cwd: @REPO_DIR@
+    env:
+      - PYTHONUNBUFFERED=1
+      - MODEL_DIR=@MODEL_DIR@
+    script: |
+      #!/bin/bash
+      set -eu
+      date -u; hostname; uname -m
+      nvidia-smi
+      python3 scripts/00_preflight.py --need-gpu --model-dir @MODEL_DIR@
+    resource:
+      cpu:
+        cores: 8
+      memory:
+        size: 32GB
+      devices:
+        nvidia.com/gpu: 1
+    policy:
+      timeout:
+        execute: 20m

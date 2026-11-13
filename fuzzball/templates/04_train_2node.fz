@@ -1,0 +1,41 @@
+# Two-node distributed training. Config made by:
+#   python scripts/06_make_config.py --mode replicate --nodes 2 ...   (or shard / ep / ddp)
+# Each node logs to results/runs/<run>/logs/<host>.log; rank 0 writes ckpt/training.jsonl.
+version: v4
+volumes:
+  shared:
+    use: @PROVISIONER@
+    name: @VOLUME@
+jobs:
+  train-2node:
+    image:
+      uri: @IMAGE@
+    mounts:
+      /shared: shared
+    env:
+      - MULTINODE_WRAPPER_FORWARD_STREAMS=1
+      - PYTHONUNBUFFERED=1
+    script: |
+      #!/bin/bash
+      set -eu
+      . /multinode/generic-helper
+      HEAD=$MULTINODE_NODE_IP
+      echo "hosts: $MULTINODE_HOSTLIST_NOSLOTS  head: $HEAD"
+      exec_rank0 "bash @REPO_DIR@/fuzzball/node_entry.sh 0 $HEAD train @CONFIG_2N@"
+      exec_rankN "bash @REPO_DIR@/fuzzball/node_entry.sh 1 $HEAD train @CONFIG_2N@"
+      wait_rank0
+    resource:
+      cpu:
+        cores: 16
+      memory:
+        size: 100GB
+      devices:
+        nvidia.com/gpu: 1
+      exclusive: true
+    multinode:
+      nodes: 2
+      implementation: generic
+      procs-per-node: 1
+    policy:
+      timeout:
+        execute: 4h

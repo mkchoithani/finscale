@@ -1,0 +1,9 @@
+# CPU-side tools: data download, labeling, scoring, charts.
+# Do NOT reinstall torch/transformers inside the NVIDIA container; use its CUDA builds.
+requests>=2.31
+pyyaml>=6.0
+openai>=1.40
+huggingface_hub>=0.24
+matplotlib>=3.8
+# Needed only for scripts/07_predict.py --backend hf (adapter evaluation on a GPU node):
+#   peft>=0.19.1   (fused MoE expert LoRA layout)

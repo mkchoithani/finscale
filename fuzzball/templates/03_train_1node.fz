@@ -1,0 +1,31 @@
+# Single-node baseline training run. Config made by: python scripts/06_make_config.py --mode single ...
+version: v4
+volumes:
+  shared:
+    use: @PROVISIONER@
+    name: @VOLUME@
+jobs:
+  train-1node:
+    image:
+      uri: @IMAGE@
+    mounts:
+      /shared: shared
+    cwd: @REPO_DIR@
+    env:
+      - PYTHONUNBUFFERED=1
+    script: |
+      #!/bin/bash
+      set -eu
+      [ -f fuzzball/cluster.env ] && . fuzzball/cluster.env
+      NNODES=1 bash scripts/launch_train.sh @CONFIG_1N@
+    resource:
+      cpu:
+        cores: 16
+      memory:
+        size: 100GB
+      devices:
+        nvidia.com/gpu: 1
+      exclusive: true
+    policy:
+      timeout:
+        execute: 4h
