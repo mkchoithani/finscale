@@ -31,7 +31,7 @@ settings that do not fit on one node.
 Cluster side: `fuzzball/templates/*.fz` (setup, smoke, 2-node NCCL, 1-node and 2-node training),
 filled in by `fuzzball/render.sh`. `scripts/nccl_bench.py` proves and measures cross-node NCCL.
 
-**Start with [RUNBOOK.md](RUNBOOK.md).**
+**Start with [RUNBOOK.md](RUNBOOK.md).** To rebuild the dataset from nothing, see [REBUILD_DATA.md](REBUILD_DATA.md).
 
 ## Design rules
 
