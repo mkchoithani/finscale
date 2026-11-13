@@ -26,7 +26,7 @@ from finscale.common import (RISK_CLASSES, SEVERITIES, TEACHER_SYSTEM, parse_jso
                              read_jsonl, validate_label)
 
 API_URL = "https://integrate.api.nvidia.com/v1"
-DEFAULT_TEACHER = "nvidia/nemotron-3-super-120b-a12b"
+DEFAULT_TEACHER = "nvidia/nemotron-3-ultra-550b-a55b"  # verified working with our key (super-120b gave 404)
 
 
 def teacher_prompt(p):

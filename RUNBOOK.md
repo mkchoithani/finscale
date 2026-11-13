@@ -18,9 +18,15 @@ Do not move past a gate that fails. Every command is run from the repo root.
 
 ## A. Data (laptop)
 
+> **The labeled dataset is already committed** (commit `f712592`: 986 rows, 29 companies).
+> If `data/` is deleted or damaged, restore it instead of rebuilding:
+> `git checkout -- data/` (or `git restore data/`). Rebuilding gives a *different* dataset
+> (newer SEC filings, slightly different teacher answers, different hashes), so only rebuild on purpose.
+> Known, accepted gaps: XOM (10-K not found by the SEC lookup) and WFC (its risk text is in Exhibit 13).
+
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt transformers jinja2
+pip install -r requirements.txt
 export NVIDIA_API_KEY=nvapi-...                 # never commit
 export HF_TOKEN=hf_...
 export SEC_USER_AGENT="FinScale Hackathon <your real email>"   # SEC rule: real contact
@@ -42,7 +48,8 @@ export SEC_USER_AGENT="FinScale Hackathon <your real email>"   # SEC rule: real 
    head -5 data/labels.jsonl | python -m json.tool --json-lines | less
    ```
    Check the class makes sense, the severity is reasonable and the quote is real text.
-   If the teacher model is unavailable: `python scripts/03_label_risk.py --list-models`, then `--model <id>`.
+   Default teacher: `nvidia/nemotron-3-ultra-550b-a55b`. If labeling stops with "API error 404",
+   run `python scripts/03_label_risk.py --probe` and pass a model that says OK with `--model <id>`.
 4. Label everything (resumable; re-run after any failure; ~20–40 min):
    ```bash
    python scripts/03_label_risk.py --workers 8

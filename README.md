@@ -20,7 +20,7 @@ settings that do not fit on one node.
 |---|---|---|
 | 1 | `scripts/01_download_edgar.py` | latest 10-K text for 30 companies |
 | 2 | `scripts/02_make_passages.py` | ~1,000-token passages from Items 1A, 1C, 3, 7, 7A |
-| 3 | `scripts/03_label_risk.py` | teacher labels from Nemotron 3 Super 120B (NVIDIA API), quote-verified |
+| 3 | `scripts/03_label_risk.py` | teacher labels from Nemotron 3 Ultra 550B (NVIDIA API), quote-verified |
 | 4 | `scripts/04_build_sft.py` | train / val / test split **by company**, gold review sheet, SHA-256 manifest |
 | 5 | `scripts/05_check_tokens.py` | gate: every answer survives tokenization at the training length |
 | 6 | `scripts/06_make_config.py` | AutoModel config: `single`, `replicate`, `shard`, `ep`, `ddp` |

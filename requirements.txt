@@ -1,11 +1,13 @@
-# CPU-side tools: data download, labeling, scoring, charts.
-# Do NOT reinstall torch/transformers inside the NVIDIA container; use its CUDA builds.
+# Laptop / CPU-side tools: data download, labeling, token check, scoring, charts.
+#   pip install -r requirements.txt
+# Do NOT install this file inside the NVIDIA GPU container (it already has CUDA builds of
+# torch/transformers); runpod/rehearse.sh and fuzzball/00_setup.fz install only what they need.
 requests>=2.31
 pyyaml>=6.0
 openai>=1.40
 huggingface_hub>=0.24
 matplotlib>=3.8
-# Laptop-only token check (scripts/05_check_tokens.py); the GPU container already has these:
-#   transformers jinja2
+transformers>=4.45      # tokenizer only, for scripts/05_check_tokens.py
+jinja2>=3.1             # needed by the tokenizer's chat template
 # Needed only for scripts/07_predict.py --backend hf (adapter evaluation on a GPU node):
 #   peft>=0.19.1   (fused MoE expert LoRA layout)
