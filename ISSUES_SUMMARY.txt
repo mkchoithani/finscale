@@ -1,0 +1,76 @@
+FinScale Nemotron 30B LoRA - Code Review: Issues Summary
+Branch: nemotron-runpod-setup (https://github.com/mkchoithani/finscale/tree/nemotron-runpod-setup)
+Status: Fixes are syntax-checked and tokenizer-tested only; NOT yet verified by a GPU training run.
+
+==================================================
+FIXED
+==================================================
+
+[CRITICAL] 1. Zero supervised tokens (P0 blocker)
+  - Up to ~3,000 tokens of 10-K text come before the answer; truncation cuts from the end,
+    so the whole answer is removed at 512 tokens (2048 is likely still too short).
+  - Fix: scripts/fit_dataset_to_seq_len.py drops rows that don't fit, or shortens only the
+    source text, never the answer. Use seq length 4096.
+
+[CRITICAL] 2. Supervision check could pass broken data
+  - Passed if any one row had a single supervised token, even with answers cut off.
+  - Fix: check_gb10_supervision.py now requires every answer to be fully kept.
+
+[HIGH] 3. Train/validation leakage
+  - The same filing section text appears in both train and val, which inflates val results.
+  - Fix: split by company (build_sft_dataset.py, scripts/resplit_by_ticker.py).
+
+[HIGH] 4. No trained adapter saved
+  - Checkpoint saving was off and there was no validation set.
+  - Fix: --save-checkpoint (saves only the adapter) plus a validation set in prepare_gb10_config.py.
+
+[HIGH] 5. Learning rate too low (1e-5)
+  - The LoRA adapter would barely change in ~20 steps.
+  - Fix: default changed to 1e-4.
+
+[MEDIUM] 6. Config generator only worked on GB10
+  - The recipe path was hardcoded to /workspace/Automodel.
+  - Fix: finds the recipe automatically and checks that data and model paths exist.
+
+[MEDIUM] 7. Wrong hardware guidance / training path that can't run
+  - README says 2x80GB is required; run_nemotron_sft.sh and lora_sft.yaml can't run.
+  - Fix: runpod/ setup uses NVIDIA's single-GPU recipe (1x H100 80GB).
+
+[MEDIUM] 8. Evidence logs never saved to Git
+  - .gitignore excluded *.log.
+  - Fix: logs under results/ are now allowed.
+
+[LOW] 9. Misleading NCCL timing
+  - The first measurement included connection setup.
+  - Fix: warm-up call added before timing.
+
+[LOW] 10. Missing pyyaml/matplotlib in requirements.txt; broken README formatting
+  - Fix: both corrected.
+
+==================================================
+NOT FIXED - TEAM DECISION NEEDED
+==================================================
+
+[CRITICAL] 11. Training data doesn't match the product
+  - Labels are summaries/quotes, not 8 risk classes + severity in JSON.
+  - Action: change the labeling prompts, or present the demo as summarization/extraction.
+
+[HIGH] 12. Small dataset (~180 rows) with conflicting counts (166/18 vs 164/18)
+  - Action: record a hash of the dataset used; always compare against the untuned base model.
+
+[HIGH] 13. Two-node training isn't set up
+  - The single-GPU recipe doesn't become distributed by adding nodes; Fuzzball files have placeholders.
+  - Action: get image/network details from event staff; don't claim it without logs from both nodes.
+
+[MEDIUM] 14. Fuzzball uses port 29500 (caused the earlier NCCL timeout)
+  - Action: confirm allowed ports with event staff.
+
+[LOW] 15. Benchmark plot script compares settings as text ("2048" vs "2048.0")
+  - Action: keep the CSV format consistent.
+
+==================================================
+NOT A REAL PROBLEM
+==================================================
+
+- "Pad token falls back to EOS" warning: AutoModel's code handles pad = EOS correctly.
+  This item can be closed.
